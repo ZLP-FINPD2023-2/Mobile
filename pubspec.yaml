@@ -20,5 +20,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/Stars.svg
+assets:
+  - assets/Illustration.svg
+  - assets/Stars.svg
