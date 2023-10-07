@@ -18,22 +18,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       const SizedBox(
         height: 48,
       ),
-      const Text('Пароль изменен!',
-          style: TextStyle(
-            fontSize: 32,
-            color: Colors.black,
-            fontWeight: FontWeight.w700,
-          )),
+      Text('Пароль изменен!', style: Theme.of(context).textTheme.titleMedium),
       const SizedBox(
         height: 16,
       ),
-      const Center(
+      Center(
         child: Text('Ваш пароль успешно изменен',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Color(0xff6B7280),
-            )),
+            style: Theme.of(context).textTheme.bodyMedium),
       ),
       const SizedBox(
         height: 48,
@@ -43,17 +35,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         height: 40,
         width: 324,
         child: ElevatedButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-                backgroundColor: const Color(0xff0F172A),
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100))),
-            child: const Text('Войти',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ))),
+              onPressed: () {},
+              child: Text('Войти',
+                  style: Theme.of(context).textTheme.labelMedium)),
       ),
     ]));
   }

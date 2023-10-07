@@ -12,21 +12,22 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
         length: 2,
         child: Scaffold(
             body: Column(
           children: [
-            SizedBox(height: 14,),
-            TabBar(tabs: [
+            const SizedBox(height: 14,),
+            TabBar(
+              tabs: [
               Tab(
-                child: Text('Регистрация',style: TextStyle(color: Color(0xff0F172A),fontSize: 14),),
+                child: Text('Регистрация',style: Theme.of(context).textTheme.labelSmall,),
               ),
               Tab(
-                child: Text('Вход',style: TextStyle(color: Color(0xff0F172A),fontSize: 14),),
+                child: Text('Вход',style: Theme.of(context).textTheme.labelSmall),
               )
             ]),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: TabBarView(
                 children: [

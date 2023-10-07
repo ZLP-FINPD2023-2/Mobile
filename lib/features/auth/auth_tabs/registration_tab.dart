@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'registration_tab_model.dart';
 
 class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
@@ -16,265 +15,111 @@ class _RegistrationTab extends State<RegistrationTab> {
         reverse: true,
         child: Column(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+            padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Имя',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Иван',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Имя',
+                  hintText: 'Иван',
+                )),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Фамилия',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Иванов',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Фамилия',
+                  hintText: 'Иванов',
+                )),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Отчество',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Иванович',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Отчество',
+                  hintText: 'Иванович',
+                )),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextField(
-                //onTap: () => RegisterModel.setDate(context), не понимаю как надо подсоединить тут календарь
-                controller: RegisterModel().dateController,
-                textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: InputDecoration(
-                    suffixIconConstraints: const BoxConstraints(maxHeight: 24),
-                    suffixIcon: IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 24,
-                        icon: const Icon(
-                          Icons.today_rounded,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {}),
-                    labelText: 'Дата рождения',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: '27.07.2000',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                  suffixIconConstraints: const BoxConstraints(maxHeight: 24),
+                  suffixIcon: IconButton(
+                      padding: EdgeInsets.zero,
+                      iconSize: 24,
+                      icon: const Icon(
+                        Icons.today_rounded,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {}),
+                  labelText: 'Дата рождения',
+                  hintText: '27.07.2000',
+                )),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Почта',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Введите свою почту',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Почта',
+                  hintText: 'Введите свою почту',
+                )),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Пароль',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Придумайте пароль',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Пароль',
+                  hintText: 'Придумайте пароль',
+                )),
           ),
           Container(
             padding: const EdgeInsets.only(left: 18, top: 5),
             alignment: Alignment.bottomLeft,
-            child: const Text('Минимум 8 символов',
+            child: Text('Минимум 8 символов',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xff6B7280),
-                )),
+                style: Theme.of(context).textTheme.bodySmall,),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                    labelText: 'Подтверждение пароля',
-                    labelStyle: const TextStyle(
-                        color: Color(0xff4B5563),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                    hintText: 'Повторите пароль',
-                    hintStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff94A3B8)),
-                    isDense: true,
-                    focusColor: const Color(0xff1BD0B8),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xffCBD5E1))),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: const BorderSide(color: Color(0xff94A3B8))),
-                    filled: true,
-                    fillColor: Colors.white)),
+                decoration: const InputDecoration(
+                  labelText: 'Подтверждение пароля',
+                  hintText: 'Повторите пароль',
+                )),
           ),
           SizedBox(
             height: 40,
             width: 324,
             child: ElevatedButton(
                 onPressed: () {},
-                style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xff0F172A),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100))),
-                child: const Text('Зарегистрироваться',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ))),
+                child: Text('Зарегистрироваться',
+                    style: Theme.of(context).textTheme.labelMedium,)),
           ),
           Padding(
               padding: EdgeInsets.only(
