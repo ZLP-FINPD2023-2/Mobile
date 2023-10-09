@@ -1,16 +1,17 @@
 name: fin_app
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: ">=3.0.3 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   dio: ^5.3.3
   shared_preferences: ^2.2.1
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +20,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+assets:
+  - assets/Illustration.svg
+  - assets/Stars.svg
