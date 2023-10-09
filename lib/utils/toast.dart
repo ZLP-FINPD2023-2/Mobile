@@ -1,18 +1,17 @@
+import 'package:fin_app/core/app_state/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void showErrorToast(BlocNetworkError err) {
+void showErrorToast(AppStateWrong err) {
   var errText = '';
-  if (err.error != null) {
-    errText += '${err.error}';
+  if (err.key != null) {
+    errText += '${err.key}';
   }
   /*else {
     errText += 'error';
   }*/
-  if (err.message != null) {
-    if (errText.isNotEmpty) errText += '\n';
-    errText += '${err.message}';
-  }
+  if (errText.isNotEmpty) errText += '\n';
+  errText += err.message;
   if (err.details != null) {
     if (errText.isNotEmpty) errText += '\n';
     errText += '${err.details}';
@@ -28,7 +27,11 @@ void showErrorToast(BlocNetworkError err) {
   );
 }
 
-void showToast(String message, {Color? backgroundColor, ToastGravity? gravity, double? fontSize, int? timeInSec}) {
+void showToast(String message,
+    {Color? backgroundColor,
+    ToastGravity? gravity,
+    double? fontSize,
+    int? timeInSec}) {
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
