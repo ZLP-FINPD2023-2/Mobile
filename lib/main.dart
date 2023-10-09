@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fin_app/features/theme.dart';
+import 'package:fin_app/constants/theme.dart';
+import 'package:fin_app/routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,12 +12,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeClass().themeData,
-      home: const Scaffold(
-        body: Center(
-          child: Text('FinApp'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: routes,
+      theme: appTheme,
     );
   }
 }

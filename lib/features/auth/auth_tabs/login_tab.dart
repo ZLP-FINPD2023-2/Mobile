@@ -23,31 +23,27 @@ class LoginTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: TextFormField(
-                textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
-                  labelText: 'Пароль',
-                  hintText: 'Введите свой пароль',
-                )),
+              textInputAction: TextInputAction.next,
+              style: Theme.of(context).textTheme.labelLarge,
+              cursorColor: const Color(0xff94A3B8),
+              textAlign: TextAlign.justify,
+              decoration: const InputDecoration(
+                labelText: 'Пароль',
+                hintText: 'Введите свой пароль',
+              )),
         ),
         Container(
           padding: const EdgeInsets.only(right: 18, top: 5, bottom: 5),
           alignment: Alignment.bottomRight,
           child: TextButton(
-            onPressed: () {},
-            child: Text('Забыли пароль?',
-                style: Theme.of(context).textTheme.bodySmall),
+            onPressed: () => Navigator.of(context).pushNamed('/auth/reset'),
+            child: Text('Забыли пароль?', style: Theme.of(context).textTheme.bodySmall),
           ),
         ),
         SizedBox(
           height: 40,
           width: 324,
-          child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Войти',
-                  style: Theme.of(context).textTheme.labelMedium)),
+          child: ElevatedButton(onPressed: () {}, child: Text('Войти', style: Theme.of(context).textTheme.labelMedium)),
         ),
       ],
     );

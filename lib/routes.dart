@@ -1,4 +1,5 @@
 import 'package:fin_app/features/auth/auth_screen.dart';
+import 'package:fin_app/features/auth/changed_password/changed_password_screen.dart';
 import 'package:fin_app/features/auth/confirm_email/confirm_email_screen.dart';
 import 'package:fin_app/features/auth/confirm_reset_password/confirm_reset_password_screen.dart';
 import 'package:fin_app/features/auth/reset_password/reset_password_screen.dart';
@@ -11,4 +12,5 @@ final Map<String, WidgetBuilder> routes = {
   '/auth/confirm_email': (context) => const ConfirmEmailScreen(),
   '/auth/reset': (context) => const ResetPasswordScreen(),
   '/auth/reset/confirm': (context) => const ConfirmResetPasswordScreen(),
+  '/auth/reset/confirm/changed': (context) => const ChangePasswordScreen()
 };
