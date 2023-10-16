@@ -4,27 +4,19 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:fin_app/core/helpers/token_info/token_info.dart';
 import 'package:flutter/foundation.dart';
 
 class HttpAPI {
   static late final String _baseURLHost;
-  static final List<String> _skipCheckTokenPaths = [];
-  static late final String? _authCookieName;
-  static late final Future<AuthToken?> Function()? _getAuthTokenFn;
-  static late final void Function({bool clearData, bool forcedLogoutScreen})?
-      _logoutFn;
+  static late final Future<String?> Function()? _getAuthTokenFn;
+  static late final void Function()? _logoutFn;
 
   static void initialize({
     required String defaultBaseURL,
-    required List<String> skipCheckTokenPaths,
-    String? authCookieName,
-    Future<AuthToken?> Function()? getAuthTokenFn,
-    void Function({bool clearData, bool forcedLogoutScreen})? logoutFn,
+    Future<String?> Function()? getAuthTokenFn,
+    void Function()? logoutFn,
   }) {
-    _skipCheckTokenPaths.addAll(skipCheckTokenPaths);
     _baseURLHost = defaultBaseURL;
-    _authCookieName = authCookieName;
     _getAuthTokenFn = getAuthTokenFn;
     _logoutFn = logoutFn;
 
@@ -84,27 +76,14 @@ class HttpAPI {
             options = options.copyWith(baseUrl: _baseURLHost);
           }
 
-          if (_skipCheckTokenPaths.contains(options.path) ||
-              _getAuthTokenFn == null) {
+          if (_getAuthTokenFn == null) {
             handler.next(options);
             return;
           }
 
-          final tokenInfo = await _getAuthTokenFn!();
-          if (tokenInfo != null) {
-            if (_authCookieName != null) {
-              options.headers['cookie'] =
-                  '$_authCookieName=${tokenInfo.accessToken}';
-            } else {
-              options.headers['Authorization'] =
-                  'Bearer ${tokenInfo.accessToken}';
-            }
-
-            if (!tokenInfo.isExpired()) {
-              options.headers['Accept-Language'] = 'RU';
-              handler.next(options);
-              return;
-            }
+          final token = await _getAuthTokenFn!();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
           }
 
           if (disableTokenVerification) {
@@ -120,7 +99,7 @@ class HttpAPI {
           //Logger.eResponse(response);
           if (response.statusCode == 401 && logoutOn401) {
             if (_logoutFn != null) {
-              _logoutFn!(clearData: false);
+              _logoutFn!();
             }
             return handler.next(response);
           }
