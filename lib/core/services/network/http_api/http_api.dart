@@ -6,20 +6,16 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:fin_app/core/helpers/token_info/token_info.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-const _storageKeyLastBaseURL = 'lastBaseURL';
 
 class HttpAPI {
-  static String _baseURLHost = '';
+  static late final String _baseURLHost;
   static final List<String> _skipCheckTokenPaths = [];
-  static late final String _defaultBaseURL;
   static late final String? _authCookieName;
   static late final Future<AuthToken?> Function()? _getAuthTokenFn;
   static late final void Function({bool clearData, bool forcedLogoutScreen})?
       _logoutFn;
 
-  static Future<bool> initialize({
+  static void initialize({
     required String defaultBaseURL,
     required List<String> skipCheckTokenPaths,
     String? authCookieName,
@@ -27,7 +23,7 @@ class HttpAPI {
     void Function({bool clearData, bool forcedLogoutScreen})? logoutFn,
   }) {
     _skipCheckTokenPaths.addAll(skipCheckTokenPaths);
-    _defaultBaseURL = defaultBaseURL;
+    _baseURLHost = defaultBaseURL;
     _authCookieName = authCookieName;
     _getAuthTokenFn = getAuthTokenFn;
     _logoutFn = logoutFn;
@@ -40,27 +36,6 @@ class HttpAPI {
         print('!!! logoutFn is empty !!!\r\n\r\n');
       }
     }
-
-    return SharedPreferences.getInstance()
-        .then((sp) => sp.getString(_storageKeyLastBaseURL))
-        .then((savedBaseURL) {
-      if (savedBaseURL == null || savedBaseURL.isEmpty) {
-        return setWmsBaseURLHost(_defaultBaseURL);
-      } else {
-        return setWmsBaseURLHost(savedBaseURL);
-      }
-    });
-  }
-
-  static Future<bool> setWmsBaseURLHost(String? host) {
-    if (host == null || !Uri.parse(host).isAbsolute) {
-      _baseURLHost = _defaultBaseURL;
-      return SharedPreferences.getInstance()
-          .then((sp) => sp.remove(_storageKeyLastBaseURL));
-    }
-    _baseURLHost = host;
-    return SharedPreferences.getInstance()
-        .then((sp) => sp.setString(_storageKeyLastBaseURL, host));
   }
 
   static String getWmsBaseURLHost() {
