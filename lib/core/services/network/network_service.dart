@@ -8,29 +8,25 @@ class NetworkService {
 
   NetworkService() : _dio = HttpAPI.newDio();
 
-  Future<AppStateSuccess<T>> delete<T, K>(
-      String endpoint, Function(K data)? mapFunction) {
-    return NetworkHandler.parseResult<T, K>(_dio.delete(endpoint), mapFunction);
+  Future<AppStateSuccess<Map<String, dynamic>>> delete(String endpoint) {
+    return NetworkHandler.parseResult(_dio.delete(endpoint));
   }
 
-  Future<AppStateSuccess<T>> get<T, K>(
-      String endpoint, Function(K data)? mapFunction,
+  Future<AppStateSuccess<Map<String, dynamic>>> get(String endpoint,
       {Map<String, dynamic>? queryParameters}) {
-    return NetworkHandler.parseResult<T, K>(
-        _dio.get(endpoint, queryParameters: queryParameters), mapFunction);
+    return NetworkHandler.parseResult(
+        _dio.get(endpoint, queryParameters: queryParameters));
   }
 
-  Future<AppStateSuccess<T>> post<T, K>(
-      String endpoint, Function(K data)? mapFunction,
+  Future<AppStateSuccess<Map<String, dynamic>>> post(String endpoint,
       {Map<String, dynamic>? queryParameters}) {
-    return NetworkHandler.parseResult<T, K>(
-        _dio.post(endpoint, queryParameters: queryParameters), mapFunction);
+    return NetworkHandler.parseResult(
+        _dio.post(endpoint, queryParameters: queryParameters));
   }
 
-  Future<AppStateSuccess<T>> put<T, K>(
-      String endpoint, Function(K data)? mapFunction,
+  Future<AppStateSuccess<Map<String, dynamic>>> put(String endpoint,
       {Map<String, dynamic>? queryParameters}) {
-    return NetworkHandler.parseResult<T, K>(
-        _dio.put(endpoint, queryParameters: queryParameters), mapFunction);
+    return NetworkHandler.parseResult(
+        _dio.put(endpoint, queryParameters: queryParameters));
   }
 }

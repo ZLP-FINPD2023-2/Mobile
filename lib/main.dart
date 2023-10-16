@@ -1,14 +1,14 @@
 import 'package:fin_app/core/di/di.dart';
 import 'package:fin_app/core/env/env.dart';
 import 'package:fin_app/core/services/network/http_api/http_api.dart';
-import 'package:fin_app/core/services/network/secure_storage/secure_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
   HttpAPI.initialize(
     defaultBaseURL: Env.serverUrl,
-    getAuthTokenFn: () => getIt<SecureStorage>().instance.read(key: 'token'),
-    logoutFn: () => getIt<SecureStorage>().instance.delete(key: 'token'),
+    getAuthTokenFn: () => getIt<FlutterSecureStorage>().read(key: 'token'),
+    logoutFn: () => getIt<FlutterSecureStorage>().delete(key: 'token'),
   );
   confingureDependecies();
   runApp(const MainApp());
