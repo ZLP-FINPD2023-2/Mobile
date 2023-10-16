@@ -1,7 +1,7 @@
-import 'package:fin_app/features/auth/auth_screen.dart';
-import 'package:fin_app/features/auth/confirm_email/confirm_email_screen.dart';
-import 'package:fin_app/features/auth/confirm_reset_password/confirm_reset_password_screen.dart';
-import 'package:fin_app/features/auth/reset_password/reset_password_screen.dart';
+import 'package:fin_app/features/auth/presentation/auth_screen.dart';
+import 'package:fin_app/features/auth/presentation/confirm_email/confirm_email_screen.dart';
+import 'package:fin_app/features/auth/presentation/confirm_reset_password/confirm_reset_password_screen.dart';
+import 'package:fin_app/features/auth/presentation/reset_password/reset_password_screen.dart';
 import 'package:fin_app/features/start/start_screen.dart';
 import 'package:flutter/material.dart';
 
