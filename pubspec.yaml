@@ -12,11 +12,15 @@ dependencies:
   dio: ^5.3.3
   shared_preferences: ^2.2.1
   fluttertoast: ^8.2.2
+  injectable: ^2.3.2
+  envied: ^0.3.0+3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  envied_generator: ^0.3.0+3
 
 flutter:
   uses-material-design: true
