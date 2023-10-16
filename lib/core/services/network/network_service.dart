@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:fin_app/core/flutter_core.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class NetworkService {
   final Dio _dio;
 
-  const NetworkService({required Dio dio}) : _dio = dio;
+  NetworkService() : _dio = HttpAPI.newDio();
 
   Future<AppStateSuccess<T>> delete<T, K>(
       String endpoint, Function(K data)? mapFunction) {
