@@ -4,31 +4,19 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:fin_app/core/helpers/token_info/token_info.dart';
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-const _storageKeyLastBaseURL = 'lastBaseURL';
 
 class HttpAPI {
-  static String _baseURLHost = '';
-  static final List<String> _skipCheckTokenPaths = [];
-  static late final String _defaultBaseURL;
-  static late final String? _authCookieName;
-  static late final Future<AuthToken?> Function()? _getAuthTokenFn;
-  static late final void Function({bool clearData, bool forcedLogoutScreen})?
-      _logoutFn;
+  static late final String _baseURLHost;
+  static late final Future<String?> Function()? _getAuthTokenFn;
+  static late final void Function()? _logoutFn;
 
-  static Future<bool> initialize({
+  static void initialize({
     required String defaultBaseURL,
-    required List<String> skipCheckTokenPaths,
-    String? authCookieName,
-    Future<AuthToken?> Function()? getAuthTokenFn,
-    void Function({bool clearData, bool forcedLogoutScreen})? logoutFn,
+    Future<String?> Function()? getAuthTokenFn,
+    void Function()? logoutFn,
   }) {
-    _skipCheckTokenPaths.addAll(skipCheckTokenPaths);
-    _defaultBaseURL = defaultBaseURL;
-    _authCookieName = authCookieName;
+    _baseURLHost = defaultBaseURL;
     _getAuthTokenFn = getAuthTokenFn;
     _logoutFn = logoutFn;
 
@@ -40,27 +28,6 @@ class HttpAPI {
         print('!!! logoutFn is empty !!!\r\n\r\n');
       }
     }
-
-    return SharedPreferences.getInstance()
-        .then((sp) => sp.getString(_storageKeyLastBaseURL))
-        .then((savedBaseURL) {
-      if (savedBaseURL == null || savedBaseURL.isEmpty) {
-        return setWmsBaseURLHost(_defaultBaseURL);
-      } else {
-        return setWmsBaseURLHost(savedBaseURL);
-      }
-    });
-  }
-
-  static Future<bool> setWmsBaseURLHost(String? host) {
-    if (host == null || !Uri.parse(host).isAbsolute) {
-      _baseURLHost = _defaultBaseURL;
-      return SharedPreferences.getInstance()
-          .then((sp) => sp.remove(_storageKeyLastBaseURL));
-    }
-    _baseURLHost = host;
-    return SharedPreferences.getInstance()
-        .then((sp) => sp.setString(_storageKeyLastBaseURL, host));
   }
 
   static String getWmsBaseURLHost() {
@@ -109,27 +76,14 @@ class HttpAPI {
             options = options.copyWith(baseUrl: _baseURLHost);
           }
 
-          if (_skipCheckTokenPaths.contains(options.path) ||
-              _getAuthTokenFn == null) {
+          if (_getAuthTokenFn == null) {
             handler.next(options);
             return;
           }
 
-          final tokenInfo = await _getAuthTokenFn!();
-          if (tokenInfo != null) {
-            if (_authCookieName != null) {
-              options.headers['cookie'] =
-                  '$_authCookieName=${tokenInfo.accessToken}';
-            } else {
-              options.headers['Authorization'] =
-                  'Bearer ${tokenInfo.accessToken}';
-            }
-
-            if (!tokenInfo.isExpired()) {
-              options.headers['Accept-Language'] = 'RU';
-              handler.next(options);
-              return;
-            }
+          final token = await _getAuthTokenFn!();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
           }
 
           if (disableTokenVerification) {
@@ -145,7 +99,7 @@ class HttpAPI {
           //Logger.eResponse(response);
           if (response.statusCode == 401 && logoutOn401) {
             if (_logoutFn != null) {
-              _logoutFn!(clearData: false);
+              _logoutFn!();
             }
             return handler.next(response);
           }
