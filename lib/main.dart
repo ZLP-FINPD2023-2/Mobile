@@ -3,6 +3,8 @@ import 'package:fin_app/core/env/env.dart';
 import 'package:fin_app/core/services/network/http_api/http_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fin_app/constants/theme.dart';
+import 'package:fin_app/routes.dart';
 
 void main() {
   HttpAPI.initialize(
@@ -19,12 +21,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('FinApp'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: routes,
+      theme: appTheme,
     );
   }
 }
