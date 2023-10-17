@@ -46,6 +46,7 @@ class HttpAPI {
         false, // не проверять валидность и срок действия токена (логои, авторизация)
     String? baseURL,
   }) {
+    print("newDio started");
     final options = BaseOptions(
       baseUrl: baseURL ?? _baseURLHost,
     );
@@ -65,67 +66,73 @@ class HttpAPI {
       };
     }
 
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        //Интерсептор подстановки авторизации
-        onRequest: (
-          RequestOptions options,
-          RequestInterceptorHandler handler,
-        ) async {
-          if (options.baseUrl != _baseURLHost) {
-            options = options.copyWith(baseUrl: _baseURLHost);
-          }
-
-          if (_getAuthTokenFn == null) {
-            handler.next(options);
-            return;
-          }
-
-          final token = await _getAuthTokenFn!();
-          if (token != null) {
-            options.headers['Authorization'] = 'Bearer $token';
-          }
-
-          if (disableTokenVerification) {
-            handler.next(options);
-            return;
-          }
-
-          if (_logoutFn != null) {
-            _logoutFn!();
-          }
-        },
-        onResponse: (response, handler) {
-          //Logger.eResponse(response);
-          if (response.statusCode == 401 && logoutOn401) {
-            if (_logoutFn != null) {
-              _logoutFn!();
-            }
-            return handler.next(response);
-          }
-
-          if (response.statusCode == 204 ||
-              (response.data.runtimeType == String && response.data == '')) {
-            response.data = {'data': null};
-          }
-          return handler.next(response);
-        },
-        onError: (DioException e, handler) async {
-          if (e.response == null) {
-            return handler.reject(e);
-          }
-
-          // Logger.eResponse(e.response!);
-
-          if (e.response != null && e.response!.statusCode == 401) {
-            if (_logoutFn != null) {
-              _logoutFn!();
-            }
-          }
-          return handler.reject(e);
-        },
-      ),
-    );
+    // dio.interceptors.add(
+    //   InterceptorsWrapper(
+    //     //Интерсептор подстановки авторизации
+    //     onRequest: (
+    //       RequestOptions options,
+    //       RequestInterceptorHandler handler,
+    //     ) async {
+    //       print("onRequest interceptor started");
+    //       if (options.baseUrl != _baseURLHost) {
+    //         options = options.copyWith(baseUrl: _baseURLHost);
+    //       }
+    //
+    //       if (_getAuthTokenFn == null) {
+    //         handler.next(options);
+    //         return;
+    //       }
+    //
+    //       final token = await _getAuthTokenFn!();
+    //       if (token != null) {
+    //         options.headers['Authorization'] = 'Bearer $token';
+    //       }
+    //
+    //       if (disableTokenVerification) {
+    //         handler.next(options);
+    //         return;
+    //       }
+    //
+    //       if (_logoutFn != null) {
+    //         _logoutFn!();
+    //       }
+    //       print("onRequest interceptor finished");
+    //     },
+    //     onResponse: (response, handler) {
+    //       //Logger.eResponse(response);
+    //       print("onResponse interceptor started");
+    //       if (response.statusCode == 401 && logoutOn401) {
+    //         if (_logoutFn != null) {
+    //           _logoutFn!();
+    //         }
+    //         return handler.next(response);
+    //       }
+    //
+    //       if (response.statusCode == 204 ||
+    //           (response.data.runtimeType == String && response.data == '')) {
+    //         response.data = {'data': null};
+    //       }
+    //       print("onResponse interceptor finished");
+    //       return handler.next(response);
+    //     },
+    //     onError: (DioException e, handler) async {
+    //       print("onError interceptor started with error: ${e.message}");
+    //       if (e.response == null) {
+    //         return handler.reject(e);
+    //       }
+    //
+    //       // Logger.eResponse(e.response!);
+    //
+    //       if (e.response != null && e.response!.statusCode == 401) {
+    //         if (_logoutFn != null) {
+    //           _logoutFn!();
+    //         }
+    //       }
+    //       print("onError interceptor finished");
+    //       return handler.reject(e);
+    //     },
+    //   ),
+    // );
 
     if (forceJsonContent) {
       dio.interceptors.add(
@@ -146,6 +153,7 @@ class HttpAPI {
           .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
+    print("newDio finished");
     return dio;
   }
 }

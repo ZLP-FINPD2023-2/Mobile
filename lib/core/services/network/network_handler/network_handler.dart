@@ -8,6 +8,7 @@ class NetworkHandler {
   static Future<AppStateSuccess<Map<String, dynamic>>> parseResult(
       Future<Response<dynamic>> req) {
     return req.then((Response<dynamic> resp) {
+      print('Server response code: ${resp.statusCode}');
       switch (resp.statusCode) {
         case 200:
           Map<String, dynamic> rawData = resp.data;

@@ -12,6 +12,8 @@ void main() {
     getAuthTokenFn: () => getIt<FlutterSecureStorage>().read(key: 'token'),
     logoutFn: () => getIt<FlutterSecureStorage>().delete(key: 'token'),
   );
+
+
   confingureDependecies();
   runApp(const MainApp());
 }

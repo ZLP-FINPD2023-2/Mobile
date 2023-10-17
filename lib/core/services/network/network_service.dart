@@ -8,6 +8,7 @@ class NetworkService {
 
   NetworkService() : _dio = HttpAPI.newDio();
 
+
   Future<AppStateSuccess<Map<String, dynamic>>> delete(String endpoint) {
     return NetworkHandler.parseResult(_dio.delete(endpoint));
   }
@@ -19,14 +20,16 @@ class NetworkService {
   }
 
   Future<AppStateSuccess<Map<String, dynamic>>> post(String endpoint,
-      {Map<String, dynamic>? queryParameters}) {
+      {Map<String, dynamic>? queryParameters, Map<String, dynamic>? data}) {
     return NetworkHandler.parseResult(
-        _dio.post(endpoint, queryParameters: queryParameters));
+        _dio.post(endpoint, queryParameters: queryParameters, data: data));
   }
 
+
   Future<AppStateSuccess<Map<String, dynamic>>> put(String endpoint,
-      {Map<String, dynamic>? queryParameters}) {
+      {Map<String, dynamic>? queryParameters, Map<String, dynamic>? data}) {
     return NetworkHandler.parseResult(
-        _dio.put(endpoint, queryParameters: queryParameters));
+        _dio.put(endpoint, queryParameters: queryParameters, data: data));
   }
+
 }

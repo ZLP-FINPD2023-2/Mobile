@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/cubit/auth_cubit.dart';
+
 
 class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
 
   @override
-  State<RegistrationTab> createState() => _RegistrationTab();
+  _RegistrationTabState createState() => _RegistrationTabState();
 }
+  class _RegistrationTabState extends State<RegistrationTab> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  final TextEditingController patronymicController = TextEditingController();
+  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
-class _RegistrationTab extends State<RegistrationTab> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+
+@override
+Widget build(BuildContext context) {
+final authCubit = context.read<AuthCubit>();
+
+return Scaffold(
       body: SingleChildScrollView(
         reverse: true,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
             child: TextFormField(
+                controller: nameController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -29,6 +44,7 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
+                controller: surnameController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -41,6 +57,7 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
+                controller: patronymicController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -52,7 +69,8 @@ class _RegistrationTab extends State<RegistrationTab> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextField(
+            child: TextFormField(
+                controller: birthDateController, // Добавьте эту строку
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
@@ -73,6 +91,7 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
+                controller: emailController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -85,6 +104,7 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
+                controller: passwordController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -104,6 +124,7 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
             child: TextFormField(
+                controller: confirmPasswordController,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -117,10 +138,22 @@ class _RegistrationTab extends State<RegistrationTab> {
             height: 40,
             width: 324,
             child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Зарегистрироваться',
-                    style: Theme.of(context).textTheme.labelMedium,)),
+              onPressed: () {
+                final authCubit = context.read<AuthCubit>();
+                authCubit.register(
+                  name: nameController.text,
+                  surname: surnameController.text,
+                  patronymic: patronymicController.text,
+                  birthDate: birthDateController.text,
+                  email: emailController.text,
+                  password: passwordController.text,
+                  confirmPassword: confirmPasswordController.text,
+                );
+              },
+              child: Text('Зарегистрироваться', style: Theme.of(context).textTheme.labelMedium),
+            ),
           ),
+
           Padding(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom))
