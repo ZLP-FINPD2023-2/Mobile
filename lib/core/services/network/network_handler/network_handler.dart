@@ -15,6 +15,9 @@ class NetworkHandler {
           if (rawData.containsKey('data')) {
             return AppStateSuccess<Map<String, dynamic>>(rawData['data']);
           }
+          else if (rawData.containsKey('token')) {
+            return AppStateSuccess<Map<String, dynamic>>(rawData);
+          }
           return AppStateSuccess<Map<String, dynamic>>();
         case 204:
           return AppStateSuccess<Map<String, dynamic>>();
