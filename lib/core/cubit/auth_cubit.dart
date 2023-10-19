@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../services/network/network_service.dart';
 import 'auth_cubit_states.dart';
@@ -11,11 +12,9 @@ import 'package:fin_app/core/flutter_core.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final NetworkService _networkService;
+  final FlutterSecureStorage _secureStorage;
 
-  AuthCubit(this._networkService) : super(AuthInitialState());
-
-
-
+  AuthCubit(this._networkService, this._secureStorage) : super(AuthInitialState());
 
   void login(String email, String password) async {
     try {
@@ -35,6 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (response is AppStateSuccess) {
         print('Login success: ${response.data}');
+        await _secureStorage.write(key: 'user_token', value: response.data?['token']);
         emit(AuthSuccessState());
       } else {
         print('Login failed: ${response.toString()}');
