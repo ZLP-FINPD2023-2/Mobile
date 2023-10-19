@@ -19,6 +19,9 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   flutter_svg: ^2.0.7
+  sensors_plus: ^3.1.0
+  velocity_x: ^4.1.1
+
 
 dev_dependencies:
   flutter_test:
