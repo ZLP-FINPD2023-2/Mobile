@@ -34,7 +34,6 @@ class AuthCubit extends Cubit<AuthState> {
       print('Response received: $response');
 
       if (response is AppStateSuccess) {
-        // Здесь вы можете обработать успешный ответ, например, сохранить токен
         print('Login success: ${response.data}');
         emit(AuthSuccessState());
       } else {
@@ -55,7 +54,6 @@ class AuthCubit extends Cubit<AuthState> {
     required String birthDate,
     required String email,
     required String password,
-    required String confirmPassword,
   }) async {
     try {
       emit(AuthLoadingState());
@@ -69,12 +67,10 @@ class AuthCubit extends Cubit<AuthState> {
           'birthDate': birthDate,
           'email': email,
           'password': password,
-          'confirmPassword': confirmPassword,
         },
       );
       print("Registration response received: $response");
       if (response is AppStateSuccess) {
-        // Здесь вы можете обработать успешный ответ
         emit(AuthSuccessState());
       } else {
         emit(AuthErrorState('Не удалось зарегистрироваться'));

@@ -10,7 +10,9 @@ class RegistrationTab extends StatefulWidget {
   @override
   _RegistrationTabState createState() => _RegistrationTabState();
 }
-  class _RegistrationTabState extends State<RegistrationTab> {
+
+class _RegistrationTabState extends State<RegistrationTab> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController patronymicController = TextEditingController();
@@ -19,14 +21,36 @@ class RegistrationTab extends StatefulWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  String? validateEmail(String? value) {
+    if (value == null || !value.contains('@')) {
+      return 'Введите корректный адрес электронной почты';
+    }
+    return null;
+  }
 
-@override
-Widget build(BuildContext context) {
-final authCubit = context.read<AuthCubit>();
+  String? validatePasswordLength(String? value) {
+    if (value == null || value.length < 8) {
+      return 'Пароль должен содержать минимум 8 символов';
+    }
+    return null;
+  }
 
-return Scaffold(
-      body: SingleChildScrollView(
+  String? validatePasswordMatch(String? value) {
+    if (value != passwordController.text) {
+      return 'Пароли не совпадают';
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authCubit = context.read<AuthCubit>();
+
+    return Scaffold(
+        body: SingleChildScrollView(
         reverse: true,
+        child: Form(
+        key: _formKey,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
@@ -92,6 +116,7 @@ return Scaffold(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 controller: emailController,
+                validator: validateEmail,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -105,6 +130,7 @@ return Scaffold(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 controller: passwordController,
+                validator: validatePasswordLength,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -125,6 +151,7 @@ return Scaffold(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
             child: TextFormField(
                 controller: confirmPasswordController,
+                validator: validatePasswordMatch,
                 textInputAction: TextInputAction.next,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
@@ -139,16 +166,17 @@ return Scaffold(
             width: 324,
             child: ElevatedButton(
               onPressed: () {
-                final authCubit = context.read<AuthCubit>();
-                authCubit.register(
-                  name: nameController.text,
-                  surname: surnameController.text,
-                  patronymic: patronymicController.text,
-                  birthDate: birthDateController.text,
-                  email: emailController.text,
-                  password: passwordController.text,
-                  confirmPassword: confirmPasswordController.text,
-                );
+                if (_formKey.currentState!.validate()) {
+                  authCubit.register(
+                    name: nameController.text,
+                    surname: surnameController.text,
+                    patronymic: patronymicController.text,
+                    birthDate: birthDateController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                    // confirmPassword: confirmPasswordController.text,
+                  );
+                }
               },
               child: Text('Зарегистрироваться', style: Theme.of(context).textTheme.labelMedium),
             ),
@@ -158,7 +186,8 @@ return Scaffold(
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom))
         ]),
-      ),
+        ),
+        ),
     );
   }
 }
