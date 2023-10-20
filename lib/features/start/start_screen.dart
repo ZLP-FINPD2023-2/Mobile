@@ -37,6 +37,11 @@ class _StartScreenState extends State<StartScreen> with TickerProviderStateMixin
     }));
   }
 
+  double normalizeAngle(double angle) {
+    const maxAngle = 40.0;
+    return angle.clamp(-maxAngle, maxAngle);
+  }
+
   @override
   void dispose() {
     for (var sub in streamSub) {
@@ -63,9 +68,9 @@ class _StartScreenState extends State<StartScreen> with TickerProviderStateMixin
                   builder: (context, zValue, child) {
                     return Transform(
                       transform: Matrix4.identity()
-                        ..setEntry(3, 2, 0.001) // perspective
-                        ..rotateX(-zValue / 6)
-                        ..rotateY(xValue / 6),
+                        ..setEntry(3, 2, 0.001)
+                        ..rotateX(-normalizeAngle(zValue) / 3.8)
+                        ..rotateY(normalizeAngle(xValue) / 3.8),
                       alignment: FractionalOffset.center,
                       child: SizedBox(
                         height: 160,
