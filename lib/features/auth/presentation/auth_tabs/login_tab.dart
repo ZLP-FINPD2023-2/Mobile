@@ -1,7 +1,7 @@
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/cubit/auth_cubit.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});

@@ -1,5 +1,7 @@
+import 'package:fin_app/features/auth/domain/models/usecases/auth_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../features/auth/domain/models/usecases/auth_usecase.dart';
+
+
 import 'auth_cubit_states.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -10,11 +12,11 @@ class AuthCubit extends Cubit<AuthState> {
   void login(String email, String password) async {
     try {
       emit(AuthLoadingState());
-      print('Sending login request...');
+      // print('Sending login request...');
       await _authUseCase.signIn(email: email, password: password);
       emit(AuthSuccessState());
     } catch (e) {
-      print('Error during login: $e');
+      // print('Error during login: $e');
       emit(AuthErrorState(e.toString()));
     }
   }
