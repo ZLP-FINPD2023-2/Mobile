@@ -1,20 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'auth_tabs/login_tab.dart';
 import 'auth_tabs/registration_tab.dart';
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+class AuthScreen extends StatelessWidget {
+  final int initialIndex;
+  const AuthScreen({
+    Key? key,
+    required this.initialIndex,
+  }) : super(key: key);
 
-  @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
-
-class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           body: DefaultTabController(
+              initialIndex: initialIndex,
               length: 2,
               child: Column(
                 children: [

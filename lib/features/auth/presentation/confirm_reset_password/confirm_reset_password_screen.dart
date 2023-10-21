@@ -1,3 +1,4 @@
+import 'package:fin_app/features/auth/presentation/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmResetPasswordScreen extends StatefulWidget {
@@ -71,7 +72,15 @@ class _ConfirmResetPasswordScreenState extends State<ConfirmResetPasswordScreen>
             children: [
               Text('Вспомнили свой пароль?', style: Theme.of(context).textTheme.bodySmall),
               TextButton(
-                  onPressed: () => Navigator.popUntil(context, ModalRoute.withName('/auth')),
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AuthScreen(
+                                  initialIndex: 1,
+                                )));
+                  },
                   child: Text('Войти', style: Theme.of(context).textTheme.bodyLarge))
             ],
           ),

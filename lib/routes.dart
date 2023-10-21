@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/': (context) => const StartScreen(),
-  '/auth': (context) => const AuthScreen(),
+  '/auth': (context) => const AuthScreen(initialIndex: 1),
   '/auth/confirm_email': (context) => const ConfirmEmailScreen(),
   '/auth/reset': (context) => const ResetPasswordScreen(),
   '/auth/reset/confirm': (context) => const ConfirmResetPasswordScreen(),

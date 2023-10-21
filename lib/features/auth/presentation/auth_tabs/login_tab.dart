@@ -23,6 +23,8 @@ class LoginTab extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
           child: TextFormField(
+              obscureText: true,
+              autocorrect: false,
               textInputAction: TextInputAction.next,
               style: Theme.of(context).textTheme.labelLarge,
               cursorColor: const Color(0xff94A3B8),
