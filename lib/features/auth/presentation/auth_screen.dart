@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../core/cubit/auth_cubit.dart';
 import '../../../core/cubit/auth_cubit_states.dart';
 import '../../../core/di/di.dart';
-import '../../../core/services/network/network_service.dart';
+import '../domain/models/usecases/auth_usecase.dart';
 import 'auth_tabs/login_tab.dart';
 import 'auth_tabs/registration_tab.dart';
 
@@ -22,7 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void initState() {
     super.initState();
-    _authCubit = AuthCubit(getIt<NetworkService>(), getIt<FlutterSecureStorage>());
+    _authCubit = AuthCubit(getIt<AuthUseCase>());
 
   }
 

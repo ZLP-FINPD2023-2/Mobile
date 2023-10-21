@@ -1,6 +1,5 @@
 import 'package:fin_app/core/flutter_core.dart';
 import 'package:fin_app/core/services/network/network_service.dart';
-import 'package:fin_app/features/auth/domain/models/user.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -10,33 +9,35 @@ class ServerAuthDataSource {
   const ServerAuthDataSource({required NetworkService networkService})
       : _networkService = networkService;
 
-  Future<(User, String)> signIn(
-      {required String email, required String password}) async {
-    final Map<String, dynamic> queryParameters = {
+  Future<String> signIn({required String email, required String password}) async {
+    final Map<String, dynamic> body = {
       "email": email,
       "password": password,
     };
 
     final result = await _networkService.post(
       '/auth/login',
-      queryParameters: queryParameters,
+      data: body,
     );
-
     final data = result.data;
 
-    if (data != null) {
-      if (data.containsKey('token') && data.containsKey('user')) {
-        final String token = data['token'] as String;
-        final User user = User.fromJson(data['user'] as Map<String, dynamic>);
-        return (user, token);
-      }
-      throw AppStateWarning(
-          "[Sign in] Bad response:${data.containsKey('token') ? '' : ' no token'}${data.containsKey('user') ? '' : ' no user'}");
+    // if (data != null) {
+    // if (data.containsKey('token') && data.containsKey('user')) {
+    // final String token = data['token'] as String;
+    // final User user = User.fromJson(data['user'] as Map<String, dynamic>);
+    // return (user, token);
+    // }
+    // throw AppStateWarning(
+    // "[Sign in] Bad response:${data.containsKey('token') ? '' : ' no token'}${data.containsKey('user') ? '' : ' no user'}");
+    // }
+
+    if (data != null && data.containsKey('token')) {
+      return data['token'] as String;
     }
-    throw AppStateWarning("[Sign in] Bad response: No data field!");
+    throw AppStateWarning("[Sign in] Bad response: No token field!");
   }
 
-  Future<bool> signUp({
+  Future<void> signUp({
     required int age,
     required String email,
     required String firstname,
@@ -45,7 +46,7 @@ class ServerAuthDataSource {
     required String password,
     required String patronymic,
   }) async {
-    final Map<String, dynamic> queryParameters = {
+    final Map<String, dynamic> body = {
       "age": age,
       "email": email,
       "firstname": firstname,
@@ -54,17 +55,18 @@ class ServerAuthDataSource {
       "password": password,
       "patronymic": patronymic,
     };
-
     final result = await _networkService.post(
       '/auth/register',
-      queryParameters: queryParameters,
+      data: body,
     );
 
     final data = result.data;
 
-    if (data != null) {
-      // TODO: check some field
+    if (data == null) {
+      throw AppStateWarning("[Sign up] Bad response: No data field!");
     }
-    throw AppStateWarning("[Sign in] Bad response: No data field!");
+
   }
+
+
 }

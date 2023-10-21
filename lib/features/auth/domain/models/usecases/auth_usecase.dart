@@ -1,5 +1,4 @@
 import 'package:fin_app/features/auth/data/datasources/server_auth_datasource.dart';
-import 'package:fin_app/features/auth/domain/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,17 +9,13 @@ class AuthUseCase {
 
   const AuthUseCase(
       {required ServerAuthDataSource serverAuthDataSource,
-      required FlutterSecureStorage secureStorage})
+        required FlutterSecureStorage secureStorage})
       : _serverAuthDataSource = serverAuthDataSource,
         _secureStorage = secureStorage;
 
-  Future<User> signIn({required String email, required String password}) async {
-    final (user, token) =
-        await _serverAuthDataSource.signIn(email: email, password: password);
-
+  Future<void> signIn({required String email, required String password}) async {
+    final token = await _serverAuthDataSource.signIn(email: email, password: password);
     await _secureStorage.write(key: 'token', value: token);
-
-    return user;
   }
 
   Future<void> signUp({
