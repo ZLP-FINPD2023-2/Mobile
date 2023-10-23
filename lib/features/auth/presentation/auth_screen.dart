@@ -22,6 +22,7 @@ class AuthScreen extends StatelessWidget {
         body: BlocProvider(
           create: (context) => AuthCubit(getIt<AuthUseCase>()),
           child: DefaultTabController(
+            initialIndex: initialIndex,
             length: 2,
             child: Column(
               children: [

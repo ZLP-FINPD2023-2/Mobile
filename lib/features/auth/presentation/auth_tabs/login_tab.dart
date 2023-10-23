@@ -49,6 +49,8 @@ class _LoginTabState extends State<LoginTab> {
             child: TextFormField(
                 controller: passwordController,
                 textInputAction: TextInputAction.next,
+                obscureText: true,
+                autocorrect: false,
                 style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
