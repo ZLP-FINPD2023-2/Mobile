@@ -1,3 +1,4 @@
+import 'package:fin_app/features/auth/presentation/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,10 +18,7 @@ class _StartScreenState extends State<StartScreen> {
         const SizedBox(
           height: 48,
         ),
-        SizedBox(
-            height: 160,
-            width: 180,
-            child: SvgPicture.asset('assets/Illustration.svg')),
+        SizedBox(height: 160, width: 180, child: SvgPicture.asset('assets/Illustration.svg')),
         const SizedBox(
           height: 48,
         ),
@@ -46,8 +44,13 @@ class _StartScreenState extends State<StartScreen> {
           height: 40,
           width: 324,
           child: ElevatedButton(
-              onPressed: () => Navigator.of(context).pushNamed('/auth'),
-              child: const Text(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AuthScreen(
+                            initialIndex: 1,
+                          ))),
+              child: Text(
                 'Войти',
               )),
         ),
@@ -59,8 +62,13 @@ class _StartScreenState extends State<StartScreen> {
           height: 40,
           width: 324,
           child: OutlinedButton(
-              onPressed: () => Navigator.of(context).pushNamed('/auth'),
-              child: const Text(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AuthScreen(
+                            initialIndex: 0,
+                          ))),
+              child: Text(
                 'Зарегистрироваться',
               )),
         ),

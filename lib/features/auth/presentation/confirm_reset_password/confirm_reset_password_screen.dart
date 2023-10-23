@@ -1,15 +1,14 @@
+import 'package:fin_app/features/auth/presentation/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmResetPasswordScreen extends StatefulWidget {
   const ConfirmResetPasswordScreen({super.key});
 
   @override
-  State<ConfirmResetPasswordScreen> createState() =>
-      _ConfirmResetPasswordScreenState();
+  State<ConfirmResetPasswordScreen> createState() => _ConfirmResetPasswordScreenState();
 }
 
-class _ConfirmResetPasswordScreenState
-    extends State<ConfirmResetPasswordScreen> {
+class _ConfirmResetPasswordScreenState extends State<ConfirmResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,8 +17,7 @@ class _ConfirmResetPasswordScreenState
         Container(
           padding: const EdgeInsets.only(left: 15),
           alignment: Alignment.bottomLeft,
-          child: Text('Сброс пароля',
-              style: Theme.of(context).textTheme.headlineLarge),
+          child: Text('Сброс пароля', style: Theme.of(context).textTheme.headlineLarge),
         ),
         const SizedBox(
           height: 24,
@@ -28,8 +26,7 @@ class _ConfirmResetPasswordScreenState
           padding: const EdgeInsets.only(left: 16),
           alignment: Alignment.bottomLeft,
           child: Text('Придумайте новый пароль',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge),
+              textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyLarge),
         ),
         const SizedBox(
           height: 24,
@@ -73,9 +70,16 @@ class _ConfirmResetPasswordScreenState
             children: [
               const Text('Вспомнили свой пароль?'),
               TextButton(
-                  onPressed: () =>
-                      Navigator.popUntil(context, ModalRoute.withName('/auth')),
-                  child: const Text('Войти'))
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AuthScreen(
+                                  initialIndex: 1,
+                                )));
+                  },
+                  child: Text('Войти', style: Theme.of(context).textTheme.bodyLarge))
             ],
           ),
         ),
@@ -87,8 +91,7 @@ class _ConfirmResetPasswordScreenState
           height: 40,
           width: 324,
           child: ElevatedButton(
-              onPressed: () => Navigator.of(context)
-                  .pushNamed('/auth/reset/confirm/changed'),
+              onPressed: () => Navigator.of(context).pushNamed('/auth/reset/confirm/changed'),
               child: const Text('Сохранить')),
         ),
       ])),
