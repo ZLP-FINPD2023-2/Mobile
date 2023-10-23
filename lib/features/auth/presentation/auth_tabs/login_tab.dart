@@ -36,7 +36,6 @@ class _LoginTabState extends State<LoginTab> {
                 controller: emailController,
                 validator: validateEmail,
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -51,7 +50,6 @@ class _LoginTabState extends State<LoginTab> {
                 textInputAction: TextInputAction.next,
                 obscureText: true,
                 autocorrect: false,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -64,7 +62,7 @@ class _LoginTabState extends State<LoginTab> {
             alignment: Alignment.bottomRight,
             child: TextButton(
               onPressed: () => Navigator.of(context).pushNamed('/auth/reset'),
-              child: Text('Забыли пароль?', style: Theme.of(context).textTheme.bodySmall),
+              child: Text('Забыли пароль?'),
             ),
           ),
           SizedBox(
@@ -73,10 +71,11 @@ class _LoginTabState extends State<LoginTab> {
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  authCubit.login(emailController.text, passwordController.text);
+                  authCubit.login(
+                      emailController.text, passwordController.text);
                 }
               },
-              child: Text('Войти', style: Theme.of(context).textTheme.labelMedium),
+              child: Text('Войти'),
             ),
           ),
         ],

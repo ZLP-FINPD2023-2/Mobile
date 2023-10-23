@@ -28,6 +28,12 @@ final ThemeData appTheme = ThemeData(
           fontWeight: FontWeight.w400,
           color: lightColorScheme.outline),
       isDense: true,
+      disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: lightColorScheme.outline)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: lightColorScheme.error)),
       focusColor: const Color(0xff1BD0B8),
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4),
