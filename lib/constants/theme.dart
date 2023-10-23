@@ -21,6 +21,7 @@ final ThemeData appTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: lightColorScheme.onSurface)),
   inputDecorationTheme: InputDecorationTheme(
+      floatingLabelBehavior: FloatingLabelBehavior.always,
       labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
       hintStyle: TextStyle(
           fontSize: 16,
