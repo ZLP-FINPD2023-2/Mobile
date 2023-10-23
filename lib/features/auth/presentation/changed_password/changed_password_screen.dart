@@ -14,17 +14,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return SafeArea(
       child: Scaffold(
           body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        SizedBox(height: 160, width: 180, child: SvgPicture.asset('assets/Stars.svg')),
+        SizedBox(
+            height: 160,
+            width: 180,
+            child: SvgPicture.asset('assets/Stars.svg')),
         const SizedBox(
           height: 48,
         ),
-        Text('Пароль изменен!', style: Theme.of(context).textTheme.titleMedium),
+        Text('Пароль изменен!',
+            style: Theme.of(context).textTheme.headlineLarge),
         const SizedBox(
           height: 16,
         ),
         Center(
           child: Text('Ваш пароль успешно изменен',
-              textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge),
         ),
         const SizedBox(
           height: 48,
@@ -34,8 +39,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           height: 40,
           width: 324,
           child: ElevatedButton(
-              onPressed: () => Navigator.popUntil(context, ModalRoute.withName('/auth')),
-              child: Text('Войти', style: Theme.of(context).textTheme.labelMedium)),
+              onPressed: () =>
+                  Navigator.popUntil(context, ModalRoute.withName('/auth')),
+              child: const Text('Войти')),
         ),
       ])),
     );

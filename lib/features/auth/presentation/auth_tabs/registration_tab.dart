@@ -18,7 +18,6 @@ class _RegistrationTab extends State<RegistrationTab> {
             padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -30,7 +29,6 @@ class _RegistrationTab extends State<RegistrationTab> {
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -42,7 +40,6 @@ class _RegistrationTab extends State<RegistrationTab> {
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -53,7 +50,6 @@ class _RegistrationTab extends State<RegistrationTab> {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextField(
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: InputDecoration(
@@ -74,7 +70,6 @@ class _RegistrationTab extends State<RegistrationTab> {
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -86,7 +81,6 @@ class _RegistrationTab extends State<RegistrationTab> {
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -97,15 +91,15 @@ class _RegistrationTab extends State<RegistrationTab> {
           Container(
             padding: const EdgeInsets.only(left: 18, top: 5),
             alignment: Alignment.bottomLeft,
-            child: Text('Минимум 8 символов',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodySmall,),
+            child: const Text(
+              'Минимум 8 символов',
+              textAlign: TextAlign.center,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
             child: TextFormField(
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.labelLarge,
                 cursorColor: const Color(0xff94A3B8),
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
@@ -117,9 +111,7 @@ class _RegistrationTab extends State<RegistrationTab> {
             height: 40,
             width: 324,
             child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Зарегистрироваться',
-                    style: Theme.of(context).textTheme.labelMedium,)),
+                onPressed: () {}, child: const Text('Зарегистрироваться')),
           ),
           Padding(
               padding: EdgeInsets.only(

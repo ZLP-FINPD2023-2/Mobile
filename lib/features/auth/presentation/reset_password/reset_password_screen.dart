@@ -16,7 +16,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Container(
           padding: const EdgeInsets.only(left: 14),
           alignment: Alignment.bottomLeft,
-          child: Text('Забыли пароль?', style: Theme.of(context).textTheme.titleMedium),
+          child: Text('Забыли пароль?',
+              style: Theme.of(context).textTheme.headlineLarge),
         ),
         const SizedBox(
           height: 24,
@@ -24,20 +25,29 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         Container(
           padding: const EdgeInsets.only(left: 16),
           alignment: Alignment.bottomLeft,
-          child: Text('Укажите адрес электронной почты,',
-              textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
+          child: Text(
+            'Укажите адрес электронной почты,',
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
         ),
         Container(
           padding: const EdgeInsets.only(left: 16),
           alignment: Alignment.bottomLeft,
-          child: Text('связанный с вашей учетной записью,',
-              textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
+          child: Text(
+            'связанный с вашей учетной записью,',
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
         ),
         Container(
           padding: const EdgeInsets.only(left: 16),
           alignment: Alignment.bottomLeft,
-          child: Text('для восстановления пароля.',
-              textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
+          child: Text(
+            'для восстановления пароля.',
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          ),
         ),
         const SizedBox(
           height: 32,
@@ -47,7 +57,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: TextFormField(
               textInputAction: TextInputAction.next,
-              style: Theme.of(context).textTheme.labelLarge,
               cursorColor: const Color(0xff94A3B8),
               textAlign: TextAlign.justify,
               decoration: const InputDecoration(
@@ -60,10 +69,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text('Помните пароль?', style: Theme.of(context).textTheme.bodySmall),
+              const Text('Помните пароль?'),
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Войти', style: Theme.of(context).textTheme.bodyLarge))
+                  child: const Text('Войти'))
             ],
           ),
         ),
@@ -75,8 +84,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           height: 40,
           width: 324,
           child: ElevatedButton(
-              onPressed: () => Navigator.of(context).pushNamed('/auth/confirm_email'),
-              child: Text('Прислать код', style: Theme.of(context).textTheme.labelMedium)),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/auth/confirm_email'),
+              child: const Text('Прислать код')),
         ),
       ])),
     );
