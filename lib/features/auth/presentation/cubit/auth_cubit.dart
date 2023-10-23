@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoadingState());
       await _authUseCase.signUp(
-        age: DateTime.now().difference(DateTime.parse(birthDate)).inDays ~/ 365,
+        age: birthDate,
         email: email,
         firstname: name,
         gender: true,

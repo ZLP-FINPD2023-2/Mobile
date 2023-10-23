@@ -19,7 +19,7 @@ class AuthUseCase {
   }
 
   Future<void> signUp({
-    required int age,
+    required String age,
     required String email,
     required String firstname,
     required bool gender,
