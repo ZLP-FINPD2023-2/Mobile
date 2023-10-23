@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF385CA9),
+  primary: Color(0xff0F172A),
   onPrimary: Color(0xFFFFFFFF),
   primaryContainer: Color(0xFFD9E2FF),
   onPrimaryContainer: Color(0xFF001946),
@@ -18,18 +18,22 @@ const lightColorScheme = ColorScheme(
   onError: Color(0xFFFFFFFF),
   errorContainer: Color(0xFFFFDAD7),
   onErrorContainer: Color(0xFF410004),
-  outline: Color(0xFF73777F),
+  //outline button
+  outline: Color(0xff94a3b8),
   // background: Color(0xFFFAFDFD),
   background: Color(0xFFFFFFFF),
   onBackground: Color(0xFF191C1D),
-  surface: Color(0xFFF8FAFA),
-  onSurface: Color(0xFF191C1D),
+  //elevated button background
+  surface: Color(0xff0F172A),
+  //text color
+  onSurface: Color(0xff6b7280),
   surfaceVariant: Color(0xFFDFE2EB),
   onSurfaceVariant: Color(0xFF43474E),
   inverseSurface: Color(0xFF2E3132),
   onInverseSurface: Color(0xFFEFF1F1),
   inversePrimary: Color(0xFFB1C6FF),
   shadow: Color(0xFF000000),
+
   surfaceTint: Color(0xFF385CA9),
   outlineVariant: Color(0xFFC3C6CF),
   scrim: Color(0xFF000000),

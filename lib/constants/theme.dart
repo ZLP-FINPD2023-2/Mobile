@@ -6,35 +6,41 @@ final ThemeData appTheme = ThemeData(
   colorScheme: lightColorScheme,
   outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Color(0xff94A3B8)),
+          //outline button text
+          foregroundColor: lightColorScheme.surface,
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100)))),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff0F172A),
+          // elevated button text
+          foregroundColor: lightColorScheme.onPrimary,
           elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)))),
-  textTheme: const TextTheme(
-      titleMedium: TextStyle(
-        fontSize: 32,
-        color: Colors.black,
-        fontWeight: FontWeight.w700,
-      ),
-      bodyLarge: TextStyle(fontSize: 14, color: Color(0xff6B7280), fontWeight: FontWeight.w700),
-      bodyMedium: TextStyle(fontSize: 16, color: Color(0xff6B7280)),
-      bodySmall: TextStyle(fontSize: 14, color: Color(0xff6B7280)),
-      labelLarge: TextStyle(fontSize: 16, color: Color(0xff0F172A)),
-      labelMedium: TextStyle(fontSize: 14, color: Colors.white),
-      labelSmall: TextStyle(fontSize: 14, color: Color(0xff0F172A))),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100)))),
+  textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: lightColorScheme.onSurface)),
   inputDecorationTheme: InputDecorationTheme(
-      labelStyle: const TextStyle(color: Color(0xff4B5563), fontSize: 14, fontWeight: FontWeight.w400),
-      hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Color(0xff94A3B8)),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+      hintStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: lightColorScheme.outline),
       isDense: true,
       focusColor: const Color(0xff1BD0B8),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), borderSide: const BorderSide(color: Color(0xffCBD5E1))),
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: lightColorScheme.outline)),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), borderSide: const BorderSide(color: Color(0xff94A3B8))),
+          borderRadius: BorderRadius.circular(4),
+          borderSide: BorderSide(color: lightColorScheme.outline)),
       filled: true,
       fillColor: Colors.white),
+  textTheme: TextTheme(
+      headlineLarge: TextStyle(
+          fontSize: 32,
+          color: lightColorScheme.shadow,
+          fontWeight: FontWeight.w700),
+      bodyLarge: const TextStyle(fontSize: 16)),
 );

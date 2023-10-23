@@ -7,7 +7,6 @@ import '../domain/models/usecases/auth_usecase.dart';
 import 'auth_tabs/login_tab.dart';
 import 'auth_tabs/registration_tab.dart';
 
-
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
 
@@ -22,7 +21,6 @@ class _AuthScreenState extends State<AuthScreen> {
   void initState() {
     super.initState();
     _authCubit = AuthCubit(getIt<AuthUseCase>());
-
   }
 
   @override

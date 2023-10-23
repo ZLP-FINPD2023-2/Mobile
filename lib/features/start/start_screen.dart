@@ -17,13 +17,16 @@ class _StartScreenState extends State<StartScreen> {
         const SizedBox(
           height: 48,
         ),
-        SizedBox(height: 160, width: 180, child: SvgPicture.asset('assets/Illustration.svg')),
+        SizedBox(
+            height: 160,
+            width: 180,
+            child: SvgPicture.asset('assets/Illustration.svg')),
         const SizedBox(
           height: 48,
         ),
         Text(
           'Добро пожаловать!',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         const SizedBox(
           height: 16,
@@ -31,8 +34,8 @@ class _StartScreenState extends State<StartScreen> {
         Center(
           child: Text(
             'Теперь ваши финансы находятся\nв одном месте и всегда под контролем',
+            style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         const SizedBox(
@@ -44,9 +47,8 @@ class _StartScreenState extends State<StartScreen> {
           width: 324,
           child: ElevatedButton(
               onPressed: () => Navigator.of(context).pushNamed('/auth'),
-              child: Text(
+              child: const Text(
                 'Войти',
-                style: Theme.of(context).textTheme.labelMedium,
               )),
         ),
         const SizedBox(
@@ -58,9 +60,8 @@ class _StartScreenState extends State<StartScreen> {
           width: 324,
           child: OutlinedButton(
               onPressed: () => Navigator.of(context).pushNamed('/auth'),
-              child: Text(
+              child: const Text(
                 'Зарегистрироваться',
-                style: Theme.of(context).textTheme.labelSmall,
               )),
         ),
       ])),
