@@ -33,11 +33,10 @@ class AuthScreen extends StatelessWidget {
                   Tab(
                     child: Text(
                       'Регистрация',
-                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
                   Tab(
-                    child: Text('Вход', style: Theme.of(context).textTheme.labelSmall),
+                    child: Text('Вход'),
                   )
                 ]),
                 const Expanded(
@@ -52,7 +51,8 @@ class AuthScreen extends StatelessWidget {
                 BlocListener<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthSuccessState) {
-                      Navigator.of(context).pushReplacementNamed('/placeholder');
+                      Navigator.of(context)
+                          .pushReplacementNamed('/placeholder');
                     }
                   },
                   child: BlocBuilder<AuthCubit, AuthState>(

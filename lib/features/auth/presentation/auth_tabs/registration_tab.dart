@@ -17,7 +17,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   String? validateEmail(String? value) {
     if (value == null || !value.contains('@')) {
@@ -175,7 +176,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   );
                 }
               },
-              child: Text('Зарегистрироваться', style: Theme.of(context).textTheme.labelMedium),
+              child: Text('Зарегистрироваться'),
             ),
           ),
         ]),
