@@ -88,24 +88,28 @@ class _RegistrationTabState extends State<RegistrationTab> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextFormField(
-                controller: birthDateController, // Добавьте эту строку
-                style: Theme.of(context).textTheme.labelLarge,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: InputDecoration(
-                  suffixIconConstraints: const BoxConstraints(maxHeight: 24),
-                  suffixIcon: IconButton(
-                      padding: EdgeInsets.zero,
-                      iconSize: 24,
-                      icon: const Icon(
-                        Icons.today_rounded,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {}),
-                  labelText: 'Дата рождения',
-                  hintText: '27.07.2000',
-                )),
+            child: GestureDetector(
+              onTap: () => _pickDate(),
+              child: TextFormField(
+                  enabled: false,
+                  controller: birthDateController, // Добавьте эту строку
+                  style: Theme.of(context).textTheme.labelLarge,
+                  cursorColor: const Color(0xff94A3B8),
+                  textAlign: TextAlign.justify,
+                  decoration: InputDecoration(
+                    suffixIconConstraints: const BoxConstraints(maxHeight: 24),
+                    suffixIcon: IconButton(
+                        padding: EdgeInsets.zero,
+                        iconSize: 24,
+                        icon: const Icon(
+                          Icons.today_rounded,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {}),
+                    labelText: 'Дата рождения',
+                    hintText: '27.07.2000',
+                  )),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
@@ -177,5 +181,19 @@ class _RegistrationTabState extends State<RegistrationTab> {
         ]),
       ),
     );
+  }
+
+  void _pickDate() async {
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (date != null) {
+      setState(() {
+        birthDateController.text = date.toString().split(' ')[0];
+      });
+    }
   }
 }
