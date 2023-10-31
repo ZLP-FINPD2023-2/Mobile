@@ -6,8 +6,7 @@ import 'package:injectable/injectable.dart';
 class ServerAuthDataSource {
   final NetworkService _networkService;
 
-  const ServerAuthDataSource({required NetworkService networkService})
-      : _networkService = networkService;
+  const ServerAuthDataSource({required NetworkService networkService}) : _networkService = networkService;
 
   Future<String> signIn({required String email, required String password}) async {
     final Map<String, dynamic> body = {
@@ -41,7 +40,7 @@ class ServerAuthDataSource {
     required String age,
     required String email,
     required String firstname,
-    required bool gender,
+    required String gender,
     required String lastname,
     required String password,
     required String patronymic,
@@ -65,8 +64,5 @@ class ServerAuthDataSource {
     if (data == null) {
       throw AppStateWarning("[Sign up] Bad response: No data field!");
     }
-
   }
-
-
 }

@@ -2,6 +2,8 @@ import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+enum Gender { male, female }
+
 class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
 
@@ -17,8 +19,12 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  Gender genderSelected = Gender.male;
+  final Map<Gender, String> menuValues = {
+    Gender.female: 'Женский',
+    Gender.male: 'Мужской',
+  };
 
   String? validateEmail(String? value) {
     if (value == null || !value.contains('@')) {
@@ -112,6 +118,20 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   )),
             ),
           ),
+          DropdownButton(
+            value: genderSelected,
+            items: Gender.values.toList().map<DropdownMenuItem<Gender>>((Gender value) {
+              return DropdownMenuItem<Gender>(
+                value: value,
+                child: Text(menuValues[value] ?? '', style: const TextStyle(fontSize: 16)),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                genderSelected = newValue!;
+              });
+            },
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
             child: TextFormField(
@@ -166,17 +186,18 @@ class _RegistrationTabState extends State<RegistrationTab> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   authCubit.register(
-                    name: nameController.text,
-                    surname: surnameController.text,
-                    patronymic: patronymicController.text,
-                    birthDate: birthDateController.text,
-                    email: emailController.text,
-                    password: passwordController.text,
-                    // confirmPassword: confirmPasswordController.text,
-                  );
+                      name: nameController.text,
+                      surname: surnameController.text,
+                      patronymic: patronymicController.text,
+                      birthDate: birthDateController.text,
+                      email: emailController.text,
+                      password: passwordController.text,
+                      gender: genderSelected
+                      // confirmPassword: confirmPasswordController.text,
+                      );
                 }
               },
-              child: Text('Зарегистрироваться'),
+              child: const Text('Зарегистрироваться'),
             ),
           ),
         ]),

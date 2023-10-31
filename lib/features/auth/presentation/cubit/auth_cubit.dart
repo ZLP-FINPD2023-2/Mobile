@@ -1,6 +1,6 @@
 import 'package:fin_app/features/auth/domain/models/usecases/auth_usecase.dart';
+import 'package:fin_app/features/auth/presentation/auth_tabs/registration_tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 import 'auth_cubit_states.dart';
 
@@ -21,21 +21,21 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void register({
-    required String name,
-    required String surname,
-    required String patronymic,
-    required String birthDate,
-    required String email,
-    required String password,
-  }) async {
+  void register(
+      {required String name,
+      required String surname,
+      required String patronymic,
+      required String birthDate,
+      required String email,
+      required String password,
+      required Gender gender}) async {
     try {
       emit(AuthLoadingState());
       await _authUseCase.signUp(
         age: birthDate,
         email: email,
         firstname: name,
-        gender: true,
+        gender: gender == Gender.male ? 'Male' : 'Female',
         lastname: surname,
         password: password,
         patronymic: patronymic,
