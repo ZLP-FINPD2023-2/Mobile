@@ -19,7 +19,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   Gender genderSelected = Gender.male;
   final Map<Gender, String> menuValues = {
     Gender.female: 'Женский',
@@ -118,19 +119,26 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   )),
             ),
           ),
-          DropdownButton(
-            value: genderSelected,
-            items: Gender.values.toList().map<DropdownMenuItem<Gender>>((Gender value) {
-              return DropdownMenuItem<Gender>(
-                value: value,
-                child: Text(menuValues[value] ?? '', style: const TextStyle(fontSize: 16)),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              setState(() {
-                genderSelected = newValue!;
-              });
-            },
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
+            child: DropdownButtonFormField(
+              decoration:
+                  const InputDecoration(labelText: 'Пол', hintText: 'Ваш пол'),
+              items: Gender.values
+                  .toList()
+                  .map<DropdownMenuItem<Gender>>((Gender value) {
+                return DropdownMenuItem<Gender>(
+                  value: value,
+                  child: Text(menuValues[value] ?? '',
+                      style: const TextStyle(fontSize: 16)),
+                );
+              }).toList(),
+              onChanged: (newValue) {
+                setState(() {
+                  genderSelected = newValue!;
+                });
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
