@@ -1,34 +1,44 @@
 import 'package:fin_app/constants/colors.dart';
-import 'package:fin_app/features/auth/domain/models/usecases/auth_usecase.dart';
-import 'package:fin_app/features/auth/presentation/auth_tabs/registration_tab.dart';
+import 'package:fin_app/core/logger/logger.dart';
+import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
+import 'package:fin_app/utils/toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/app_state/app_state.dart';
+import '../auth_tabs/registration_tab.dart';
+import 'auth_cubit_state.dart';
 
-import 'auth_cubit_states.dart';
-
+@singleton
 class AuthCubit extends Cubit<AuthState> {
   final AuthUseCase _authUseCase;
 
-  AuthCubit(this._authUseCase) : super(AuthInitialState());
+  AuthCubit(
+    this._authUseCase,
+  ) : super(AuthInitialState());
 
   void login(String email, String password) async {
     try {
       emit(AuthLoadingState());
+      logger.info('Sending login request...');
       await _authUseCase.signIn(email: email, password: password);
       emit(AuthSuccessState());
     } catch (e) {
+      final error = AppState.catchErrorHandler(e);
+      logger.warning('Error during login: ${error.message}');
       _showToast(e.toString());
     }
   }
 
-  void register(
-      {required String name,
-      required String surname,
-      required String patronymic,
-      required String birthDate,
-      required String email,
-      required String password,
-      required Gender gender}) async {
+  void register({
+    required String name,
+    required String surname,
+    required String patronymic,
+    required String birthDate,
+    required String email,
+    required String password,
+    required Gender gender,
+  }) async {
     try {
       emit(AuthLoadingState());
       await _authUseCase.signUp(
@@ -42,18 +52,21 @@ class AuthCubit extends Cubit<AuthState> {
       );
       emit(AuthSuccessState());
     } catch (e) {
+      final error = AppState.catchErrorHandler(e);
+      logger.warning('Error during register: ${error.message}');
+      emit(AuthErrorState(e.toString()));
       _showToast(e.toString());
     }
   }
 
   void _showToast(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: lightColorScheme.error,
-        textColor: lightColorScheme.background,
-        fontSize: 16.0);
+    showToast(
+      message,
+      gravity: ToastGravity.BOTTOM,
+      timeInSec: 1,
+      backgroundColor: lightColorScheme.background,
+      textColor: lightColorScheme.shadow,
+      fontSize: 16.0,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,7 @@ class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
 
   @override
-  _RegistrationTabState createState() => _RegistrationTabState();
+  State<RegistrationTab> createState() => _RegistrationTabState();
 }
 
 class _RegistrationTabState extends State<RegistrationTab> {
@@ -57,52 +58,51 @@ class _RegistrationTabState extends State<RegistrationTab> {
       reverse: false,
       child: Form(
         key: _formKey,
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 25, 16, 0),
-            child: TextFormField(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 25),
+              TextFormField(
                 controller: nameController,
                 textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
+                cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
                   labelText: 'Имя',
                   hintText: 'Иван',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextFormField(
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
                 controller: surnameController,
                 textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
+                cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
                   labelText: 'Фамилия',
                   hintText: 'Иванов',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextFormField(
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
                 controller: patronymicController,
                 textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
+                cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
                   labelText: 'Отчество',
                   hintText: 'Иванович',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: GestureDetector(
-              onTap: () => _pickDate(),
-              child: TextFormField(
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () => _pickDate(),
+                child: TextFormField(
                   enabled: false,
                   controller: birthDateController, // Добавьте эту строку
-                  style: Theme.of(context).textTheme.labelLarge,
-                  cursorColor: const Color(0xff94A3B8),
+                  style: context.textStyles.labelLarge,
+                  cursorColor: context.colors.outline,
                   textAlign: TextAlign.justify,
                   decoration: InputDecoration(
                     suffixIconConstraints: const BoxConstraints(maxHeight: 24),
@@ -116,91 +116,87 @@ class _RegistrationTabState extends State<RegistrationTab> {
                         onPressed: () {}),
                     labelText: 'Дата рождения',
                     hintText: '27.07.2000',
-                  )),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: DropdownButtonFormField(
-              decoration:
-                  const InputDecoration(labelText: 'Пол', hintText: 'Ваш пол'),
-              items: Gender.values
-                  .toList()
-                  .map<DropdownMenuItem<Gender>>((Gender value) {
-                return DropdownMenuItem<Gender>(
-                  value: value,
-                  child: Text(menuValues[value] ?? '',
-                      style: const TextStyle(fontSize: 16)),
-                );
-              }).toList(),
-              onChanged: (newValue) {
-                setState(() {
-                  genderSelected = newValue!;
-                });
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextFormField(
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              DropdownButtonFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Пол', hintText: 'Ваш пол'),
+                items: Gender.values
+                    .toList()
+                    .map<DropdownMenuItem<Gender>>((Gender value) {
+                  return DropdownMenuItem<Gender>(
+                    value: value,
+                    child: Text(menuValues[value] ?? '',
+                        style: const TextStyle(fontSize: 16)),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    genderSelected = newValue!;
+                  });
+                },
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
                 controller: emailController,
                 validator: validateEmail,
                 textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
+                cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
                   labelText: 'Почта',
                   hintText: 'Введите свою почту',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: TextFormField(
-                controller: passwordController,
-                validator: validatePasswordLength,
-                textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
-                  labelText: 'Пароль',
-                  hintText: 'Придумайте пароль',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
-            child: TextFormField(
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                  controller: passwordController,
+                  validator: validatePasswordLength,
+                  textInputAction: TextInputAction.next,
+                  cursorColor: const Color(0xff94A3B8),
+                  textAlign: TextAlign.justify,
+                  decoration: const InputDecoration(
+                    labelText: 'Пароль',
+                    hintText: 'Придумайте пароль',
+                  )),
+              const SizedBox(height: 20),
+              TextFormField(
                 controller: confirmPasswordController,
                 validator: validatePasswordMatch,
                 textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
+                cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
                 decoration: const InputDecoration(
                   labelText: 'Подтверждение пароля',
                   hintText: 'Повторите пароль',
-                )),
-          ),
-          SizedBox(
-            height: 40,
-            width: 324,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  authCubit.register(
-                      name: nameController.text,
-                      surname: surnameController.text,
-                      patronymic: patronymicController.text,
-                      birthDate: birthDateController.text,
-                      email: emailController.text,
-                      password: passwordController.text,
-                      gender: genderSelected
-                      // confirmPassword: confirmPasswordController.text,
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 40,
+                width: 324,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      authCubit.register(
+                        name: nameController.text,
+                        surname: surnameController.text,
+                        patronymic: patronymicController.text,
+                        birthDate: birthDateController.text,
+                        email: emailController.text,
+                        password: passwordController.text,
+                        gender: genderSelected,
                       );
-                }
-              },
-              child: const Text('Зарегистрироваться'),
-            ),
+                    }
+                  },
+                  child: const Text('Зарегистрироваться'),
+                ),
+              ),
+            ],
           ),
-        ]),
+        ),
       ),
     );
   }
@@ -217,5 +213,18 @@ class _RegistrationTabState extends State<RegistrationTab> {
         birthDateController.text = date.toString().split(' ')[0];
       });
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    nameController.dispose();
+    surnameController.dispose();
+    patronymicController.dispose();
+    birthDateController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
   }
 }

@@ -1,4 +1,6 @@
+import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,13 +8,21 @@ class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
 
   @override
-  _LoginTabState createState() => _LoginTabState();
+  State<LoginTab> createState() => _LoginTabState();
 }
 
 class _LoginTabState extends State<LoginTab> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
 
   String? validateEmail(String? value) {
     if (value == null || !value.contains('@')) {
@@ -27,59 +37,72 @@ class _LoginTabState extends State<LoginTab> {
 
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: TextFormField(
-                controller: emailController,
-                validator: validateEmail,
-                textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
-                  labelText: 'Почта',
-                  hintText: 'Введите свою почту',
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-            child: TextFormField(
-                controller: passwordController,
-                textInputAction: TextInputAction.next,
-                obscureText: true,
-                autocorrect: false,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
-                  labelText: 'Пароль',
-                  hintText: 'Введите свой пароль',
-                )),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 18, top: 5, bottom: 5),
-            alignment: Alignment.bottomRight,
-            child: TextButton(
-              onPressed: () => Navigator.of(context).pushNamed('/auth/reset'),
-              child: Text('Забыли пароль?'),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              controller: emailController,
+              validator: validateEmail,
+              textInputAction: TextInputAction.next,
+              cursorColor: context.colors.outline,
+              textAlign: TextAlign.justify,
+              decoration: const InputDecoration(
+                labelText: 'Почта',
+                hintText: 'Введите свою почту',
+              ),
             ),
-          ),
-          SizedBox(
-            height: 40,
-            width: 324,
-            child: ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  authCubit.login(
-                      emailController.text, passwordController.text);
-                }
-              },
-              child: Text('Войти'),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: passwordController,
+              textInputAction: TextInputAction.next,
+              obscureText: true,
+              autocorrect: false,
+              cursorColor: context.colors.outline,
+              textAlign: TextAlign.justify,
+              decoration: const InputDecoration(
+                labelText: 'Пароль',
+                hintText: 'Введите свой пароль',
+              ),
             ),
-          ),
-        ],
+            Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: TextButton(
+                onPressed: () => Navigator.of(context).pushNamed(
+                  Routes.resetPasswordScreen,
+                ),
+                child: Text(
+                  'Забыли пароль?',
+                  style: context.textStyles.labelMedium?.copyWith(
+                    color: context.colors.outline,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+              width: 324,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    authCubit.login(
+                        emailController.text, passwordController.text);
+                  }
+                },
+                child: const Text('Войти'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 }
