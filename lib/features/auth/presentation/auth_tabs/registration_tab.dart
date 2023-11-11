@@ -166,14 +166,6 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   hintText: 'Придумайте пароль',
                 )),
           ),
-          Container(
-            padding: const EdgeInsets.only(left: 18, top: 5),
-            alignment: Alignment.bottomLeft,
-            child: const Text(
-              'Минимум 8 символов',
-              textAlign: TextAlign.center,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
             child: TextFormField(
