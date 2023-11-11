@@ -31,6 +31,7 @@ void showToast(
   ToastGravity? gravity,
   double? fontSize,
   int? timeInSec,
+  Color? textColor,
 }) {
   Fluttertoast.showToast(
     msg: message,
@@ -39,5 +40,6 @@ void showToast(
     backgroundColor: backgroundColor,
     gravity: gravity,
     fontSize: fontSize,
+    textColor: textColor,
   );
 }

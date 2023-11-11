@@ -55,8 +55,6 @@ class AuthScreen extends StatelessWidget {
                       logger.debug('Current AuthState: $state');
                       if (state is AuthLoadingState) {
                         return const CircularProgressIndicator();
-                      } else if (state is AuthErrorState) {
-                        return Text(state.error);
                       }
                       return Container();
                     },

@@ -3,6 +3,8 @@ import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+enum Gender { male, female }
+
 class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
 
@@ -20,6 +22,11 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  Gender genderSelected = Gender.male;
+  final Map<Gender, String> menuValues = {
+    Gender.female: 'Женский',
+    Gender.male: 'Мужской',
+  };
 
   String? validateEmail(String? value) {
     if (value == null || !value.contains('@')) {
@@ -92,25 +99,44 @@ class _RegistrationTabState extends State<RegistrationTab> {
               GestureDetector(
                 onTap: () => _pickDate(),
                 child: TextFormField(
-                    enabled: false,
-                    controller: birthDateController, // Добавьте эту строку
-                    style: context.textStyles.labelLarge,
-                    cursorColor: context.colors.outline,
-                    textAlign: TextAlign.justify,
-                    decoration: InputDecoration(
-                      suffixIconConstraints:
-                          const BoxConstraints(maxHeight: 24),
-                      suffixIcon: IconButton(
-                          padding: EdgeInsets.zero,
-                          iconSize: 24,
-                          icon: const Icon(
-                            Icons.today_rounded,
-                            color: Colors.grey,
-                          ),
-                          onPressed: () {}),
-                      labelText: 'Дата рождения',
-                      hintText: '27.07.2000',
-                    )),
+                  enabled: false,
+                  controller: birthDateController, // Добавьте эту строку
+                  style: context.textStyles.labelLarge,
+                  cursorColor: context.colors.outline,
+                  textAlign: TextAlign.justify,
+                  decoration: InputDecoration(
+                    suffixIconConstraints: const BoxConstraints(maxHeight: 24),
+                    suffixIcon: IconButton(
+                        padding: EdgeInsets.zero,
+                        iconSize: 24,
+                        icon: const Icon(
+                          Icons.today_rounded,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {}),
+                    labelText: 'Дата рождения',
+                    hintText: '27.07.2000',
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              DropdownButtonFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Пол', hintText: 'Ваш пол'),
+                items: Gender.values
+                    .toList()
+                    .map<DropdownMenuItem<Gender>>((Gender value) {
+                  return DropdownMenuItem<Gender>(
+                    value: value,
+                    child: Text(menuValues[value] ?? '',
+                        style: const TextStyle(fontSize: 16)),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    genderSelected = newValue!;
+                  });
+                },
               ),
               const SizedBox(height: 20),
               TextFormField(
@@ -126,23 +152,15 @@ class _RegistrationTabState extends State<RegistrationTab> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                controller: passwordController,
-                validator: validatePasswordLength,
-                textInputAction: TextInputAction.next,
-                cursorColor: context.colors.outline,
-                textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
-                  labelText: 'Пароль',
-                  hintText: 'Придумайте пароль',
-                ),
-              ),
-              const SizedBox(height: 5),
-              Container(
-                alignment: AlignmentDirectional.topStart,
-                child: const Text(
-                  'Минимум 8 символов',
-                ),
-              ),
+                  controller: passwordController,
+                  validator: validatePasswordLength,
+                  textInputAction: TextInputAction.next,
+                  cursorColor: const Color(0xff94A3B8),
+                  textAlign: TextAlign.justify,
+                  decoration: const InputDecoration(
+                    labelText: 'Пароль',
+                    hintText: 'Придумайте пароль',
+                  )),
               const SizedBox(height: 20),
               TextFormField(
                 controller: confirmPasswordController,
@@ -169,6 +187,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                         birthDate: birthDateController.text,
                         email: emailController.text,
                         password: passwordController.text,
+                        gender: genderSelected,
                       );
                     }
                   },

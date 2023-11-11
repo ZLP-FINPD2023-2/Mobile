@@ -1,8 +1,12 @@
+import 'package:fin_app/constants/colors.dart';
 import 'package:fin_app/core/logger/logger.dart';
 import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
+import 'package:fin_app/utils/toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/app_state/app_state.dart';
+import '../auth_tabs/registration_tab.dart';
 import 'auth_cubit_state.dart';
 
 @singleton
@@ -22,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during login: ${error.message}');
-      emit(AuthErrorState(e.toString()));
+      _showToast(e.toString());
     }
   }
 
@@ -33,6 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String birthDate,
     required String email,
     required String password,
+    required Gender gender,
   }) async {
     try {
       emit(AuthLoadingState());
@@ -40,7 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
         age: birthDate,
         email: email,
         firstname: name,
-        gender: "Male",
+        gender: gender == Gender.male ? 'Male' : 'Female',
         lastname: surname,
         password: password,
         patronymic: patronymic,
@@ -50,6 +55,18 @@ class AuthCubit extends Cubit<AuthState> {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during register: ${error.message}');
       emit(AuthErrorState(e.toString()));
+      _showToast(e.toString());
     }
+  }
+
+  void _showToast(String message) {
+    showToast(
+      message,
+      gravity: ToastGravity.BOTTOM,
+      timeInSec: 1,
+      backgroundColor: lightColorScheme.background,
+      textColor: lightColorScheme.shadow,
+      fontSize: 16.0,
+    );
   }
 }
