@@ -9,11 +9,28 @@ import 'package:flutter/material.dart';
 import 'features/auth/presentation/placeholder_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  '/': (context) => const StartScreen(),
-  '/auth': (context) => const AuthScreen(initialIndex: 1),
-  '/auth/confirm_email': (context) => const ConfirmEmailScreen(),
-  '/auth/reset': (context) => const ResetPasswordScreen(),
-  '/auth/reset/confirm': (context) => const ConfirmResetPasswordScreen(),
-  '/auth/reset/confirm/changed': (context) => const ChangePasswordScreen(),
-  '/placeholder': (context) => PlaceholderScreen(),
+  Routes.startScreen: (context) => const StartScreen(),
+  Routes.authScreen: (context) => const AuthScreen(initialIndex: 1),
+  Routes.confirmEmailScreen: (context) => const ConfirmEmailScreen(),
+  Routes.resetPasswordScreen: (context) => const ResetPasswordScreen(),
+  Routes.confirmResetPasswordScreen: (context) => const ConfirmResetPasswordScreen(),
+  Routes.changePasswordScreen: (context) => const ChangePasswordScreen(),
+  Routes.placeholderScreen: (context) => const PlaceholderScreen(),
 };
+
+class Routes {
+  static String startScreen = '/';
+
+  static String authScreen = '/auth';
+
+  static String confirmEmailScreen = '/auth/confirm_email';
+
+  static String resetPasswordScreen = '/auth/reset';
+
+  static String confirmResetPasswordScreen = '/auth/reset/confirm';
+
+  static String changePasswordScreen = '/auth/reset/confirm/changed';
+
+  static String placeholderScreen = '/placeholder';
+
+}

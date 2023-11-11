@@ -1,81 +1,75 @@
+import 'package:fin_app/core/extensions/context.dart';
+import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
 
-class ConfirmEmailScreen extends StatefulWidget {
+class ConfirmEmailScreen extends StatelessWidget {
   const ConfirmEmailScreen({super.key});
 
-  @override
-  State<ConfirmEmailScreen> createState() => _ConfirmEmailScreenState();
-}
-
-class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Проверьте вашу почту',
-            style: Theme.of(context).textTheme.headlineLarge),
-        const SizedBox(
-          height: 24,
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 16),
-          alignment: Alignment.bottomLeft,
-          child: Text('Мы отправили код на адрес: ',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge),
-        ),
-        Container(
-            alignment: Alignment.bottomLeft,
-            padding: const EdgeInsets.only(left: 19),
-            child: const Text('helloworld@gmail.com ',
-                textAlign: TextAlign.left,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Проверьте вашу почту',
+                style: context.textStyles.headlineLarge,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Мы отправили код на адрес: ',
+                textAlign: TextAlign.start,
+                style: context.textStyles.bodyLarge,
+              ),
+              Text(
+                'helloworld@gmail.com ',
+                textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xff6B7280),
+                  color: context.colors.onSurface,
                   fontWeight: FontWeight.w700,
-                ))),
-        const SizedBox(
-          height: 48,
-        ),
-        //? Текстовое поле Код
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-          child: TextFormField(
-              textInputAction: TextInputAction.next,
-              cursorColor: const Color(0xff94A3B8),
-              textAlign: TextAlign.justify,
-              decoration: const InputDecoration(
-                labelText: 'Код',
-                hintText: 'Введите код',
-              )),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton(
-                  onPressed: () {}, child: const Text('Отправить код заново:')),
-              const Text(
-                '00:20',
-              )
+                ),
+              ),
+              const SizedBox(height: 48),
+              //? Текстовое поле Код
+              TextFormField(
+                textInputAction: TextInputAction.next,
+                cursorColor: context.colors.outline,
+                textAlign: TextAlign.justify,
+                decoration: const InputDecoration(
+                  labelText: 'Код',
+                  hintText: 'Введите код',
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Отправить код заново:'),
+                  ),
+                  const Text('00:20')
+                ],
+              ),
+              const SizedBox(height: 24),
+              //кнопка подтвердить
+              SizedBox(
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.of(context).pushNamed(
+                    Routes.confirmResetPasswordScreen,
+                  ),
+                  child: const Text('Подтвердить'),
+                ),
+              ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 24,
-        ),
-        //кнопка подтвердить
-        SizedBox(
-          height: 40,
-          width: 324,
-          child: ElevatedButton(
-              onPressed: () =>
-                  Navigator.of(context).pushNamed('/auth/reset/confirm'),
-              child: const Text('Подтвердить')),
-        ),
-      ])),
+      ),
     );
   }
 }

@@ -1,22 +1,27 @@
-import 'package:fin_app/features/auth/domain/models/usecases/auth_usecase.dart';
+import 'package:fin_app/core/logger/logger.dart';
+import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import '../../../../core/app_state/app_state.dart';
+import 'auth_cubit_state.dart';
 
-
-import 'auth_cubit_states.dart';
-
+@singleton
 class AuthCubit extends Cubit<AuthState> {
   final AuthUseCase _authUseCase;
 
-  AuthCubit(this._authUseCase) : super(AuthInitialState());
+  AuthCubit(
+    this._authUseCase,
+  ) : super(AuthInitialState());
 
   void login(String email, String password) async {
     try {
       emit(AuthLoadingState());
-      // print('Sending login request...');
+      logger.info('Sending login request...');
       await _authUseCase.signIn(email: email, password: password);
       emit(AuthSuccessState());
     } catch (e) {
-      // print('Error during login: $e');
+      final error = AppState.catchErrorHandler(e);
+      logger.warning('Error during login: ${error.message}');
       emit(AuthErrorState(e.toString()));
     }
   }
@@ -35,13 +40,15 @@ class AuthCubit extends Cubit<AuthState> {
         age: birthDate,
         email: email,
         firstname: name,
-        gender: true,
+        gender: "Male",
         lastname: surname,
         password: password,
         patronymic: patronymic,
       );
       emit(AuthSuccessState());
     } catch (e) {
+      final error = AppState.catchErrorHandler(e);
+      logger.warning('Error during register: ${error.message}');
       emit(AuthErrorState(e.toString()));
     }
   }

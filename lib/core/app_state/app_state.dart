@@ -1,6 +1,6 @@
-library app_state;
-
 import 'package:dio/dio.dart';
+
+import '../logger/logger.dart';
 
 class AppState {
   static AppStateWrong catchErrorHandler(Object? error, {String? details}) {
@@ -12,19 +12,16 @@ class AppState {
     } else if (error is DioException) {
       return AppStateError(error.message ?? '', details: details);
     } else if (error is TypeError) {
-      /* Logger.appLog(AppLog(
-        logType: Level.error,
+      logger.error(
         message: error.toString(),
-        error: error.stackTrace.toString(),
-      )); */
+        error: error,
+        stackTrace: error.stackTrace,
+      );
       return AppStateError(error.toString(), details: details);
     }
 
-    /* Logger.appLog(AppLog(
-      logType: Level.error,
-      message: 'unhandled error',
-      error: error.toString(),
-    )); */
+    logger.error(message: 'unhandled error', error: error);
+    
     return AppStateError(error.toString(), details: details);
   }
 }

@@ -7,10 +7,10 @@ class AuthUseCase {
   final ServerAuthDataSource _serverAuthDataSource;
   final FlutterSecureStorage _secureStorage;
 
-  const AuthUseCase(
-      {required ServerAuthDataSource serverAuthDataSource,
-        required FlutterSecureStorage secureStorage})
-      : _serverAuthDataSource = serverAuthDataSource,
+  const AuthUseCase({
+    required ServerAuthDataSource serverAuthDataSource,
+    required FlutterSecureStorage secureStorage,
+  })  : _serverAuthDataSource = serverAuthDataSource,
         _secureStorage = secureStorage;
 
   Future<void> signIn({required String email, required String password}) async {
@@ -22,7 +22,7 @@ class AuthUseCase {
     required String age,
     required String email,
     required String firstname,
-    required bool gender,
+    required String gender,
     required String lastname,
     required String password,
     required String patronymic,

@@ -1,5 +1,4 @@
-import 'package:fin_app/core/flutter_core.dart';
-
+import '../../../../core/app_state/app_state.dart';
 
 abstract class AuthState extends AppState {}
 
