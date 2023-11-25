@@ -11,7 +11,7 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 class BudgetInfoScreen extends StatefulWidget {
   final int index;
 
-  BudgetInfoScreen({Key? key, required this.index}) : super(key: key);
+  const BudgetInfoScreen({Key? key, required this.index}) : super(key: key);
 
   @override
   _BudgetInfoScreenState createState() => _BudgetInfoScreenState();
@@ -30,7 +30,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
     _controller = AnimationController(
       vsync: this,
       lowerBound: 0.5,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     )..repeat();
   }
 
@@ -43,11 +43,11 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BudgetScreen()));
+                MaterialPageRoute(builder: (context) => const BudgetScreen()));
           },
         ),
         title: Text(
-          'Бюджет ' + listOfBudgets[widget.index].name,
+          'Бюджет ${listOfBudgets[widget.index].name}',
           style: context.textStyles.headlineSmall,
         ),
         actions: [
@@ -67,7 +67,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
             },
           ),
           IconButton(
-            icon: Icon(Icons.delete_outline_outlined, color: textWhite),
+            icon: const Icon(Icons.delete_outline_outlined, color: textWhite),
             onPressed: () {
               showDialog(
                 context: context,
@@ -86,15 +86,15 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
           return SlidingUpPanel(
             maxHeight: MediaQuery.of(context).size.height * 0.55,
             minHeight: MediaQuery.of(context).size.height * 0.1,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             body: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 120,
                   ),
-                  Container(
+                  SizedBox(
                     width: 200,
                     height: 200,
                     child: Stack(
@@ -157,13 +157,12 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
-  late AnimationController _controller;
 
   final String name;
   final String description;
   final int sum;
 
-  PanelWidget({
+  const PanelWidget({
     Key? key,
     required this.name,
     required this.description,
@@ -174,7 +173,7 @@ class PanelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -190,7 +189,7 @@ class PanelWidget extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
             'Подробности',
             style: TextStyle(
                 fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),

@@ -25,8 +25,7 @@ class EditBudget extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BudgetScreen()));
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -63,8 +62,8 @@ class EditBudget extends StatelessWidget {
                 width: 336,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        Color(0xff1b438f), // Задайте желаемый цвет фона кнопки
+                    primary: const Color(
+                        0xff1b438f), // Задайте желаемый цвет фона кнопки
                   ),
                   onPressed: () {
                     listOfBudgets[index].name = nameController.text;

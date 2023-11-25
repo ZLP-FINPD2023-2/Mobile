@@ -5,7 +5,7 @@ import 'package:fin_app/constants/colors.dart';
 class DeleteBudget extends StatelessWidget {
   final int index;
 
-  DeleteBudget({
+  const DeleteBudget({
     Key? key,
     required this.index,
   }) : super(key: key);
@@ -48,7 +48,8 @@ class DeleteBudget extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => BudgetScreen()));
+                                      builder: (context) =>
+                                          const BudgetScreen()));
                               listOfBudgets.remove(listOfBudgets[index]);
                             },
                             child: const Text(

@@ -47,7 +47,7 @@ class _NavigationExampleState extends State<BudgetScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsetsDirectional.all(5),
+        padding: const EdgeInsetsDirectional.all(5),
         child: ListView.builder(
             itemCount: listOfBudgets.length,
             itemBuilder: (context, index) {
@@ -61,7 +61,7 @@ class _NavigationExampleState extends State<BudgetScreen> {
                     );
                   },
                   child: Padding(
-                      padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

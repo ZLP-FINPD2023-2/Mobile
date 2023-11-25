@@ -1,6 +1,4 @@
-import 'package:fin_app/features/home/presentation/budget/widgets/budget_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fin_app/constants/colors.dart';
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
@@ -71,11 +69,11 @@ class _NavigationExampleState extends State<HomeScreen> {
         ],
       ),
       body: <Widget>[
-        Card(),
-        Card(),
-        Card(),
-        BudgetScreen(),
-        Card()
+        const Card(),
+        const Card(),
+        const Card(),
+        const BudgetScreen(),
+        const Card()
       ][currentPageIndex],
     );
   }

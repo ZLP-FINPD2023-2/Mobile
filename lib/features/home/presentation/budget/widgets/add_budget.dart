@@ -53,19 +53,18 @@ class AddBudget extends StatelessWidget {
                 width: 336,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        Color(0xff1b438f), // Задайте желаемый цвет фона кнопки
+                    primary: const Color(
+                        0xff1b438f), // Задайте желаемый цвет фона кнопки
                   ),
                   onPressed: () {
                     listOfBudgets.add(BudgetInfo(
                         name: nameController.text,
                         description: descriptionController.text,
                         sum: int.parse(sumController.text)));
-                    print(listOfBudgets);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => BudgetScreen()));
+                            builder: (context) => const BudgetScreen()));
                   },
                   child: const Text('Сохранить'),
                 ),

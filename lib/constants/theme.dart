@@ -25,7 +25,7 @@ final ThemeData appTheme = ThemeData(
           fontSize: 22,
           color: lightColorScheme.shadow,
           fontWeight: FontWeight.w700),
-      headlineSmall: TextStyle(fontSize: 22, color: Colors.white),
+      headlineSmall: const TextStyle(fontSize: 22, color: Colors.white),
       bodyLarge: const TextStyle(fontSize: 16)),
 );
 
@@ -36,6 +36,9 @@ InputDecoration authTheme = InputDecoration(
     hintStyle: const TextStyle(
         fontSize: 16, fontWeight: FontWeight.w400, color: grayColor),
     isDense: true,
+    focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: const BorderSide(color: errorColor)),
     disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(4),
         borderSide: const BorderSide(color: grayColor)),
@@ -51,7 +54,7 @@ InputDecoration authTheme = InputDecoration(
     filled: true,
     fillColor: Colors.white);
 
-InputDecoration homeTheme = InputDecoration(
+InputDecoration homeTheme = const InputDecoration(
     floatingLabelBehavior: FloatingLabelBehavior.always,
     labelStyle: TextStyle(
         fontSize: 16, fontWeight: FontWeight.w400, color: textGrayDark),
