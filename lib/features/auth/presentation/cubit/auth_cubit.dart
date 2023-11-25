@@ -26,6 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during login: ${error.message}');
+      emit(AuthErrorState(e.toString()));
       _showToast(e.toString());
     }
   }
@@ -42,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoadingState());
       await _authUseCase.signUp(
-        age: birthDate,
+        birthday: birthDate,
         email: email,
         firstname: name,
         gender: gender == Gender.male ? 'Male' : 'Female',
@@ -50,6 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
         patronymic: patronymic,
       );
+      login(email, password);
       emit(AuthSuccessState());
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
@@ -66,7 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
       timeInSec: 1,
       backgroundColor: lightColorScheme.background,
       textColor: lightColorScheme.shadow,
-      fontSize: 16.0,
+      fontSize: 14.0,
     );
   }
 }

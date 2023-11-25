@@ -1,6 +1,6 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:fin_app/routes.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fin_app/constants/theme.dart';
@@ -17,7 +17,7 @@ class _LoginTabState extends State<LoginTab> {
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
-
+  bool _obscurePassword = true;
   @override
   void initState() {
     super.initState();
@@ -58,38 +58,52 @@ class _LoginTabState extends State<LoginTab> {
             TextFormField(
               controller: passwordController,
               textInputAction: TextInputAction.next,
-              obscureText: true,
+              obscureText: _obscurePassword,
               autocorrect: false,
               cursorColor: context.colors.outline,
               textAlign: TextAlign.justify,
               decoration: authTheme.copyWith(
                 labelText: 'Пароль',
                 hintText: 'Введите свой пароль',
+                suffixIcon: InkWell(
+                  onTap: () => setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  }),
+                  child: const Icon(
+                    size: 24,
+                    Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
             ),
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: TextButton(
-                onPressed: () => Navigator.of(context).pushNamed(
-                  Routes.resetPasswordScreen,
-                ),
+                onPressed: () => {},
                 child: const Text(
                   'Забыли пароль?',
                 ),
               ),
             ),
-            SizedBox(
-              height: 40,
-              width: 324,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    authCubit.login(
-                        emailController.text, passwordController.text);
-                  }
-                },
-                child: const Text('Войти'),
-              ),
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                if (state is AuthLoadingState) {
+                  return const SizedBox(height: 40, width: 40, child: CircularProgressIndicator());
+                }
+                return SizedBox(
+                  height: 40,
+                  width: 324,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        authCubit.login(emailController.text, passwordController.text);
+                      }
+                    },
+                    child: const Text('Войти'),
+                  ),
+                );
+              },
             ),
           ],
         ),

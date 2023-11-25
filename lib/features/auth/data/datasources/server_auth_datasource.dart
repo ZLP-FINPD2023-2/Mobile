@@ -11,8 +11,7 @@ class ServerAuthDataSource {
     required NetworkService networkService,
   }) : _networkService = networkService;
 
-  Future<String> signIn(
-      {required String email, required String password}) async {
+  Future<String> signIn({required String email, required String password}) async {
     final Map<String, dynamic> data = {
       "email": email,
       "password": password,
@@ -32,7 +31,7 @@ class ServerAuthDataSource {
   }
 
   Future<void> signUp({
-    required String age,
+    required String birthday,
     required String email,
     required String firstname,
     required String gender,
@@ -41,7 +40,7 @@ class ServerAuthDataSource {
     required String patronymic,
   }) async {
     final Map<String, dynamic> data = {
-      "age": age,
+      "birthday": birthday,
       "email": email,
       "firstname": firstname,
       "gender": gender,

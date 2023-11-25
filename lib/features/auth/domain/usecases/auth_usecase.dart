@@ -19,7 +19,7 @@ class AuthUseCase {
   }
 
   Future<void> signUp({
-    required String age,
+    required String birthday,
     required String email,
     required String firstname,
     required String gender,
@@ -28,7 +28,7 @@ class AuthUseCase {
     required String patronymic,
   }) async {
     await _serverAuthDataSource.signUp(
-      age: age,
+      birthday: birthday,
       email: email,
       firstname: firstname,
       gender: gender,
