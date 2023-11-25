@@ -1,1 +1,15 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    require_trailing_commas: true
+    # unnecessary_lambdas: true
+
+analyzer:
+  errors:
+    deprecated_member_use: false
+    deprecated_member_use_from_same_package: false
+
+  exclude: [
+    lib/**.g.dart
+  ]

@@ -12,24 +12,23 @@ final Map<String, WidgetBuilder> routes = {
   Routes.authScreen: (context) => const AuthScreen(initialIndex: 1),
   Routes.confirmEmailScreen: (context) => const ConfirmEmailScreen(),
   Routes.resetPasswordScreen: (context) => const ResetPasswordScreen(),
-  Routes.confirmResetPasswordScreen: (context) =>
-      const ConfirmResetPasswordScreen(),
+  Routes.confirmResetPasswordScreen: (context) => const ConfirmResetPasswordScreen(),
   Routes.changePasswordScreen: (context) => const ChangePasswordScreen(),
   Routes.homeScreen: (context) => const HomeScreen(),
 };
 
 class Routes {
-  static String startScreen = '/';
+  static String startScreen = '/start';
 
-  static String authScreen = '/auth';
+  static String authScreen = '/start/auth';
 
-  static String confirmEmailScreen = '/auth/confirm_email';
+  static String confirmEmailScreen = '/start/auth/confirm_email';
 
-  static String resetPasswordScreen = '/auth/reset';
+  static String resetPasswordScreen = '/start/auth/reset';
 
-  static String confirmResetPasswordScreen = '/auth/reset/confirm';
+  static String confirmResetPasswordScreen = '/start/auth/reset/confirm';
 
-  static String changePasswordScreen = '/auth/reset/confirm/changed';
+  static String changePasswordScreen = '/start/auth/reset/confirm/changed';
 
   static String homeScreen = '/home';
 }

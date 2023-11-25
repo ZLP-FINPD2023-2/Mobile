@@ -1,8 +1,10 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fin_app/constants/theme.dart';
+import 'package:intl/intl.dart';
 
 enum Gender { male, female }
 
@@ -21,9 +23,10 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  DateTime? birthDate;
   Gender genderSelected = Gender.male;
+  bool _obscurePassword = true;
   final Map<Gender, String> menuValues = {
     Gender.female: 'Женский',
     Gender.male: 'Мужской',
@@ -102,19 +105,14 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 child: TextFormField(
                   enabled: false,
                   controller: birthDateController, // Добавьте эту строку
-                  style: context.textStyles.labelLarge,
                   cursorColor: context.colors.outline,
                   textAlign: TextAlign.justify,
                   decoration: authTheme.copyWith(
-                    suffixIconConstraints: const BoxConstraints(maxHeight: 24),
-                    suffixIcon: IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: 24,
-                        icon: const Icon(
-                          Icons.today_rounded,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {}),
+                    suffixIcon: const Icon(
+                      size: 24,
+                      Icons.today_rounded,
+                      color: Colors.grey,
+                    ),
                     labelText: 'Дата рождения',
                     hintText: '27.07.2000',
                   ),
@@ -122,15 +120,11 @@ class _RegistrationTabState extends State<RegistrationTab> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField(
-                decoration:
-                    authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),
-                items: Gender.values
-                    .toList()
-                    .map<DropdownMenuItem<Gender>>((Gender value) {
+                decoration: authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),
+                items: Gender.values.toList().map<DropdownMenuItem<Gender>>((Gender value) {
                   return DropdownMenuItem<Gender>(
                     value: value,
-                    child: Text(menuValues[value] ?? '',
-                        style: const TextStyle(fontSize: 16)),
+                    child: Text(menuValues[value] ?? '', style: const TextStyle(fontSize: 16)),
                   );
                 }).toList(),
                 onChanged: (newValue) {
@@ -153,17 +147,30 @@ class _RegistrationTabState extends State<RegistrationTab> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                  controller: passwordController,
-                  validator: validatePasswordLength,
-                  textInputAction: TextInputAction.next,
-                  cursorColor: const Color(0xff94A3B8),
-                  textAlign: TextAlign.justify,
-                  decoration: authTheme.copyWith(
-                    labelText: 'Пароль',
-                    hintText: 'Придумайте пароль',
-                  )),
+                obscureText: _obscurePassword,
+                controller: passwordController,
+                validator: validatePasswordLength,
+                textInputAction: TextInputAction.next,
+                cursorColor: const Color(0xff94A3B8),
+                textAlign: TextAlign.justify,
+                decoration: authTheme.copyWith(
+                  labelText: 'Пароль',
+                  hintText: 'Придумайте пароль',
+                  suffixIcon: InkWell(
+                    onTap: () => setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    }),
+                    child: const Icon(
+                      size: 24,
+                      Icons.visibility,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 20),
               TextFormField(
+                obscureText: true,
                 controller: confirmPasswordController,
                 validator: validatePasswordMatch,
                 textInputAction: TextInputAction.next,
@@ -175,25 +182,36 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                height: 40,
-                width: 324,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      authCubit.register(
-                        name: nameController.text,
-                        surname: surnameController.text,
-                        patronymic: patronymicController.text,
-                        birthDate: birthDateController.text,
-                        email: emailController.text,
-                        password: passwordController.text,
-                        gender: genderSelected,
-                      );
-                    }
-                  },
-                  child: const Text('Зарегистрироваться'),
-                ),
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  if (state is AuthLoadingState) {
+                    return const SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return SizedBox(
+                    height: 40,
+                    width: 324,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          authCubit.register(
+                            name: nameController.text,
+                            surname: surnameController.text,
+                            patronymic: patronymicController.text,
+                            birthDate: DateFormat('dd-MM-yyyy').format(birthDate!),
+                            email: emailController.text,
+                            password: passwordController.text,
+                            gender: genderSelected,
+                          );
+                        }
+                      },
+                      child: const Text('Зарегистрироваться'),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
             ],
@@ -212,7 +230,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
     );
     if (date != null) {
       setState(() {
-        birthDateController.text = date.toString().split(' ')[0];
+        birthDate = date;
+        birthDateController.text = DateFormat('dd.MM.yyyy').format(date);
       });
     }
   }
