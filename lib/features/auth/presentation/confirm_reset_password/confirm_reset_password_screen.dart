@@ -1,6 +1,7 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fin_app/constants/theme.dart';
 
 import '../../../../routes.dart';
 
@@ -36,7 +37,7 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Новый пароль',
                   hintText: 'Введите пароль',
                 ),
@@ -54,7 +55,7 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Подтвердите новый пароль',
                   hintText: 'Повторите пароль',
                 ),
@@ -65,15 +66,17 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                   const Text('Вспомнили свой пароль?'),
                   TextButton(
                     onPressed: () {
-                      Navigator.popUntil(context, ModalRoute.withName(Routes.startScreen));
+                      Navigator.popUntil(
+                          context, ModalRoute.withName(Routes.startScreen));
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AuthScreen(initialIndex: 1),
+                          builder: (context) =>
+                              const AuthScreen(initialIndex: 1),
                         ),
                       );
                     },
-                    child: Text('Войти', style: context.textStyles.bodyLarge),
+                    child: const Text('Войти'),
                   )
                 ],
               ),
@@ -82,7 +85,8 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pushNamed(Routes.changePasswordScreen),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(Routes.changePasswordScreen),
                     child: const Text('Сохранить')),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fin_app/constants/theme.dart';
 
 enum Gender { male, female }
 
@@ -68,7 +69,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Имя',
                   hintText: 'Иван',
                 ),
@@ -79,7 +80,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Фамилия',
                   hintText: 'Иванов',
                 ),
@@ -90,7 +91,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Отчество',
                   hintText: 'Иванович',
                 ),
@@ -104,7 +105,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   style: context.textStyles.labelLarge,
                   cursorColor: context.colors.outline,
                   textAlign: TextAlign.justify,
-                  decoration: InputDecoration(
+                  decoration: authTheme.copyWith(
                     suffixIconConstraints: const BoxConstraints(maxHeight: 24),
                     suffixIcon: IconButton(
                         padding: EdgeInsets.zero,
@@ -121,8 +122,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Пол', hintText: 'Ваш пол'),
+                decoration:
+                    authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),
                 items: Gender.values
                     .toList()
                     .map<DropdownMenuItem<Gender>>((Gender value) {
@@ -145,7 +146,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Почта',
                   hintText: 'Введите свою почту',
                 ),
@@ -157,7 +158,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   textInputAction: TextInputAction.next,
                   cursorColor: const Color(0xff94A3B8),
                   textAlign: TextAlign.justify,
-                  decoration: const InputDecoration(
+                  decoration: authTheme.copyWith(
                     labelText: 'Пароль',
                     hintText: 'Придумайте пароль',
                   )),
@@ -168,7 +169,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Подтверждение пароля',
                   hintText: 'Повторите пароль',
                 ),
@@ -194,6 +195,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                   child: const Text('Зарегистрироваться'),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

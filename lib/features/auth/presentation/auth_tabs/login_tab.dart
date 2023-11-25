@@ -3,6 +3,7 @@ import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fin_app/constants/theme.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
@@ -48,7 +49,7 @@ class _LoginTabState extends State<LoginTab> {
               textInputAction: TextInputAction.next,
               cursorColor: context.colors.outline,
               textAlign: TextAlign.justify,
-              decoration: const InputDecoration(
+              decoration: authTheme.copyWith(
                 labelText: 'Почта',
                 hintText: 'Введите свою почту',
               ),
@@ -61,7 +62,7 @@ class _LoginTabState extends State<LoginTab> {
               autocorrect: false,
               cursorColor: context.colors.outline,
               textAlign: TextAlign.justify,
-              decoration: const InputDecoration(
+              decoration: authTheme.copyWith(
                 labelText: 'Пароль',
                 hintText: 'Введите свой пароль',
               ),
@@ -72,11 +73,8 @@ class _LoginTabState extends State<LoginTab> {
                 onPressed: () => Navigator.of(context).pushNamed(
                   Routes.resetPasswordScreen,
                 ),
-                child: Text(
+                child: const Text(
                   'Забыли пароль?',
-                  style: context.textStyles.labelMedium?.copyWith(
-                    color: context.colors.outline,
-                  ),
                 ),
               ),
             ),

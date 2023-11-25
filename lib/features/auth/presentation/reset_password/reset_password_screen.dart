@@ -1,5 +1,6 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:flutter/material.dart';
+import 'package:fin_app/constants/theme.dart';
 
 import '../../../../routes.dart';
 
@@ -43,7 +44,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Почта',
                   hintText: 'Введите свою почту',
                 ),
@@ -63,7 +64,8 @@ class ResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed(Routes.confirmEmailScreen),
+                  onPressed: () => Navigator.of(context)
+                      .pushNamed(Routes.confirmEmailScreen),
                   child: const Text('Прислать код'),
                 ),
               ),

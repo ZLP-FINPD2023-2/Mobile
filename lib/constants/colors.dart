@@ -39,6 +39,21 @@ const lightColorScheme = ColorScheme(
   scrim: Color(0xFF000000),
 );
 
+//NavigationBarColors Icons
+const Color homeColor = Color(0xff1f2937);
+const Color targetColor = Color(0xff9333ea);
+const Color transitionColor = Color(0xff16a34a);
+const Color walletColor = Color(0xff2563eb);
+
+//Tab Colors
+const Color budgetColor = Color(0xff385ca9);
+const Color textWhite = Colors.white;
+const Color textDark = Color(0xff0F172A);
+const Color grayColor = Color(0xff94a3b8);
+const Color errorColor = Color(0xFFB91A24);
+//homeTextField
+const Color textGrayDark = Color(0xff525252);
+const Color textGrayLight = Color(0xffA3A3A3);
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFFB1C6FF),

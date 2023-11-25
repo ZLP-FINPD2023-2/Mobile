@@ -1,6 +1,7 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:fin_app/constants/theme.dart';
 
 class ConfirmEmailScreen extends StatelessWidget {
   const ConfirmEmailScreen({super.key});
@@ -40,7 +41,7 @@ class ConfirmEmailScreen extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
-                decoration: const InputDecoration(
+                decoration: authTheme.copyWith(
                   labelText: 'Код',
                   hintText: 'Введите код',
                 ),

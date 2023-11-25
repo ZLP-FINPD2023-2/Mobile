@@ -47,7 +47,8 @@ class AuthScreen extends StatelessWidget {
                 BlocListener<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthSuccessState) {
-                      Navigator.of(context).pushReplacementNamed(Routes.placeholderScreen);
+                      Navigator.of(context)
+                          .pushReplacementNamed(Routes.homeScreen);
                     }
                   },
                   child: BlocBuilder<AuthCubit, AuthState>(
