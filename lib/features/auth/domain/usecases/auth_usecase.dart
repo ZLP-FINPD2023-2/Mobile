@@ -14,7 +14,8 @@ class AuthUseCase {
         _secureStorage = secureStorage;
 
   Future<void> signIn({required String email, required String password}) async {
-    final token = await _serverAuthDataSource.signIn(email: email, password: password);
+    final token =
+        await _serverAuthDataSource.signIn(email: email, password: password);
     await _secureStorage.write(key: 'token', value: token);
   }
 
@@ -36,5 +37,9 @@ class AuthUseCase {
       password: password,
       patronymic: patronymic,
     );
+  }
+
+  Future<void> logout() async {
+    _secureStorage.delete(key: 'token');
   }
 }

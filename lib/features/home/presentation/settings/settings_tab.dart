@@ -1,7 +1,9 @@
 import 'package:fin_app/core/di/di.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
 import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsTab extends StatefulWidget {
   const SettingsTab({super.key});
@@ -11,21 +13,29 @@ class SettingsTab extends StatefulWidget {
 }
 
 class _SettingsTabState extends State<SettingsTab> {
-  _logout() async {
-    final storage = getIt<FlutterSecureStorage>();
-    if (await storage.read(key: 'token') != null) {
-      await storage.delete(key: 'token');
-    }
-    // ignore: use_build_context_synchronously
-    Navigator.of(context).pushNamedAndRemoveUntil(Routes.startScreen, (route) => false);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton(
-        onPressed: _logout,
-        child: const Text('Выйти'),
+    return BlocProvider(
+      create: (context) => getIt<AuthCubit>(),
+      child: Center(
+        child: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthInitialState) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                Routes.startScreen,
+                (route) => false,
+              );
+            }
+          },
+          child: BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) {
+              return TextButton(
+                onPressed: () => context.read<AuthCubit>().logout(),
+                child: const Text('Выйти'),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

@@ -67,7 +67,9 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       Navigator.popUntil(
-                          context, ModalRoute.withName(Routes.startScreen));
+                        context,
+                        ModalRoute.withName(Routes.startScreen),
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -85,9 +87,10 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: ElevatedButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(Routes.changePasswordScreen),
-                    child: const Text('Сохранить')),
+                  onPressed: () => Navigator.of(context)
+                      .pushNamed(Routes.changePasswordScreen),
+                  child: const Text('Сохранить'),
+                ),
               ),
             ],
           ),

@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
     this._authUseCase,
   ) : super(AuthInitialState());
 
-  void login(String email, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       emit(AuthLoadingState());
       logger.info('Sending login request...');
@@ -31,7 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void register({
+  Future<void> register({
     required String name,
     required String surname,
     required String patronymic,
@@ -41,9 +41,10 @@ class AuthCubit extends Cubit<AuthState> {
     required Gender gender,
   }) async {
     try {
+      final date = birthDate.replaceAll(".", "-");
       emit(AuthLoadingState());
       await _authUseCase.signUp(
-        birthday: birthDate,
+        birthday: date,
         email: email,
         firstname: name,
         gender: gender == Gender.male ? 'Male' : 'Female',
@@ -52,7 +53,19 @@ class AuthCubit extends Cubit<AuthState> {
         patronymic: patronymic,
       );
       login(email, password);
-      emit(AuthSuccessState());
+    } catch (e) {
+      final error = AppState.catchErrorHandler(e);
+      logger.warning('Error during register: ${error.message}');
+      emit(AuthErrorState(e.toString()));
+      _showToast(e.toString());
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      emit(AuthLoadingState());
+      await _authUseCase.logout();
+      emit(AuthInitialState());
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during register: ${error.message}');

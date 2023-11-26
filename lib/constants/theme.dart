@@ -8,56 +8,82 @@ final ThemeData appTheme = ThemeData(
   navigationBarTheme:
       const NavigationBarThemeData(backgroundColor: Colors.transparent),
   elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-          // elevated button text
-          foregroundColor: lightColorScheme.onPrimary,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(100)))),
+    style: ElevatedButton.styleFrom(
+      // elevated button text
+      foregroundColor: lightColorScheme.onPrimary,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100),
+      ),
+    ),
+  ),
   textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: lightColorScheme.onSurface)),
+    style: TextButton.styleFrom(foregroundColor: lightColorScheme.onSurface),
+  ),
   textTheme: TextTheme(
-      headlineLarge: TextStyle(
-          fontSize: 32,
-          color: lightColorScheme.shadow,
-          fontWeight: FontWeight.w700),
-      headlineMedium: TextStyle(
-          fontSize: 22,
-          color: lightColorScheme.shadow,
-          fontWeight: FontWeight.w700),
-      headlineSmall: const TextStyle(fontSize: 22, color: Colors.white),
-      bodyLarge: const TextStyle(fontSize: 16)),
+    headlineLarge: TextStyle(
+      fontSize: 32,
+      color: lightColorScheme.shadow,
+      fontWeight: FontWeight.w700,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 22,
+      color: lightColorScheme.shadow,
+      fontWeight: FontWeight.w700,
+    ),
+    headlineSmall: const TextStyle(fontSize: 22, color: Colors.white),
+    bodyLarge: const TextStyle(fontSize: 16),
+  ),
 );
 
 InputDecoration authTheme = InputDecoration(
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    labelStyle: const TextStyle(
-        fontSize: 14, fontWeight: FontWeight.w400, color: textDark),
-    hintStyle: const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, color: grayColor),
-    isDense: true,
-    focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: errorColor)),
-    disabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: grayColor)),
-    errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: errorColor)),
-    enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: grayColor)),
-    focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4),
-        borderSide: const BorderSide(color: grayColor)),
-    filled: true,
-    fillColor: Colors.white);
+  floatingLabelBehavior: FloatingLabelBehavior.always,
+  labelStyle: const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: textDark,
+  ),
+  hintStyle: const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: grayColor,
+  ),
+  isDense: true,
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(4),
+    borderSide: const BorderSide(color: errorColor),
+  ),
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(4),
+    borderSide: const BorderSide(color: grayColor),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(4),
+    borderSide: const BorderSide(color: errorColor),
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(4),
+    borderSide: const BorderSide(color: grayColor),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(4),
+    borderSide: const BorderSide(color: grayColor),
+  ),
+  filled: true,
+  fillColor: Colors.white,
+);
 
 InputDecoration homeTheme = const InputDecoration(
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    labelStyle: TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, color: textGrayDark),
-    hintStyle: TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, color: textGrayLight),
-    isDense: true);
+  floatingLabelBehavior: FloatingLabelBehavior.always,
+  labelStyle: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: textGrayDark,
+  ),
+  hintStyle: TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: textGrayLight,
+  ),
+  isDense: true,
+);

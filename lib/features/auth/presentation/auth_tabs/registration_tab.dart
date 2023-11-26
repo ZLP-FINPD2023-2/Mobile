@@ -24,7 +24,6 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
-  DateTime? birthDate;
   Gender genderSelected = Gender.male;
   bool _obscurePassword = true;
   final Map<Gender, String> menuValues = {
@@ -201,7 +200,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                             name: nameController.text,
                             surname: surnameController.text,
                             patronymic: patronymicController.text,
-                            birthDate: DateFormat('dd-MM-yyyy').format(birthDate!),
+                            birthDate: birthDateController.text,
                             email: emailController.text,
                             password: passwordController.text,
                             gender: genderSelected,
@@ -230,7 +229,6 @@ class _RegistrationTabState extends State<RegistrationTab> {
     );
     if (date != null) {
       setState(() {
-        birthDate = date;
         birthDateController.text = DateFormat('dd.MM.yyyy').format(date);
       });
     }

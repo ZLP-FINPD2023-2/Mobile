@@ -9,8 +9,11 @@ class BudgetInfo {
   String description;
   int sum;
 
-  BudgetInfo(
-      {required this.name, required this.description, required this.sum});
+  BudgetInfo({
+    required this.name,
+    required this.description,
+    required this.sum,
+  });
 }
 
 List<BudgetInfo> listOfBudgets = [];
@@ -40,7 +43,7 @@ class _NavigationExampleState extends State<BudgetScreen> {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => AddBudget(),
+                builder: (context) => const AddBudget(),
               );
             },
           ),
@@ -49,12 +52,13 @@ class _NavigationExampleState extends State<BudgetScreen> {
       body: Padding(
         padding: const EdgeInsetsDirectional.all(5),
         child: ListView.builder(
-            itemCount: listOfBudgets.length,
-            itemBuilder: (context, index) {
-              return ItemBudget(
-                index: index,
-              );
-            }),
+          itemCount: listOfBudgets.length,
+          itemBuilder: (context, index) {
+            return ItemBudget(
+              index: index,
+            );
+          },
+        ),
       ),
     );
   }

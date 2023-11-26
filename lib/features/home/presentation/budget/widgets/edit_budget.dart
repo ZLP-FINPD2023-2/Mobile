@@ -36,51 +36,62 @@ class EditBudget extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(children: [
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
                 TextFormField(
                   controller: nameController,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Название', hintText: 'Введите название'),
+                    labelText: 'Название',
+                    hintText: 'Введите название',
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: descriptionController,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Описание', hintText: 'Добавьте описание'),
+                    labelText: 'Описание',
+                    hintText: 'Добавьте описание',
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: sumController,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Сумма', hintText: 'Настройте сумму'),
-                ),
-              ]),
-              SizedBox(
-                height: 50,
-                width: 336,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color(
-                        0xff1b438f), // Задайте желаемый цвет фона кнопки
+                    labelText: 'Сумма',
+                    hintText: 'Настройте сумму',
                   ),
-                  onPressed: () {
-                    listOfBudgets[index].name = nameController.text;
-                    listOfBudgets[index].description =
-                        descriptionController.text;
-                    listOfBudgets[index].sum = int.parse(sumController.text);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BudgetInfoScreen(
-                                  index: index,
-                                )));
-                  },
-                  child: const Text('Сохранить'),
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+              width: 336,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(
+                    0xff1b438f,
+                  ), // Задайте желаемый цвет фона кнопки
+                ),
+                onPressed: () {
+                  listOfBudgets[index].name = nameController.text;
+                  listOfBudgets[index].description = descriptionController.text;
+                  listOfBudgets[index].sum = int.parse(sumController.text);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BudgetInfoScreen(
+                        index: index,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('Сохранить'),
               ),
-            ]),
+            ),
+          ],
+        ),
       ),
     );
   }

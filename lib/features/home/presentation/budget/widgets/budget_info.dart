@@ -14,7 +14,7 @@ class BudgetInfoScreen extends StatefulWidget {
   const BudgetInfoScreen({Key? key, required this.index}) : super(key: key);
 
   @override
-  _BudgetInfoScreenState createState() => _BudgetInfoScreenState();
+  State<BudgetInfoScreen> createState() => _BudgetInfoScreenState();
 }
 
 class _BudgetInfoScreenState extends State<BudgetInfoScreen>
@@ -42,8 +42,10 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const BudgetScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BudgetScreen()),
+            );
           },
         ),
         title: Text(
@@ -59,11 +61,13 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
             ),
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EditBudget(
-                            index: widget.index,
-                          )));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditBudget(
+                    index: widget.index,
+                  ),
+                ),
+              );
             },
           ),
           IconButton(
@@ -117,16 +121,18 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
                   Text(
                     name,
                     style: const TextStyle(
-                        fontSize: 28,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700),
+                      fontSize: 28,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   Text(
                     sum.toString(),
                     style: const TextStyle(
-                        fontSize: 24,
-                        color: Color(0xff1b438f),
-                        fontWeight: FontWeight.w700),
+                      fontSize: 24,
+                      color: Color(0xff1b438f),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),
@@ -182,8 +188,9 @@ class PanelWidget extends StatelessWidget {
               width: 45,
               height: 5,
               decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(12)),
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
           const SizedBox(
@@ -192,7 +199,10 @@ class PanelWidget extends StatelessWidget {
           const Text(
             'Подробности',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontSize: 20,
+            ),
           ),
           TextFormField(
             enabled: false,

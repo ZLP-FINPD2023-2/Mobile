@@ -13,61 +13,73 @@ class DeleteBudget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-        child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Colors.white,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Удаление',
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Удаление',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 24,
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              const Text(
+                'Вы точно хотите удалить бюджет?',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                  color: Color(0xff44464F),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BudgetScreen(),
+                        ),
+                      );
+                      listOfBudgets.remove(listOfBudgets[index]);
+                    },
+                    child: const Text(
+                      'Да',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 24),
+                        fontSize: 14,
+                        color: Color(0xff1b438f),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 4,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Нет',
+                      style: TextStyle(fontSize: 14, color: errorColor),
                     ),
-                    const Text('Вы точно хотите удалить бюджет?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 14,
-                            color: Color(0xff44464F))),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BudgetScreen()));
-                              listOfBudgets.remove(listOfBudgets[index]);
-                            },
-                            child: const Text(
-                              'Да',
-                              style: TextStyle(
-                                  fontSize: 14, color: Color(0xff1b438f)),
-                            )),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              'Нет',
-                              style: TextStyle(fontSize: 14, color: errorColor),
-                            ))
-                      ],
-                    )
-                  ]),
-            )));
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
