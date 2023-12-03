@@ -16,7 +16,7 @@ import 'package:fin_app/features/auth/data/datasources/server_auth_datasource.da
     as _i6;
 import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart'
     as _i7;
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart'
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart'
     as _i8;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;

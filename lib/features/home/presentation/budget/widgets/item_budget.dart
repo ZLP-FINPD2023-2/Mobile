@@ -1,12 +1,13 @@
+import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/features/home/presentation/budget/widgets/budget_info.dart';
-import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:fin_app/constants/colors.dart';
 
 class ItemBudget extends StatelessWidget {
-  final int index;
+  final BudgetInfo budget;
+
   const ItemBudget({
-    required this.index,
+    required this.budget,
     super.key,
   });
 
@@ -14,12 +15,7 @@ class ItemBudget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BudgetInfoScreen(index: index),
-          ),
-        );
+        // Здесь вы можете использовать budget для навигации или других действий
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
@@ -36,11 +32,9 @@ class ItemBudget extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 Text(
-                  listOfBudgets[index].name,
+                  budget.name,
                   style: const TextStyle(
                     fontSize: 18,
                     color: Colors.black,
@@ -50,7 +44,7 @@ class ItemBudget extends StatelessWidget {
               ],
             ),
             Text(
-              "${listOfBudgets[index].sum}₽",
+              "${budget.sum}₽",
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black,

@@ -1,9 +1,11 @@
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
+import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
 import 'package:fin_app/features/home/presentation/budget/widgets/budget_info.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditBudget extends StatelessWidget {
   final int index;
@@ -75,18 +77,16 @@ class EditBudget extends StatelessWidget {
                   ), // Задайте желаемый цвет фона кнопки
                 ),
                 onPressed: () {
-                  listOfBudgets[index].name = nameController.text;
-                  listOfBudgets[index].description = descriptionController.text;
-                  listOfBudgets[index].sum = int.parse(sumController.text);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BudgetInfoScreen(
-                        index: index,
-                      ),
-                    ),
+                  final budgetCubit = context.read<BudgetCubit>();
+                  final updatedBudget = BudgetInfo(
+                    name: nameController.text,
+                    description: descriptionController.text,
+                    sum: int.parse(sumController.text),
                   );
+                  budgetCubit.updateBudget(index, updatedBudget);
+                  Navigator.pop(context);
                 },
+
                 child: const Text('Сохранить'),
               ),
             ),
