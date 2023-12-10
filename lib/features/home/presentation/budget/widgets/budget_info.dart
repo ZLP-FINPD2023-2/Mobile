@@ -1,75 +1,91 @@
+import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
+import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit_states.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:fin_app/features/home/presentation/budget/widgets/delete_budget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fin_app/features/home/presentation/budget/widgets/edit_budget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BudgetInfoScreen extends StatefulWidget {
   final int index;
+  final BudgetCubit budgetCubit;
 
-  const BudgetInfoScreen({Key? key, required this.index}) : super(key: key);
+  const BudgetInfoScreen({Key? key, required this.index, required this.budgetCubit}) : super(key: key);
 
   @override
   State<BudgetInfoScreen> createState() => _BudgetInfoScreenState();
 }
 
-class _BudgetInfoScreenState extends State<BudgetInfoScreen>
-    with TickerProviderStateMixin {
+class _BudgetInfoScreenState extends State<BudgetInfoScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
-  late String name = listOfBudgets[widget.index].name;
-  late String description = listOfBudgets[widget.index].description;
-  late int sum = listOfBudgets[widget.index].sum;
+
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       lowerBound: 0.5,
       duration: const Duration(seconds: 3),
     )..repeat();
+    widget.budgetCubit.loadBudgets();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<BudgetCubit, BudgetState>(
+      bloc: widget.budgetCubit,
+      builder: (context, state) {
+        if (state is BudgetLoadedState) {
+          final budgetInfo = state.budgets[widget.index];
+          return buildBudgetInfoScreen(budgetInfo);
+        } else if (state is BudgetLoadingState) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return Center(child: Text('Ошибка загрузки'));
+        }
+      },
+    );
+  }
+
+  Scaffold buildBudgetInfoScreen(BudgetInfo budgetInfo) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: budgetColor,
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BudgetScreen()),
-            );
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Бюджет ${listOfBudgets[widget.index].name}',
+          'Бюджет ${budgetInfo.name}',
           style: context.textStyles.headlineSmall,
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.edit_outlined,
-              color: textWhite,
-              fill: 0,
-            ),
+            icon: const Icon(Icons.edit_outlined, color: textWhite),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => EditBudget(
                     index: widget.index,
+                    budgetCubit: widget.budgetCubit,
                   ),
                 ),
               );
             },
           ),
+
           IconButton(
             icon: const Icon(Icons.delete_outline_outlined, color: textWhite),
             onPressed: () {
@@ -77,6 +93,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
                 context: context,
                 builder: (context) => DeleteBudget(
                   index: widget.index,
+                  budgetCubit: widget.budgetCubit,
                 ),
               );
             },
@@ -84,67 +101,64 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
         ],
       ),
       body: AnimatedBuilder(
-        animation:
-            CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
+        animation: CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
         builder: (context, child) {
           return SlidingUpPanel(
             maxHeight: MediaQuery.of(context).size.height * 0.55,
             minHeight: MediaQuery.of(context).size.height * 0.1,
             borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
-            body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 120,
-                  ),
-                  SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        _buildContainer(100 * _controller.value),
-                        _buildContainer(150 * _controller.value),
-                        _buildContainer(200 * _controller.value),
-                        Align(
-                          child: SvgPicture.asset(
-                            'assets/wallet_icon.svg',
-                            color: Colors.white,
-                            width: 35,
-                            height: 35,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  Text(
-                    sum.toString(),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      color: Color(0xff1b438f),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            body: buildPanelBody(budgetInfo),
             panelBuilder: (controller) => PanelWidget(
-              name: name,
-              description: description,
-              sum: sum,
+              name: budgetInfo.name,
+              description: budgetInfo.description,
+              sum: budgetInfo.sum,
               controller: controller,
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget buildPanelBody(BudgetInfo budgetInfo) {
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 120),
+          buildAnimatedContainer(),
+          Text(
+            budgetInfo.name,
+            style: const TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          Text(
+            budgetInfo.sum.toString(),
+            style: const TextStyle(fontSize: 24, color: Color(0xff1b438f), fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildAnimatedContainer() {
+    return SizedBox(
+      width: 200,
+      height: 200,
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          _buildContainer(100 * _controller.value),
+          _buildContainer(150 * _controller.value),
+          _buildContainer(200 * _controller.value),
+          Align(
+            child: SvgPicture.asset(
+              'assets/wallet_icon.svg',
+              color: Colors.white,
+              width: 35,
+              height: 35,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -163,7 +177,6 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
-
   final String name;
   final String description;
   final int sum;
@@ -193,40 +206,29 @@ class PanelWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           const Text(
             'Подробности',
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-              fontSize: 20,
-            ),
+            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
           ),
           TextFormField(
             enabled: false,
             initialValue: name,
-            decoration: homeTheme.copyWith(
-              labelText: 'Название',
-            ),
+            decoration: homeTheme.copyWith(labelText: 'Название'),
           ),
           TextFormField(
             enabled: false,
             initialValue: description,
-            decoration: homeTheme.copyWith(
-              labelText: 'Описание',
-            ),
+            decoration: homeTheme.copyWith(labelText: 'Описание'),
           ),
           TextFormField(
             enabled: false,
             initialValue: sum.toString(),
-            decoration: homeTheme.copyWith(
-              labelText: 'Сумма',
-            ),
+            decoration: homeTheme.copyWith(labelText: 'Сумма'),
           ),
         ],
       ),
     );
   }
 }
+

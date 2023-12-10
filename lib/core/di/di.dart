@@ -1,5 +1,6 @@
 import 'package:fin_app/core/di/di.config.dart';
-import 'package:fin_app/features/auth/data/sharedPref/budget_repository.dart';
+import 'package:fin_app/features/home/data/sharedPref/budget_repository.dart';
+
 import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';

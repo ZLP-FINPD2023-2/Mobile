@@ -7,10 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeleteBudget extends StatelessWidget {
   final int index;
+  final BudgetCubit budgetCubit;
 
   const DeleteBudget({
     Key? key,
     required this.index,
+    required this.budgetCubit,
   }) : super(key: key);
 
   @override
@@ -51,19 +53,11 @@ class DeleteBudget extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      final budgetCubit = context.read<BudgetCubit>();
                       budgetCubit.deleteBudget(index);
                       Navigator.pop(context);
                       Navigator.pop(context);
                     },
-
-                    child: const Text(
-                      'Да',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xff1b438f),
-                      ),
-                    ),
+                    child: const Text('Да', style: TextStyle(fontSize: 14, color: Color(0xff1b438f))),
                   ),
                   TextButton(
                     onPressed: () {

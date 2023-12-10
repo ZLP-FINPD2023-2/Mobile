@@ -77,30 +77,34 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) {
-                  final budgetCubit = context.read<BudgetCubit>();
-                  return AddBudget(budgetCubit: budgetCubit);
+                builder: (BuildContext dialogContext) {
+                  return BlocProvider.value(
+                    value: BlocProvider.of<BudgetCubit>(context),
+                    child: AddBudget(),
+                  );
                 },
               );
             },
           ),
         ],
       ),
+
+
       body: BlocBuilder<BudgetCubit, BudgetState>(
-        builder: (context, state) {
-          if (state is BudgetLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          } else if (state is BudgetLoadedState) {
-            return ListView.builder(
-              itemCount: state.budgets.length,
-              itemBuilder: (context, index) {
-                final budget = state.budgets[index];
-                return ItemBudget(budget: budget);
-              },
-            );
-          } else {
-            return Center(child: Text('Ошибка загрузки'));
-          }
+    builder: (context, state) {
+      if (state is BudgetLoadingState) {
+        return Center(child: CircularProgressIndicator());
+      } else if (state is BudgetLoadedState) {
+        return ListView.builder(
+          itemCount: state.budgets.length,
+          itemBuilder: (context, index) {
+            final budget = state.budgets[index];
+            return ItemBudget(budget: budget, index: index);
+          },
+        );
+      } else {
+        return Center(child: Text('Ошибка загрузки'));
+      }
         },
       ),
     );

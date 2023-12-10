@@ -9,10 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditBudget extends StatelessWidget {
   final int index;
+  final BudgetCubit budgetCubit;
 
   EditBudget({
     Key? key,
     required this.index,
+    required this.budgetCubit,
   }) : super(key: key);
 
   final TextEditingController nameController = TextEditingController();
@@ -71,13 +73,7 @@ class EditBudget extends StatelessWidget {
               height: 50,
               width: 336,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(
-                    0xff1b438f,
-                  ), // Задайте желаемый цвет фона кнопки
-                ),
                 onPressed: () {
-                  final budgetCubit = context.read<BudgetCubit>();
                   final updatedBudget = BudgetInfo(
                     name: nameController.text,
                     description: descriptionController.text,
@@ -86,7 +82,6 @@ class EditBudget extends StatelessWidget {
                   budgetCubit.updateBudget(index, updatedBudget);
                   Navigator.pop(context);
                 },
-
                 child: const Text('Сохранить'),
               ),
             ),

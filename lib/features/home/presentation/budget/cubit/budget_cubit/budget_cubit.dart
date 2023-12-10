@@ -1,4 +1,5 @@
-import 'package:fin_app/features/auth/data/sharedPref/budget_repository.dart';
+
+import 'package:fin_app/features/home/data/sharedPref/budget_repository.dart';
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
