@@ -1,6 +1,6 @@
 import 'package:fin_app/core/extensions/context.dart';
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit/auth_cubit_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fin_app/constants/theme.dart';

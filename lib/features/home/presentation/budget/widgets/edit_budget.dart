@@ -1,16 +1,20 @@
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
+import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
 import 'package:fin_app/features/home/presentation/budget/widgets/budget_info.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditBudget extends StatelessWidget {
   final int index;
+  final BudgetCubit budgetCubit;
 
   EditBudget({
     Key? key,
     required this.index,
+    required this.budgetCubit,
   }) : super(key: key);
 
   final TextEditingController nameController = TextEditingController();
@@ -70,23 +74,14 @@ class EditBudget extends StatelessWidget {
               height: 50,
               width: 336,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(
-                    0xff1b438f,
-                  ), // Задайте желаемый цвет фона кнопки
-                ),
                 onPressed: () {
-                  listOfBudgets[index].name = nameController.text;
-                  listOfBudgets[index].description = descriptionController.text;
-                  listOfBudgets[index].sum = int.parse(sumController.text);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BudgetInfoScreen(
-                        index: index,
-                      ),
-                    ),
+                  final updatedBudget = BudgetInfo(
+                    name: nameController.text,
+                    description: descriptionController.text,
+                    sum: int.parse(sumController.text),
                   );
+                  budgetCubit.updateBudget(index, updatedBudget);
+                  Navigator.pop(context);
                 },
                 child: const Text('Сохранить'),
               ),

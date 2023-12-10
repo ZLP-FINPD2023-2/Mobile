@@ -1,4 +1,4 @@
-import '../../../../core/app_state/app_state.dart';
+import '../../../../../core/app_state/app_state.dart';
 
 abstract class AuthState extends AppState {}
 

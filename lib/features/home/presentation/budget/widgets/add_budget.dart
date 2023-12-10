@@ -1,31 +1,24 @@
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
+import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddBudget extends StatefulWidget {
-  const AddBudget({super.key});
-
-  @override
-  State<AddBudget> createState() => _AddBudgetState();
-}
-
-class _AddBudgetState extends State<AddBudget> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController sumController = TextEditingController();
-
+class AddBudget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController descriptionController = TextEditingController();
+    final TextEditingController sumController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: budgetColor,
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Новый бюджет',
@@ -68,29 +61,19 @@ class _AddBudgetState extends State<AddBudget> {
             SizedBox(
               height: 50,
               width: 336,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(
-                    0xff1b438f,
-                  ), // Задайте желаемый цвет фона кнопки
-                ),
+              child:  ElevatedButton(
                 onPressed: () {
-                  listOfBudgets.add(
-                    BudgetInfo(
-                      name: nameController.text,
-                      description: descriptionController.text,
-                      sum: int.parse(sumController.text),
-                    ),
+                  final newBudget = BudgetInfo(
+                    name: nameController.text,
+                    description: descriptionController.text,
+                    sum: int.parse(sumController.text),
                   );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BudgetScreen(),
-                    ),
-                  );
+                  context.read<BudgetCubit>().addBudget(newBudget);
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Сохранить'),
               ),
+
             ),
           ],
         ),
@@ -98,11 +81,5 @@ class _AddBudgetState extends State<AddBudget> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    nameController.dispose();
-    descriptionController.dispose();
-    sumController.dispose();
-  }
+
 }

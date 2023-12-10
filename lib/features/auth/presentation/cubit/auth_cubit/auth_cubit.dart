@@ -5,8 +5,8 @@ import 'package:fin_app/utils/toast.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../core/app_state/app_state.dart';
-import '../auth_tabs/registration_tab.dart';
+import '../../../../../core/app_state/app_state.dart';
+import '../../auth_tabs/registration_tab.dart';
 import 'auth_cubit_state.dart';
 
 @singleton
