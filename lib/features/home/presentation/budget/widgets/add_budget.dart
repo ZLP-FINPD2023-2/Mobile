@@ -57,6 +57,7 @@ class _AddBudgetState extends State<AddBudget> {
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: sumController,
+                  keyboardType: TextInputType.number,
                   decoration: homeTheme.copyWith(
                     labelText: 'Сумма',
                     hintText: 'Настройте сумму',

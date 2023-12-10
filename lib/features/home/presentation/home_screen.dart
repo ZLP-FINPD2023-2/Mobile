@@ -1,3 +1,4 @@
+import 'package:fin_app/features/home/presentation/transaction/transaction_screen.dart';
 import 'package:fin_app/features/home/presentation/settings/settings_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,7 +73,7 @@ class _NavigationExampleState extends State<HomeScreen> {
       body: <Widget>[
         const Card(),
         const Card(),
-        const Card(),
+        const TransactionScreen(),
         const BudgetScreen(),
         const SettingsTab()
       ][currentPageIndex],
