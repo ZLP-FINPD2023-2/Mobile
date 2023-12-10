@@ -19,9 +19,3 @@ void confingureDependecies() {
   getIt.registerLazySingleton<BudgetRepository>(() => BudgetRepository());
   getIt.init();
 }
-
-@module
-abstract class RepositoryModule {
-  @lazySingleton
-  BudgetRepository get budgetRepository => BudgetRepository();
-}
