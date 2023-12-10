@@ -45,7 +45,7 @@ class HttpAPI {
           RequestOptions options,
           RequestInterceptorHandler handler,
         ) async {
-          final token = _getAuthTokenFn();
+          final token = await _getAuthTokenFn();
           options.headers['Authorization'] = 'Bearer $token';
           handler.next(options);
         },

@@ -42,10 +42,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BudgetScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
         title: Text(

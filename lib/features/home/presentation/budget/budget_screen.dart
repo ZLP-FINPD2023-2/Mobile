@@ -4,30 +4,14 @@ import 'package:fin_app/features/home/presentation/budget/widgets/add_budget.dar
 import 'package:fin_app/features/home/presentation/budget/widgets/item_budget.dart';
 import 'package:flutter/material.dart';
 
-class BudgetInfo {
-  String name;
-  String description;
-  int sum;
+import '../domain/models/budget_model.dart';
 
-  BudgetInfo({
-    required this.name,
-    required this.description,
-    required this.sum,
-  });
-}
+List<BudgetModel> listOfBudgets = [];
 
-List<BudgetInfo> listOfBudgets = [];
-
-class BudgetScreen extends StatefulWidget {
+class BudgetScreen extends StatelessWidget {
   const BudgetScreen({super.key});
 
-  @override
-  State<BudgetScreen> createState() => _NavigationExampleState();
-}
-
-class _NavigationExampleState extends State<BudgetScreen> {
   //final ds = BudgetInfo(name: 'dfdf', description: 'fdfd', sum: 330000);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

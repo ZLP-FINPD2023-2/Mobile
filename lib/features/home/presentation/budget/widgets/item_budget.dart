@@ -5,6 +5,7 @@ import 'package:fin_app/constants/colors.dart';
 
 class ItemBudget extends StatelessWidget {
   final int index;
+
   const ItemBudget({
     required this.index,
     super.key,

@@ -1,18 +1,22 @@
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
-import 'package:fin_app/features/home/presentation/budget/widgets/budget_info.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
 
-class EditBudget extends StatelessWidget {
+class EditBudget extends StatefulWidget {
   final int index;
 
-  EditBudget({
+  const EditBudget({
     Key? key,
     required this.index,
   }) : super(key: key);
 
+  @override
+  State<EditBudget> createState() => _EditBudgetState();
+}
+
+class _EditBudgetState extends State<EditBudget> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController sumController = TextEditingController();
@@ -75,17 +79,13 @@ class EditBudget extends StatelessWidget {
                   ), // Задайте желаемый цвет фона кнопки
                 ),
                 onPressed: () {
-                  listOfBudgets[index].name = nameController.text;
-                  listOfBudgets[index].description = descriptionController.text;
-                  listOfBudgets[index].sum = int.parse(sumController.text);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BudgetInfoScreen(
-                        index: index,
-                      ),
-                    ),
+                  listOfBudgets[widget.index] =
+                      listOfBudgets[widget.index].copyWith(
+                    name: nameController.text,
+                    description: descriptionController.text,
+                    sum: int.parse(sumController.text),
                   );
+                  Navigator.pop(context);
                 },
                 child: const Text('Сохранить'),
               ),
