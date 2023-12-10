@@ -100,23 +100,23 @@ class _RegistrationTabState extends State<RegistrationTab> {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () => _pickDate(),
-                child: TextFormField(
-                  enabled: false,
-                  controller: birthDateController, // Добавьте эту строку
-                  cursorColor: context.colors.outline,
-                  textAlign: TextAlign.justify,
-                  decoration: authTheme.copyWith(
-                    suffixIcon: const Icon(
-                      size: 24,
-                      Icons.today_rounded,
-                      color: Colors.grey,
+                  onTap: () => _pickDate(),
+                  child: TextFormField(
+                    enabled: false,
+                    controller: birthDateController, // Добавьте эту строку
+                    style: const TextStyle(color: Color(0xff6b7280)),
+                    cursorColor: context.colors.outline,
+                    textAlign: TextAlign.justify,
+                    decoration: authTheme.copyWith(
+                      labelText: 'Дата рождения',
+                      hintText: '27.07.2000',
+                      suffixIcon: const Icon(
+                        size: 24,
+                        Icons.today_rounded,
+                        color: Colors.grey,
+                      ),
                     ),
-                    labelText: 'Дата рождения',
-                    hintText: '27.07.2000',
-                  ),
-                ),
-              ),
+                  )),
               const SizedBox(height: 20),
               DropdownButtonFormField(
                 decoration: authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),

@@ -1,28 +1,32 @@
-import 'package:flutter/material.dart';
 import 'package:fin_app/core/extensions/context.dart';
+import 'package:fin_app/features/home/presentation/transaction/widgets/delete_transaction.dart';
+import 'package:fin_app/features/home/presentation/transaction/widgets/edit_transaction.dart';
+import 'package:flutter/material.dart';
+import 'package:fin_app/features/home/presentation/transaction/transaction_screen.dart';
 import 'package:fin_app/constants/colors.dart';
 import 'package:fin_app/constants/theme.dart';
-import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
-import 'package:fin_app/features/home/presentation/budget/widgets/delete_budget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fin_app/features/home/presentation/budget/widgets/edit_budget.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class BudgetInfoScreen extends StatefulWidget {
+class IncomeInfo extends StatefulWidget {
   final int index;
+  final List<TransactionInfo> listOfTransactions;
 
-  const BudgetInfoScreen({Key? key, required this.index}) : super(key: key);
+  const IncomeInfo({
+    required this.index,
+    required this.listOfTransactions,
+    super.key,
+  });
 
   @override
-  State<BudgetInfoScreen> createState() => _BudgetInfoScreenState();
+  State<IncomeInfo> createState() => _IncomeInfoState();
 }
 
-class _BudgetInfoScreenState extends State<BudgetInfoScreen>
-    with TickerProviderStateMixin {
+class _IncomeInfoState extends State<IncomeInfo> with TickerProviderStateMixin {
   late AnimationController _controller;
-  late String name = listOfBudgets[widget.index].name;
-  late String description = listOfBudgets[widget.index].description;
-  late int sum = listOfBudgets[widget.index].sum;
+  late String name = widget.listOfTransactions[widget.index].name;
+  late String description = widget.listOfTransactions[widget.index].description;
+  late int sum = widget.listOfTransactions[widget.index].sum;
+  late String date = widget.listOfTransactions[widget.index].date;
   @override
   void initState() {
     super.initState();
@@ -35,21 +39,25 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
   }
 
   @override
+  void dispose() {
+    _controller
+        .dispose(); // Убедитесь, что контроллер уничтожен при выходе из виджета
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: budgetColor,
+        backgroundColor: const Color(0xff22c55e),
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const BudgetScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
         title: Text(
-          'Бюджет ${listOfBudgets[widget.index].name}',
+          'Транзакция',
           style: context.textStyles.headlineSmall,
         ),
         actions: [
@@ -61,13 +69,11 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
             ),
             onPressed: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditBudget(
-                    index: widget.index,
-                  ),
-                ),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditTransaction(
+                          index: widget.index,
+                          listOfTransaction: widget.listOfTransactions)));
             },
           ),
           IconButton(
@@ -75,9 +81,9 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => DeleteBudget(
-                  index: widget.index,
-                ),
+                builder: (context) => DeleteTransaction(
+                    index: widget.index,
+                    listOfTransaction: widget.listOfTransactions),
               );
             },
           ),
@@ -107,12 +113,11 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
                         _buildContainer(100 * _controller.value),
                         _buildContainer(150 * _controller.value),
                         _buildContainer(200 * _controller.value),
-                        Align(
-                          child: SvgPicture.asset(
-                            'assets/wallet_icon.svg',
+                        const Align(
+                          child: Icon(
+                            Icons.check,
                             color: Colors.white,
-                            width: 35,
-                            height: 35,
+                            size: 35,
                           ),
                         )
                       ],
@@ -121,26 +126,29 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
                   Text(
                     name,
                     style: const TextStyle(
-                      fontSize: 28,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
+                        fontSize: 28,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    sum.toString(),
+                    description,
                     style: const TextStyle(
-                      fontSize: 24,
-                      color: Color(0xff1b438f),
-                      fontWeight: FontWeight.w700,
-                    ),
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    '+$sum',
+                    style: const TextStyle(
+                        fontSize: 32,
+                        color: Color(0xff22c55e),
+                        fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
             ),
             panelBuilder: (controller) => PanelWidget(
-              name: name,
-              description: description,
-              sum: sum,
+              date: date,
               controller: controller,
             ),
           );
@@ -155,7 +163,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
       height: radius,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.blue.withOpacity(1 - _controller.value),
+        color: const Color(0xff22c55e).withOpacity(1 - _controller.value),
       ),
     );
   }
@@ -164,15 +172,11 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
 
-  final String name;
-  final String description;
-  final int sum;
+  final String date;
 
   const PanelWidget({
     Key? key,
-    required this.name,
-    required this.description,
-    required this.sum,
+    required this.date,
     required this.controller,
   }) : super(key: key);
 
@@ -188,9 +192,8 @@ class PanelWidget extends StatelessWidget {
               width: 45,
               height: 5,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(12),
-              ),
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(12)),
             ),
           ),
           const SizedBox(
@@ -199,33 +202,14 @@ class PanelWidget extends StatelessWidget {
           const Text(
             'Подробности',
             style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-              fontSize: 20,
-            ),
+                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
           ),
           TextFormField(
             enabled: false,
-            initialValue: name,
+            initialValue: date,
             style: const TextStyle(color: Colors.black),
             decoration: homeTheme.copyWith(
-              labelText: 'Название',
-            ),
-          ),
-          TextFormField(
-            enabled: false,
-            initialValue: description,
-            style: const TextStyle(color: Colors.black),
-            decoration: homeTheme.copyWith(
-              labelText: 'Описание',
-            ),
-          ),
-          TextFormField(
-            enabled: false,
-            initialValue: sum.toString(),
-            style: const TextStyle(color: Colors.black),
-            decoration: homeTheme.copyWith(
-              labelText: 'Сумма',
+              labelText: 'Дата',
             ),
           ),
         ],
