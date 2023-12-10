@@ -1,42 +1,37 @@
-import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
-import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
+import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
 
-class EditBudget extends StatefulWidget {
-  final int index;
-  final BudgetCubit budgetCubit;
+import '../../../../core/di/di.dart';
+import '../../../home/presentation/domain/models/budget_model.dart';
 
-  const EditBudget({
-    Key? key,
-    required this.index,
-    required this.budgetCubit,
-  }) : super(key: key);
+class AddGoal extends StatefulWidget {
+  const AddGoal({super.key});
 
   @override
-  State<EditBudget> createState() => _EditBudgetState();
+  State<AddGoal> createState() => _AddGoalState();
 }
 
-class _EditBudgetState extends State<EditBudget> {
+class _AddGoalState extends State<AddGoal> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController sumController = TextEditingController();
+  final TextEditingController goalSumController = TextEditingController();
+  final TextEditingController currentSumController = TextEditingController();
+  final List<BudgetModel> budgets = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: budgetColor,
+        backgroundColor: goalColor,
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Редактирование',
+          'Новая цель',
           style: context.textStyles.headlineSmall,
         ),
       ),
@@ -64,11 +59,27 @@ class _EditBudgetState extends State<EditBudget> {
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
-                  controller: sumController,
+                  controller: goalSumController,
                   keyboardType: TextInputType.number,
                   decoration: homeTheme.copyWith(
                     labelText: 'Сумма',
                     hintText: 'Настройте сумму',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: currentSumController,
+                  keyboardType: TextInputType.number,
+                  decoration: homeTheme.copyWith(
+                    labelText: 'Накоплено',
+                    hintText: 'Введите, сколько вы уже накопили',
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  decoration: homeTheme.copyWith(
+                    labelText: 'Бюджеты',
+                    hintText: 'Выберите бюджеты',
                   ),
                 ),
               ],
@@ -77,13 +88,17 @@ class _EditBudgetState extends State<EditBudget> {
               height: 50,
               width: 336,
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: targetColor, // Задайте желаемый цвет фона кнопки
+                ),
                 onPressed: () {
-                  final updatedBudget = BudgetInfo(
+                  getIt<GoalsCubit>().addGoal(
                     name: nameController.text,
                     description: descriptionController.text,
-                    sum: int.parse(sumController.text),
+                    goalSum: int.tryParse(goalSumController.text) ?? 0,
+                    currentSum: int.tryParse(currentSumController.text) ?? 0,
+                    budgets: budgets,
                   );
-                  budgetCubit.updateBudget(index, updatedBudget);
                   Navigator.pop(context);
                 },
                 child: const Text('Сохранить'),
@@ -93,5 +108,14 @@ class _EditBudgetState extends State<EditBudget> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    goalSumController.dispose();
+    currentSumController.dispose();
   }
 }

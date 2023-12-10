@@ -28,7 +28,6 @@ class BudgetInfo {
     };
   }
 
-
   factory BudgetInfo.fromJson(Map<String, dynamic> json) {
     return BudgetInfo(
       name: json['name'],
@@ -37,7 +36,6 @@ class BudgetInfo {
     );
   }
 }
-
 
 List<BudgetInfo> listOfBudgets = [];
 
@@ -88,23 +86,21 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
           ),
         ],
       ),
-
-
       body: BlocBuilder<BudgetCubit, BudgetState>(
-    builder: (context, state) {
-      if (state is BudgetLoadingState) {
-        return Center(child: CircularProgressIndicator());
-      } else if (state is BudgetLoadedState) {
-        return ListView.builder(
-          itemCount: state.budgets.length,
-          itemBuilder: (context, index) {
-            final budget = state.budgets[index];
-            return ItemBudget(budget: budget, index: index);
-          },
-        );
-      } else {
-        return Center(child: Text('Ошибка загрузки'));
-      }
+        builder: (context, state) {
+          if (state is BudgetLoadingState) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is BudgetLoadedState) {
+            return ListView.builder(
+              itemCount: state.budgets.length,
+              itemBuilder: (context, index) {
+                final budget = state.budgets[index];
+                return ItemBudget(budget: budget, index: index);
+              },
+            );
+          } else {
+            return Center(child: Text('Ошибка загрузки'));
+          }
         },
       ),
     );

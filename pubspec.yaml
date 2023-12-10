@@ -23,6 +23,7 @@ dependencies:
   logger: ^2.0.2+1
   sliding_up_panel: ^2.0.0+1
   intl: ^0.18.1
+  uuid: ^4.2.1
 
 dev_dependencies:
   flutter_test:

@@ -51,6 +51,7 @@ const Color textWhite = Colors.white;
 const Color textDark = Color(0xff0F172A);
 const Color grayColor = Color(0xff94a3b8);
 const Color errorColor = Color(0xFFB91A24);
+const Color goalColor = Color(0xffA855F7);
 //homeTextField
 const Color textGrayDark = Color(0xff525252);
 const Color textGrayLight = Color(0xffA3A3A3);

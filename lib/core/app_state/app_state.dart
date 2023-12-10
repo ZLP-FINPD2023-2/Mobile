@@ -10,7 +10,15 @@ class AppState {
     if (error is AppStateWrong) {
       return error;
     } else if (error is DioException) {
-      return AppStateError(error.message ?? '', details: details);
+      return AppStateError(
+        (error.response?.data as Map<String, dynamic>)
+                .entries
+                .firstOrNull
+                ?.value ??
+            error.message ??
+            '',
+        details: details,
+      );
     } else if (error is TypeError) {
       logger.error(
         message: error.toString(),
@@ -21,7 +29,7 @@ class AppState {
     }
 
     logger.error(message: 'unhandled error', error: error);
-    
+
     return AppStateError(error.toString(), details: details);
   }
 }

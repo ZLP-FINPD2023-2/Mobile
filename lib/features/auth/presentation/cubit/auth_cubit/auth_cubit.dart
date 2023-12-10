@@ -27,7 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during login: ${error.message}');
       emit(AuthErrorState(e.toString()));
-      _showToast(e.toString());
+      _showToast(error.message.toString());
     }
   }
 
@@ -52,12 +52,12 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
         patronymic: patronymic,
       );
-      login(email, password);
+      await login(email, password);
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
       logger.warning('Error during register: ${error.message}');
-      emit(AuthErrorState(e.toString()));
-      _showToast(e.toString());
+      emit(AuthErrorState(error.toString()));
+      _showToast(error.message.toString());
     }
   }
 
