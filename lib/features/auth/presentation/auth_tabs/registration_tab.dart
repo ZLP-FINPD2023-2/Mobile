@@ -116,7 +116,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
                         color: Colors.grey,
                       ),
                     ),
-                  )),
+                  ),),
               const SizedBox(height: 20),
               DropdownButtonFormField(
                 decoration: authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),

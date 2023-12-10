@@ -73,7 +73,7 @@ class _IncomeInfoState extends State<IncomeInfo> with TickerProviderStateMixin {
                   MaterialPageRoute(
                       builder: (context) => EditTransaction(
                           index: widget.index,
-                          listOfTransaction: widget.listOfTransactions)));
+                          listOfTransaction: widget.listOfTransactions,),),);
             },
           ),
           IconButton(
@@ -83,7 +83,7 @@ class _IncomeInfoState extends State<IncomeInfo> with TickerProviderStateMixin {
                 context: context,
                 builder: (context) => DeleteTransaction(
                     index: widget.index,
-                    listOfTransaction: widget.listOfTransactions),
+                    listOfTransaction: widget.listOfTransactions,),
               );
             },
           ),
@@ -119,7 +119,7 @@ class _IncomeInfoState extends State<IncomeInfo> with TickerProviderStateMixin {
                             color: Colors.white,
                             size: 35,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -128,21 +128,21 @@ class _IncomeInfoState extends State<IncomeInfo> with TickerProviderStateMixin {
                     style: const TextStyle(
                         fontSize: 28,
                         color: Colors.black,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w700,),
                   ),
                   Text(
                     description,
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w400,),
                   ),
                   Text(
                     '+$sum',
                     style: const TextStyle(
                         fontSize: 32,
                         color: Color(0xff22c55e),
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w400,),
                   ),
                 ],
               ),
@@ -193,7 +193,7 @@ class PanelWidget extends StatelessWidget {
               height: 5,
               decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),),
             ),
           ),
           const SizedBox(
@@ -202,7 +202,7 @@ class PanelWidget extends StatelessWidget {
           const Text(
             'Подробности',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
+                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20,),
           ),
           TextFormField(
             enabled: false,

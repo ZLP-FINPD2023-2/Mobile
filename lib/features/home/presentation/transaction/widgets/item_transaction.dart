@@ -28,7 +28,7 @@ class ItemTransaction extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 20,
                   color: Colors.black,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w700,),
             ),
           ),
         ),
@@ -48,14 +48,14 @@ class ItemTransaction extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AddTransaction()));
+                            builder: (context) => const AddTransaction(),),);
                   } else {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ExpenditureInfo(
                                 index: index,
-                                listOfTransactions: listOfTransactions)));
+                                listOfTransactions: listOfTransactions,),),);
                   }
                 },
                 child: Padding(
@@ -99,7 +99,7 @@ class ItemTransaction extends StatelessWidget {
                                   : errorColor,
                               fontWeight: FontWeight.w700,
                             ),
-                          )
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -111,7 +111,7 @@ class ItemTransaction extends StatelessWidget {
                       ),
                       const SizedBox(
                         height: 12,
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -126,14 +126,14 @@ class ItemTransaction extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => IncomeInfo(
                                 index: index,
-                                listOfTransactions: listOfTransactions)));
+                                listOfTransactions: listOfTransactions,),),);
                   } else {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ExpenditureInfo(
                                 index: index,
-                                listOfTransactions: listOfTransactions)));
+                                listOfTransactions: listOfTransactions,),),);
                   }
                 },
                 child: Padding(
@@ -177,7 +177,7 @@ class ItemTransaction extends StatelessWidget {
                               : errorColor,
                           fontWeight: FontWeight.w700,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -223,7 +223,7 @@ String setDate(String date) {
   String todayDay = today.substring(8, 10);
   String todayDate = '$todayDay.$todayMonth.$todayYear';
   String dayOfWeekName = dayOfWeekMap[DateTime.parse(
-              '${date.substring(6, 10)}-${date.substring(3, 5)}-${date.substring(0, 2)}')
+              '${date.substring(6, 10)}-${date.substring(3, 5)}-${date.substring(0, 2)}',)
           .weekday] ??
       'Некорректный день недели';
   String newDate =

@@ -7,7 +7,7 @@ class DeleteTransaction extends StatelessWidget {
   final List<TransactionInfo> listOfTransaction;
 
   const DeleteTransaction(
-      {Key? key, required this.index, required this.listOfTransaction})
+      {Key? key, required this.index, required this.listOfTransaction,})
       : super(key: key);
 
   @override
@@ -29,7 +29,7 @@ class DeleteTransaction extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w400,
-                          fontSize: 24),
+                          fontSize: 24,),
                     ),
                     const SizedBox(
                       height: 4,
@@ -38,7 +38,7 @@ class DeleteTransaction extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,
-                            color: Color(0xff44464F))),
+                            color: Color(0xff44464F),),),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -49,7 +49,7 @@ class DeleteTransaction extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const TransactionScreen()));
+                                          const TransactionScreen(),),);
                               if (listOfTransaction.length == 1) {
                                 dateMap.remove(key);
                               }
@@ -59,8 +59,8 @@ class DeleteTransaction extends StatelessWidget {
                             child: const Text(
                               'Да',
                               style: TextStyle(
-                                  fontSize: 14, color: Color(0xff059669)),
-                            )),
+                                  fontSize: 14, color: Color(0xff059669),),
+                            ),),
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -68,10 +68,10 @@ class DeleteTransaction extends StatelessWidget {
                             child: const Text(
                               'Нет',
                               style: TextStyle(fontSize: 14, color: errorColor),
-                            ))
+                            ),),
                       ],
-                    )
-                  ]),
-            )));
+                    ),
+                  ],),
+            ),),);
   }
 }

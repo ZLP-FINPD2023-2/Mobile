@@ -1,6 +1,5 @@
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
-import 'package:fin_app/features/home/presentation/domain/models/budget_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
@@ -8,6 +7,8 @@ import 'package:fin_app/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddBudget extends StatelessWidget {
+  const AddBudget({super.key});
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController nameController = TextEditingController();

@@ -59,7 +59,7 @@ class ItemBudget extends StatelessWidget {
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
               ),
-            )
+            ),
           ],
         ),
       ),

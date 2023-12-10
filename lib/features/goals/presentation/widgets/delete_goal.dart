@@ -73,9 +73,9 @@ class DeleteGoal extends StatelessWidget {
                       'Нет',
                       style: TextStyle(fontSize: 14, color: errorColor),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

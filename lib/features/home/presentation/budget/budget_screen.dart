@@ -46,14 +46,16 @@ class BudgetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<BudgetCubit>(
       create: (context) => getIt<BudgetCubit>(),
-      child: BudgetScreenContent(),
+      child: const BudgetScreenContent(),
     );
   }
 }
 
 class BudgetScreenContent extends StatefulWidget {
+  const BudgetScreenContent({super.key});
+
   @override
-  _BudgetScreenContentState createState() => _BudgetScreenContentState();
+  State<BudgetScreenContent> createState() => _BudgetScreenContentState();
 }
 
 class _BudgetScreenContentState extends State<BudgetScreenContent> {
@@ -78,7 +80,7 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
                 builder: (BuildContext dialogContext) {
                   return BlocProvider.value(
                     value: BlocProvider.of<BudgetCubit>(context),
-                    child: AddBudget(),
+                    child: const AddBudget(),
                   );
                 },
               );
@@ -89,7 +91,7 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
       body: BlocBuilder<BudgetCubit, BudgetState>(
         builder: (context, state) {
           if (state is BudgetLoadingState) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is BudgetLoadedState) {
             return ListView.builder(
               itemCount: state.budgets.length,
@@ -99,7 +101,7 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
               },
             );
           } else {
-            return Center(child: Text('Ошибка загрузки'));
+            return const Center(child: Text('Ошибка загрузки'));
           }
         },
       ),

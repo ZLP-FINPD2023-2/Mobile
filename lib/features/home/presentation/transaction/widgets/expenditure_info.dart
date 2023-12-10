@@ -74,7 +74,7 @@ class _ExpenditureInfoState extends State<ExpenditureInfo>
                   MaterialPageRoute(
                       builder: (context) => EditTransaction(
                           index: widget.index,
-                          listOfTransaction: widget.listOfTransactions)));
+                          listOfTransaction: widget.listOfTransactions,),),);
             },
           ),
           IconButton(
@@ -84,7 +84,7 @@ class _ExpenditureInfoState extends State<ExpenditureInfo>
                 context: context,
                 builder: (context) => DeleteTransaction(
                     index: widget.index,
-                    listOfTransaction: widget.listOfTransactions),
+                    listOfTransaction: widget.listOfTransactions,),
               );
             },
           ),
@@ -120,7 +120,7 @@ class _ExpenditureInfoState extends State<ExpenditureInfo>
                             color: Colors.white,
                             size: 35,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -129,21 +129,21 @@ class _ExpenditureInfoState extends State<ExpenditureInfo>
                     style: const TextStyle(
                         fontSize: 28,
                         color: Colors.black,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w700,),
                   ),
                   Text(
                     description,
                     style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w400,),
                   ),
                   Text(
                     '-$sum',
                     style: const TextStyle(
                         fontSize: 32,
                         color: Color(0xffEF4444),
-                        fontWeight: FontWeight.w400),
+                        fontWeight: FontWeight.w400,),
                   ),
                 ],
               ),
@@ -194,7 +194,7 @@ class PanelWidget extends StatelessWidget {
               height: 5,
               decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),),
             ),
           ),
           const SizedBox(
@@ -203,7 +203,7 @@ class PanelWidget extends StatelessWidget {
           const Text(
             'Подробности',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
+                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20,),
           ),
           TextFormField(
             enabled: false,

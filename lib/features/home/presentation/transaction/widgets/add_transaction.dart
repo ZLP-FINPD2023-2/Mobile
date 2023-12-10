@@ -34,7 +34,7 @@ class _AddTransactionState extends State<AddTransaction> {
               icon: const Icon(Icons.close, color: textWhite),
               onPressed: () {
                 Navigator.pop(context);
-              }),
+              },),
           backgroundColor: isIncomeSelected
               ? const Color(0xff22c55e)
               : const Color(0xffEF4444),
@@ -57,7 +57,7 @@ class _AddTransactionState extends State<AddTransaction> {
                   return DropdownMenuItem<TransactionType>(
                     value: value,
                     child: Text(menuValues[value] ?? '',
-                        style: const TextStyle(fontSize: 16)),
+                        style: const TextStyle(fontSize: 16),),
                   );
                 }).toList(),
                 onChanged: (newValue) {
@@ -75,29 +75,29 @@ class _AddTransactionState extends State<AddTransaction> {
               TextFormField(
                 controller: nameController,
                 decoration: homeTheme.copyWith(
-                    labelText: 'Название', hintText: 'Введите название'),
+                    labelText: 'Название', hintText: 'Введите название',),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: descriptionController,
                 decoration: homeTheme.copyWith(
-                    labelText: 'Описание', hintText: 'Добавьте описание'),
+                    labelText: 'Описание', hintText: 'Добавьте описание',),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: sumController,
                 keyboardType: TextInputType.number,
                 decoration: homeTheme.copyWith(
-                    labelText: 'Сумма', hintText: 'Настройте сумму'),
+                    labelText: 'Сумма', hintText: 'Настройте сумму',),
               ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: dateController,
                 keyboardType: TextInputType.number,
                 decoration: homeTheme.copyWith(
-                    labelText: 'Дата', hintText: '09.10.2004'),
+                    labelText: 'Дата', hintText: '09.10.2004',),
               ),
-            ]),
+            ],),
           ),
         ),
         bottomNavigationBar: Padding(
@@ -108,7 +108,7 @@ class _AddTransactionState extends State<AddTransaction> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary:
-                      isIncomeSelected ? const Color(0xff16a34a) : errorColor),
+                      isIncomeSelected ? const Color(0xff16a34a) : errorColor,),
               onPressed: () {
                 addTransactionToMap(TransactionInfo(
                   type: typeSelected,
@@ -117,17 +117,17 @@ class _AddTransactionState extends State<AddTransaction> {
                   sum: int.parse(sumController.text),
                   date: dateController.text,
                   budgets: 'ddddd',
-                ));
+                ),);
                 dateMap = sortedKeys(dateMap);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TransactionScreen()));
+                        builder: (context) => const TransactionScreen(),),);
               },
               child: const Text('Сохранить'),
             ),
           ),
-        ));
+        ),);
   }
 }
 
@@ -144,7 +144,7 @@ void addTransactionToMap(TransactionInfo transaction) {
 }
 
 Map<String, List<TransactionInfo>> sortedKeys(
-    Map<String, List<TransactionInfo>> myMap) {
+    Map<String, List<TransactionInfo>> myMap,) {
   Map<String, List<TransactionInfo>> sortedMap = {};
   List<String> sortedKeys = myMap.keys.toList();
 

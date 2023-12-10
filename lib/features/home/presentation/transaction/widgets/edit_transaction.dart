@@ -10,7 +10,7 @@ class EditTransaction extends StatelessWidget {
   final List<TransactionInfo> listOfTransaction;
 
   EditTransaction(
-      {Key? key, required this.index, required this.listOfTransaction})
+      {Key? key, required this.index, required this.listOfTransaction,})
       : super(key: key);
 
   final TextEditingController nameController = TextEditingController();
@@ -47,28 +47,28 @@ class EditTransaction extends StatelessWidget {
                 TextFormField(
                   controller: nameController,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Название', hintText: 'Введите название'),
+                      labelText: 'Название', hintText: 'Введите название',),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: descriptionController,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Описание', hintText: 'Добавьте описание'),
+                      labelText: 'Описание', hintText: 'Добавьте описание',),
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: sumController,
                   keyboardType: TextInputType.number,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Сумма', hintText: 'Настройте сумму'),
+                      labelText: 'Сумма', hintText: 'Настройте сумму',),
                 ),
                 TextFormField(
                   controller: dateController,
                   keyboardType: TextInputType.number,
                   decoration: homeTheme.copyWith(
-                      labelText: 'Дата', hintText: '09.10.2004'),
+                      labelText: 'Дата', hintText: '09.10.2004',),
                 ),
-              ]),
+              ],),
               SizedBox(
                 height: 50,
                 width: 336,
@@ -93,12 +93,12 @@ class EditTransaction extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TransactionScreen()));
+                            builder: (context) => const TransactionScreen(),),);
                   },
                   child: const Text('Сохранить'),
                 ),
               ),
-            ]),
+            ],),
       ),
     );
   }

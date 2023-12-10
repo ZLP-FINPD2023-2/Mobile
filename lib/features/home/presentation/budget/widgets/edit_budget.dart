@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
+import 'package:fin_app/core/di/di.dart';
 
 class EditBudget extends StatefulWidget {
   final int index;
@@ -83,7 +84,7 @@ class _EditBudgetState extends State<EditBudget> {
                     description: descriptionController.text,
                     sum: int.parse(sumController.text),
                   );
-                  budgetCubit.updateBudget(index, updatedBudget);
+                  getIt<BudgetCubit>().updateBudget(widget.index, updatedBudget);
                   Navigator.pop(context);
                 },
                 child: const Text('Сохранить'),

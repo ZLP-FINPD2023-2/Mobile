@@ -1,4 +1,3 @@
-
 import 'package:fin_app/features/home/data/sharedPref/budget_repository.dart';
 import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +5,11 @@ import 'package:injectable/injectable.dart';
 
 import 'budget_cubit_states.dart';
 
-
 @injectable
 class BudgetCubit extends Cubit<BudgetState> {
-  final BudgetRepository _budgetRepository;
+  final BudgetRepository _budgetRepository = BudgetRepository();
 
-  BudgetCubit(this._budgetRepository) : super(BudgetInitialState());
+  BudgetCubit() : super(BudgetInitialState());
 
   Future<void> loadBudgets() async {
     try {

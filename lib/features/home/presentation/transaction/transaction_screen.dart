@@ -18,7 +18,7 @@ class TransactionInfo {
       required this.description,
       required this.sum,
       required this.date,
-      required this.budgets});
+      required this.budgets,});
 }
 
 var dateMap = <String, List<TransactionInfo>>{};
@@ -48,7 +48,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const AddTransaction()));
+                        builder: (context) => const AddTransaction(),),);
               },
             ),
           ],
@@ -66,7 +66,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
-                      fontWeight: FontWeight.w700),
+                      fontWeight: FontWeight.w700,),
                 ),
               ),
             ),
@@ -81,9 +81,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   final key = dateMap.keys.elementAt(index);
                   final listOfTransaction = dateMap[key];
                   return ItemTransaction(
-                      dateKey: key, listOfTransactions: listOfTransaction!);
-                }),
+                      dateKey: key, listOfTransactions: listOfTransaction!,);
+                },),
           ],
-        ));
+        ),);
   }
 }

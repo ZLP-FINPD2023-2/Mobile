@@ -50,9 +50,9 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen> with TickerProvider
           final budgetInfo = state.budgets[widget.index];
           return buildBudgetInfoScreen(budgetInfo);
         } else if (state is BudgetLoadingState) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
-          return Center(child: Text('Ошибка загрузки'));
+          return const Center(child: Text('Ошибка загрузки'));
         }
       },
     );
@@ -156,7 +156,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen> with TickerProvider
               width: 35,
               height: 35,
             ),
-          )
+          ),
         ],
       ),
     );

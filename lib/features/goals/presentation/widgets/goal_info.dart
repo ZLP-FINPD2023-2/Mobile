@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../../../../core/di/di.dart';
+import 'package:fin_app/core/di/di.dart';
 import '../cubit/goals_cubit_state.dart';
 
 class GoalInfoScreen extends StatefulWidget {
@@ -24,8 +24,7 @@ class GoalInfoScreen extends StatefulWidget {
   State<GoalInfoScreen> createState() => _GoalInfoScreenState();
 }
 
-class _GoalInfoScreenState extends State<GoalInfoScreen>
-    with TickerProviderStateMixin {
+class _GoalInfoScreenState extends State<GoalInfoScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
   @override
   void initState() {
@@ -100,8 +99,7 @@ class _GoalInfoScreenState extends State<GoalInfoScreen>
               return SlidingUpPanel(
                 maxHeight: MediaQuery.of(context).size.height * 0.55,
                 minHeight: MediaQuery.of(context).size.height * 0.1,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(10)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                 body: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,7 +123,7 @@ class _GoalInfoScreenState extends State<GoalInfoScreen>
                                 width: 35,
                                 height: 35,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -301,10 +299,7 @@ class _PanelWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 enabled: false,
-                initialValue:
-                    goal?.budgets != null && goal?.budgets.isEmpty != null
-                        ? ''
-                        : 'Бюджет ',
+                initialValue: goal?.budgets != null && goal?.budgets.isEmpty != null ? '' : 'Бюджет ',
                 decoration: homeTheme.copyWith(
                   labelText: 'Бюджеты',
                 ),

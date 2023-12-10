@@ -53,7 +53,7 @@ class ConfirmEmailScreen extends StatelessWidget {
                     onPressed: () {},
                     child: const Text('Отправить код заново:'),
                   ),
-                  const Text('00:20')
+                  const Text('00:20'),
                 ],
               ),
               const SizedBox(height: 24),

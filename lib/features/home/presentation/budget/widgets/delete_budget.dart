@@ -1,9 +1,6 @@
-
-import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
 import 'package:fin_app/features/home/presentation/budget/cubit/budget_cubit/budget_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/colors.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeleteBudget extends StatelessWidget {
   final int index;
@@ -67,9 +64,9 @@ class DeleteBudget extends StatelessWidget {
                       'Нет',
                       style: TextStyle(fontSize: 14, color: errorColor),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

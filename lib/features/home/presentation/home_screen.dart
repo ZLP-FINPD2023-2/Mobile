@@ -90,7 +90,7 @@ class _NavigationExampleState extends State<HomeScreen> {
           const GoalsScreen(),
           const TransactionScreen(),
           const BudgetScreen(),
-          const SettingsTab()
+          const SettingsTab(),
         ][currentPageIndex],
       ),
     );

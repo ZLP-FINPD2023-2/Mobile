@@ -79,7 +79,7 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                       );
                     },
                     child: const Text('Войти'),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(height: 12),
