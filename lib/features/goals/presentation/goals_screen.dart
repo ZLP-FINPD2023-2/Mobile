@@ -1,6 +1,6 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
-import 'package:fin_app/features/goals/presentation/widgets/add_goal.dart';
+import 'package:fin_app/features/goals/presentation/screens/add_goal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,12 +23,15 @@ class GoalsScreen extends StatelessWidget {
               Icons.add,
               color: context.colors.shadow,
             ),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const AddGoal(),
-              );
-            },
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => BlocProvider(
+                  create: (context) => GoalsCubit(),
+                  child: const AddGoal(),
+                ),
+              ),
+            ),
           ),
         ],
       ),

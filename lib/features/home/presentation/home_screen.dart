@@ -1,15 +1,15 @@
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit/auth_cubit.dart';
+import 'package:fin_app/core/di/di.dart';
+import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
 import 'package:fin_app/features/goals/presentation/goals_screen.dart';
 import 'package:fin_app/features/home/presentation/settings/settings_tab.dart';
-import 'package:fin_app/features/home/presentation/transaction/transaction_screen.dart';
+import 'package:fin_app/features/transactions/presentation/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fin_app/constants/colors.dart';
-import 'package:fin_app/features/home/presentation/budget/budget_screen.dart';
-
-import '../../../core/di/di.dart';
+import 'package:fin_app/features/budget/presentation/budget_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,10 +26,10 @@ class _NavigationExampleState extends State<HomeScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
-          create: (_) => getIt<AuthCubit>(),
+          create: (_) => AuthCubit(getIt<AuthUseCase>()),
         ),
         BlocProvider<GoalsCubit>(
-          create: (_) => getIt<GoalsCubit>(),
+          create: (_) => GoalsCubit(),
         ),
       ],
       child: Scaffold(

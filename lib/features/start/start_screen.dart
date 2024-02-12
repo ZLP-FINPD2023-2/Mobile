@@ -1,5 +1,5 @@
 import 'package:fin_app/core/extensions/context.dart';
-import 'package:fin_app/features/auth/presentation/auth_screen.dart';
+import 'package:fin_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

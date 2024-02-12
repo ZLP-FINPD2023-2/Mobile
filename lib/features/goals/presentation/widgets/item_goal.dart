@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubit/goals_cubit.dart';
 import '../cubit/goals_cubit_state.dart';
-import 'goal_info.dart';
+import '../screens/goal_info.dart';
 
 class ItemGoal extends StatelessWidget {
   final String id;

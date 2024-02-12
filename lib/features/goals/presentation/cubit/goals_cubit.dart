@@ -1,8 +1,8 @@
+import 'package:fin_app/features/budget/domain/models/budget_model.dart';
 import 'package:fin_app/features/goals/domain/models/goal_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
-import '../../../home/presentation/domain/models/budget_model.dart';
 import 'goals_cubit_state.dart';
 
 @singleton

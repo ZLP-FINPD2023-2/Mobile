@@ -1,5 +1,4 @@
 import 'package:fin_app/core/di/di.config.dart';
-import 'package:fin_app/features/home/data/sharedPref/budget_repository.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -16,6 +15,5 @@ void confingureDependecies() {
     defaultBaseURL: Env.serverUrl,
     getAuthTokenFn: () => getIt<FlutterSecureStorage>().read(key: 'token'),
   );
-  getIt.registerLazySingleton<BudgetRepository>(() => BudgetRepository());
   getIt.init();
 }

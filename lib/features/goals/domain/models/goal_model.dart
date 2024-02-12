@@ -1,6 +1,5 @@
+import 'package:fin_app/features/budget/domain/models/budget_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../home/presentation/domain/models/budget_model.dart';
 
 
 part 'goal_model.freezed.dart';
@@ -14,7 +13,7 @@ class GoalModel with _$GoalModel {
     required String description,
     required int goalSum,
     required int currentSum,
-    required List<BudgetModel> budgets,
+    @Default([]) List<BudgetModel> budgets,
   }) = _GoalModel;
 
   factory GoalModel.fromJson(Map<String, dynamic> json) =>

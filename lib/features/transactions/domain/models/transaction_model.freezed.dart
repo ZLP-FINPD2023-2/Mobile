@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'goal_model.dart';
+part of 'transaction_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,43 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GoalModel _$GoalModelFromJson(Map<String, dynamic> json) {
-  return _GoalModel.fromJson(json);
+TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
+  return _TransactionModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GoalModel {
-  String get id => throw _privateConstructorUsedError;
+mixin _$TransactionModel {
+  TransactionType get type => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  int get goalSum => throw _privateConstructorUsedError;
-  int get currentSum => throw _privateConstructorUsedError;
+  int get sum => throw _privateConstructorUsedError;
+  String get date => throw _privateConstructorUsedError;
   List<BudgetModel> get budgets => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GoalModelCopyWith<GoalModel> get copyWith =>
+  $TransactionModelCopyWith<TransactionModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GoalModelCopyWith<$Res> {
-  factory $GoalModelCopyWith(GoalModel value, $Res Function(GoalModel) then) =
-      _$GoalModelCopyWithImpl<$Res, GoalModel>;
+abstract class $TransactionModelCopyWith<$Res> {
+  factory $TransactionModelCopyWith(
+          TransactionModel value, $Res Function(TransactionModel) then) =
+      _$TransactionModelCopyWithImpl<$Res, TransactionModel>;
   @useResult
   $Res call(
-      {String id,
+      {TransactionType type,
       String name,
       String description,
-      int goalSum,
-      int currentSum,
+      int sum,
+      String date,
       List<BudgetModel> budgets});
 }
 
 /// @nodoc
-class _$GoalModelCopyWithImpl<$Res, $Val extends GoalModel>
-    implements $GoalModelCopyWith<$Res> {
-  _$GoalModelCopyWithImpl(this._value, this._then);
+class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
+    implements $TransactionModelCopyWith<$Res> {
+  _$TransactionModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -60,18 +61,18 @@ class _$GoalModelCopyWithImpl<$Res, $Val extends GoalModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? type = null,
     Object? name = null,
     Object? description = null,
-    Object? goalSum = null,
-    Object? currentSum = null,
+    Object? sum = null,
+    Object? date = null,
     Object? budgets = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TransactionType,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -80,14 +81,14 @@ class _$GoalModelCopyWithImpl<$Res, $Val extends GoalModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      goalSum: null == goalSum
-          ? _value.goalSum
-          : goalSum // ignore: cast_nullable_to_non_nullable
+      sum: null == sum
+          ? _value.sum
+          : sum // ignore: cast_nullable_to_non_nullable
               as int,
-      currentSum: null == currentSum
-          ? _value.currentSum
-          : currentSum // ignore: cast_nullable_to_non_nullable
-              as int,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       budgets: null == budgets
           ? _value.budgets
           : budgets // ignore: cast_nullable_to_non_nullable
@@ -97,45 +98,45 @@ class _$GoalModelCopyWithImpl<$Res, $Val extends GoalModel>
 }
 
 /// @nodoc
-abstract class _$$GoalModelImplCopyWith<$Res>
-    implements $GoalModelCopyWith<$Res> {
-  factory _$$GoalModelImplCopyWith(
-          _$GoalModelImpl value, $Res Function(_$GoalModelImpl) then) =
-      __$$GoalModelImplCopyWithImpl<$Res>;
+abstract class _$$TransactionModelImplCopyWith<$Res>
+    implements $TransactionModelCopyWith<$Res> {
+  factory _$$TransactionModelImplCopyWith(_$TransactionModelImpl value,
+          $Res Function(_$TransactionModelImpl) then) =
+      __$$TransactionModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
+      {TransactionType type,
       String name,
       String description,
-      int goalSum,
-      int currentSum,
+      int sum,
+      String date,
       List<BudgetModel> budgets});
 }
 
 /// @nodoc
-class __$$GoalModelImplCopyWithImpl<$Res>
-    extends _$GoalModelCopyWithImpl<$Res, _$GoalModelImpl>
-    implements _$$GoalModelImplCopyWith<$Res> {
-  __$$GoalModelImplCopyWithImpl(
-      _$GoalModelImpl _value, $Res Function(_$GoalModelImpl) _then)
+class __$$TransactionModelImplCopyWithImpl<$Res>
+    extends _$TransactionModelCopyWithImpl<$Res, _$TransactionModelImpl>
+    implements _$$TransactionModelImplCopyWith<$Res> {
+  __$$TransactionModelImplCopyWithImpl(_$TransactionModelImpl _value,
+      $Res Function(_$TransactionModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? type = null,
     Object? name = null,
     Object? description = null,
-    Object? goalSum = null,
-    Object? currentSum = null,
+    Object? sum = null,
+    Object? date = null,
     Object? budgets = null,
   }) {
-    return _then(_$GoalModelImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$TransactionModelImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TransactionType,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,14 +145,14 @@ class __$$GoalModelImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      goalSum: null == goalSum
-          ? _value.goalSum
-          : goalSum // ignore: cast_nullable_to_non_nullable
+      sum: null == sum
+          ? _value.sum
+          : sum // ignore: cast_nullable_to_non_nullable
               as int,
-      currentSum: null == currentSum
-          ? _value.currentSum
-          : currentSum // ignore: cast_nullable_to_non_nullable
-              as int,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
       budgets: null == budgets
           ? _value._budgets
           : budgets // ignore: cast_nullable_to_non_nullable
@@ -162,29 +163,29 @@ class __$$GoalModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GoalModelImpl implements _GoalModel {
-  const _$GoalModelImpl(
-      {required this.id,
+class _$TransactionModelImpl implements _TransactionModel {
+  const _$TransactionModelImpl(
+      {required this.type,
       required this.name,
       required this.description,
-      required this.goalSum,
-      required this.currentSum,
+      required this.sum,
+      required this.date,
       final List<BudgetModel> budgets = const []})
       : _budgets = budgets;
 
-  factory _$GoalModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GoalModelImplFromJson(json);
+  factory _$TransactionModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionModelImplFromJson(json);
 
   @override
-  final String id;
+  final TransactionType type;
   @override
   final String name;
   @override
   final String description;
   @override
-  final int goalSum;
+  final int sum;
   @override
-  final int currentSum;
+  final String date;
   final List<BudgetModel> _budgets;
   @override
   @JsonKey()
@@ -196,69 +197,69 @@ class _$GoalModelImpl implements _GoalModel {
 
   @override
   String toString() {
-    return 'GoalModel(id: $id, name: $name, description: $description, goalSum: $goalSum, currentSum: $currentSum, budgets: $budgets)';
+    return 'TransactionModel(type: $type, name: $name, description: $description, sum: $sum, date: $date, budgets: $budgets)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GoalModelImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$TransactionModelImpl &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.goalSum, goalSum) || other.goalSum == goalSum) &&
-            (identical(other.currentSum, currentSum) ||
-                other.currentSum == currentSum) &&
+            (identical(other.sum, sum) || other.sum == sum) &&
+            (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._budgets, _budgets));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, goalSum,
-      currentSum, const DeepCollectionEquality().hash(_budgets));
+  int get hashCode => Object.hash(runtimeType, type, name, description, sum,
+      date, const DeepCollectionEquality().hash(_budgets));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GoalModelImplCopyWith<_$GoalModelImpl> get copyWith =>
-      __$$GoalModelImplCopyWithImpl<_$GoalModelImpl>(this, _$identity);
+  _$$TransactionModelImplCopyWith<_$TransactionModelImpl> get copyWith =>
+      __$$TransactionModelImplCopyWithImpl<_$TransactionModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GoalModelImplToJson(
+    return _$$TransactionModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _GoalModel implements GoalModel {
-  const factory _GoalModel(
-      {required final String id,
+abstract class _TransactionModel implements TransactionModel {
+  const factory _TransactionModel(
+      {required final TransactionType type,
       required final String name,
       required final String description,
-      required final int goalSum,
-      required final int currentSum,
-      final List<BudgetModel> budgets}) = _$GoalModelImpl;
+      required final int sum,
+      required final String date,
+      final List<BudgetModel> budgets}) = _$TransactionModelImpl;
 
-  factory _GoalModel.fromJson(Map<String, dynamic> json) =
-      _$GoalModelImpl.fromJson;
+  factory _TransactionModel.fromJson(Map<String, dynamic> json) =
+      _$TransactionModelImpl.fromJson;
 
   @override
-  String get id;
+  TransactionType get type;
   @override
   String get name;
   @override
   String get description;
   @override
-  int get goalSum;
+  int get sum;
   @override
-  int get currentSum;
+  String get date;
   @override
   List<BudgetModel> get budgets;
   @override
   @JsonKey(ignore: true)
-  _$$GoalModelImplCopyWith<_$GoalModelImpl> get copyWith =>
+  _$$TransactionModelImplCopyWith<_$TransactionModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

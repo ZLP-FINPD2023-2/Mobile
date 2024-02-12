@@ -40,6 +40,6 @@ class AuthUseCase {
   }
 
   Future<void> logout() async {
-    _secureStorage.delete(key: 'token');
+    await _secureStorage.delete(key: 'token');
   }
 }

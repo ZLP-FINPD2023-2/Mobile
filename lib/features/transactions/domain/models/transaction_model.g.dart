@@ -1,30 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'goal_model.dart';
+part of 'transaction_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GoalModelImpl _$$GoalModelImplFromJson(Map<String, dynamic> json) =>
-    _$GoalModelImpl(
-      id: json['id'] as String,
+_$TransactionModelImpl _$$TransactionModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TransactionModelImpl(
+      type: $enumDecode(_$TransactionTypeEnumMap, json['type']),
       name: json['name'] as String,
       description: json['description'] as String,
-      goalSum: json['goalSum'] as int,
-      currentSum: json['currentSum'] as int,
+      sum: json['sum'] as int,
+      date: json['date'] as String,
       budgets: (json['budgets'] as List<dynamic>?)
               ?.map((e) => BudgetModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
 
-Map<String, dynamic> _$$GoalModelImplToJson(_$GoalModelImpl instance) =>
+Map<String, dynamic> _$$TransactionModelImplToJson(
+        _$TransactionModelImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'type': _$TransactionTypeEnumMap[instance.type]!,
       'name': instance.name,
       'description': instance.description,
-      'goalSum': instance.goalSum,
-      'currentSum': instance.currentSum,
+      'sum': instance.sum,
+      'date': instance.date,
       'budgets': instance.budgets,
     };
+
+const _$TransactionTypeEnumMap = {
+  TransactionType.income: 'income',
+  TransactionType.expenditure: 'expenditure',
+};
