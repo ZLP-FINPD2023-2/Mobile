@@ -22,7 +22,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int get age => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  bool get gender => throw _privateConstructorUsedError;
+  Gender get gender => throw _privateConstructorUsedError;
   String get firstname => throw _privateConstructorUsedError;
   String get lastname => throw _privateConstructorUsedError;
   String get patronymic => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int age,
       String email,
-      bool gender,
+      Gender gender,
       String firstname,
       String lastname,
       String patronymic});
@@ -78,7 +78,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Gender,
       firstname: null == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
@@ -105,7 +105,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int age,
       String email,
-      bool gender,
+      Gender gender,
       String firstname,
       String lastname,
       String patronymic});
@@ -140,7 +140,7 @@ class __$$UserImplCopyWithImpl<$Res>
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Gender,
       firstname: null == firstname
           ? _value.firstname
           : firstname // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ class _$UserImpl implements _User {
   @override
   final String email;
   @override
-  final bool gender;
+  final Gender gender;
   @override
   final String firstname;
   @override
@@ -228,7 +228,7 @@ abstract class _User implements User {
   const factory _User(
       {required final int age,
       required final String email,
-      required final bool gender,
+      required final Gender gender,
       required final String firstname,
       required final String lastname,
       required final String patronymic}) = _$UserImpl;
@@ -240,7 +240,7 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  bool get gender;
+  Gender get gender;
   @override
   String get firstname;
   @override

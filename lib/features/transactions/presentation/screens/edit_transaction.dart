@@ -87,7 +87,7 @@ class EditTransaction extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: isIncomeSelected
-                      ? const Color(0xff16a34a)
+                      ? transactionColor
                       : const Color(0xffdc2626),
                 ),
                 onPressed: () {

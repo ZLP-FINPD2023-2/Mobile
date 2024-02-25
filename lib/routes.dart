@@ -12,7 +12,8 @@ final Map<String, WidgetBuilder> routes = {
   Routes.authScreen: (context) => const AuthScreen(initialIndex: 1),
   Routes.confirmEmailScreen: (context) => const ConfirmEmailScreen(),
   Routes.resetPasswordScreen: (context) => const ResetPasswordScreen(),
-  Routes.confirmResetPasswordScreen: (context) => const ConfirmResetPasswordScreen(),
+  Routes.confirmResetPasswordScreen: (context) =>
+      const ConfirmResetPasswordScreen(),
   Routes.changePasswordScreen: (context) => const ChangePasswordScreen(),
   Routes.homeScreen: (context) => const HomeScreen(),
 };

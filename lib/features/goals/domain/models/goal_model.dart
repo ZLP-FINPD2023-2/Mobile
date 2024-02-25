@@ -1,7 +1,6 @@
 import 'package:fin_app/features/budget/domain/models/budget_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 part 'goal_model.freezed.dart';
 part 'goal_model.g.dart';
 

@@ -1,3 +1,4 @@
+import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/transactions/domain/models/transaction_model.dart';
 import 'package:fin_app/features/transactions/presentation/screens/expenditure_info.dart';
 import 'package:fin_app/features/transactions/presentation/screens/income_info.dart';
@@ -113,7 +114,7 @@ class ItemTransaction extends StatelessWidget {
                       ),
                       Container(
                         height: 1,
-                        color: const Color(0xff6B7280),
+                        color: context.colors.onSurface,
                       ),
                       const SizedBox(
                         height: 12,

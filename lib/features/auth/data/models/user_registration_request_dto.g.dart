@@ -1,28 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'user_registration_request_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      age: json['age'] as int,
+UserRegistrationRequestDTO _$UserRegistrationRequestDTOFromJson(
+        Map<String, dynamic> json) =>
+    UserRegistrationRequestDTO(
+      birthday: json['birthday'] as String,
       email: json['email'] as String,
-      gender: $enumDecode(_$GenderEnumMap, json['gender']),
       firstname: json['firstname'] as String,
+      gender: $enumDecode(_$GenderEnumMap, json['gender']),
       lastname: json['lastname'] as String,
+      password: json['password'] as String,
       patronymic: json['patronymic'] as String,
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
+Map<String, dynamic> _$UserRegistrationRequestDTOToJson(
+        UserRegistrationRequestDTO instance) =>
     <String, dynamic>{
-      'age': instance.age,
       'email': instance.email,
-      'gender': _$GenderEnumMap[instance.gender]!,
+      'password': instance.password,
       'firstname': instance.firstname,
+      'gender': _$GenderEnumMap[instance.gender]!,
       'lastname': instance.lastname,
       'patronymic': instance.patronymic,
+      'birthday': instance.birthday,
     };
 
 const _$GenderEnumMap = {

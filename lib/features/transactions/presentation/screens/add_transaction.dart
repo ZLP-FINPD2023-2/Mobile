@@ -128,7 +128,7 @@ class _AddTransactionState extends State<AddTransaction> {
           width: double.infinity,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: isIncomeSelected ? const Color(0xff16a34a) : errorColor,
+              primary: isIncomeSelected ? transactionColor : errorColor,
             ),
             onPressed: () {
               addTransactionToMap(

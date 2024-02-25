@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 void showErrorToast(AppStateWrong err) {
   var errText = '';
-  
+
   if (err.key != null) {
     errText += '${err.key}';
   }

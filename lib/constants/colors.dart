@@ -42,7 +42,7 @@ const lightColorScheme = ColorScheme(
 //NavigationBarColors Icons
 const Color homeColor = Color(0xff1f2937);
 const Color targetColor = Color(0xff9333ea);
-const Color transitionColor = Color(0xff16a34a);
+const Color transactionColor = Color(0xff16a34a);
 const Color walletColor = Color(0xff2563eb);
 
 //Tab Colors

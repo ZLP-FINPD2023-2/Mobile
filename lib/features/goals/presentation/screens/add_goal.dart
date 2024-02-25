@@ -6,7 +6,6 @@ import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class AddGoal extends StatefulWidget {
   const AddGoal({super.key});
 

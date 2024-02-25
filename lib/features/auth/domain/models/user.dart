@@ -8,11 +8,18 @@ class User with _$User {
   const factory User({
     required int age,
     required String email,
-    required bool gender,
+    required Gender gender,
     required String firstname,
     required String lastname,
     required String patronymic,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+}
+
+enum Gender {
+  @JsonValue('Male')
+  male,
+  @JsonValue('Female')
+  female,
 }

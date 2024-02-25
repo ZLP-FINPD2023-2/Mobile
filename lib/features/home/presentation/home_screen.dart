@@ -63,7 +63,7 @@ class _NavigationExampleState extends State<HomeScreen> {
             NavigationDestination(
               selectedIcon: SvgPicture.asset(
                 'assets/barchart_icon.svg',
-                color: transitionColor,
+                color: transactionColor,
               ),
               icon: SvgPicture.asset('assets/barchart_icon.svg'),
               label: 'Транзакции',

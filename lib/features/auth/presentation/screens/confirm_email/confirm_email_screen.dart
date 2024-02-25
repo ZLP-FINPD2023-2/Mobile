@@ -1,10 +1,46 @@
+import 'dart:async';
+
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 
-class ConfirmEmailScreen extends StatelessWidget {
+class ConfirmEmailScreen extends StatefulWidget {
   const ConfirmEmailScreen({super.key});
+
+  @override
+  State<ConfirmEmailScreen> createState() => _ConfirmEmailScreenState();
+}
+
+class _ConfirmEmailScreenState extends State<ConfirmEmailScreen> {
+  final String email = 'helloworld@gmail.com';
+
+  late final TextEditingController confirmationCodeController;
+  late final Timer requestConfirmationCodeTimer;
+
+  Duration requestConfirmationCodeTime = const Duration(seconds: 20);
+
+  @override
+  void initState() {
+    super.initState();
+    confirmationCodeController = TextEditingController();
+    requestConfirmationCodeTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        if (mounted) {
+          setState(
+            () {
+              if (requestConfirmationCodeTime.inSeconds > 0) {
+                requestConfirmationCodeTime = Duration(
+                  seconds: requestConfirmationCodeTime.inSeconds - 1,
+                );
+              }
+            },
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +58,12 @@ class ConfirmEmailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Мы отправили код на адрес: ',
+                'Мы отправили код на адрес:',
                 textAlign: TextAlign.start,
                 style: context.textStyles.bodyLarge,
               ),
               Text(
-                'helloworld@gmail.com ',
+                email,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontSize: 16,
@@ -36,8 +72,8 @@ class ConfirmEmailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 48),
-              //? Текстовое поле Код
               TextFormField(
+                controller: confirmationCodeController,
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
                 textAlign: TextAlign.justify,
@@ -53,11 +89,12 @@ class ConfirmEmailScreen extends StatelessWidget {
                     onPressed: () {},
                     child: const Text('Отправить код заново:'),
                   ),
-                  const Text('00:20'),
+                  Text(
+                    '${(requestConfirmationCodeTime.inSeconds / 60).floor()}:${requestConfirmationCodeTime.inSeconds % 60}',
+                  ),
                 ],
               ),
               const SizedBox(height: 24),
-              //кнопка подтвердить
               SizedBox(
                 height: 40,
                 child: ElevatedButton(
@@ -72,5 +109,12 @@ class ConfirmEmailScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    confirmationCodeController.dispose();
+    requestConfirmationCodeTimer.cancel();
   }
 }

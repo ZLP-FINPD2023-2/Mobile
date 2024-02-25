@@ -1,12 +1,13 @@
 import 'package:fin_app/core/extensions/context.dart';
+import 'package:fin_app/features/auth/domain/models/user.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
+import 'package:fin_app/features/auth/presentation/widgets/email_input.dart';
+import 'package:fin_app/features/auth/presentation/widgets/password_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:intl/intl.dart';
-
-enum Gender { male, female }
 
 class RegistrationTab extends StatefulWidget {
   const RegistrationTab({super.key});
@@ -17,33 +18,18 @@ class RegistrationTab extends StatefulWidget {
 
 class _RegistrationTabState extends State<RegistrationTab> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController patronymicController = TextEditingController();
-  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController birthdayController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   Gender genderSelected = Gender.male;
-  bool _obscurePassword = true;
-  final Map<Gender, String> menuValues = {
-    Gender.female: 'Женский',
-    Gender.male: 'Мужской',
-  };
-
-  String? validateEmail(String? value) {
-    if (value == null || !value.contains('@')) {
-      return 'Введите корректный адрес электронной почты';
-    }
-    return null;
-  }
-
-  String? validatePasswordLength(String? value) {
-    if (value == null || value.length < 8) {
-      return 'Пароль должен содержать минимум 8 символов';
-    }
-    return null;
-  }
+  bool _obsecurePassword = true;
 
   String? validatePasswordMatch(String? value) {
     if (value != passwordController.text) {
@@ -99,73 +85,34 @@ class _RegistrationTabState extends State<RegistrationTab> {
                 ),
               ),
               const SizedBox(height: 20),
-              GestureDetector(
-                  onTap: () => _pickDate(),
-                  child: TextFormField(
-                    enabled: false,
-                    controller: birthDateController, // Добавьте эту строку
-                    style: const TextStyle(color: Color(0xff6b7280)),
-                    cursorColor: context.colors.outline,
-                    textAlign: TextAlign.justify,
-                    decoration: authTheme.copyWith(
-                      labelText: 'Дата рождения',
-                      hintText: '27.07.2000',
-                      suffixIcon: const Icon(
-                        size: 24,
-                        Icons.today_rounded,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),),
-              const SizedBox(height: 20),
-              DropdownButtonFormField(
-                decoration: authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),
-                items: Gender.values.toList().map<DropdownMenuItem<Gender>>((Gender value) {
-                  return DropdownMenuItem<Gender>(
-                    value: value,
-                    child: Text(menuValues[value] ?? '', style: const TextStyle(fontSize: 16)),
-                  );
-                }).toList(),
-                onChanged: (newValue) {
-                  setState(() {
-                    genderSelected = newValue!;
-                  });
-                },
+              _BirthdayInput(
+                onChangedCallback: (date) => setState(() {
+                  birthdayController.text =
+                      DateFormat('dd.MM.yyyy').format(date);
+                }),
+                controller: birthdayController,
               ),
               const SizedBox(height: 20),
-              TextFormField(
+              _GenderDropdownInput(
+                onChangedCallback: (newValue) => setState(() {
+                  if (newValue != null) {
+                    genderSelected = newValue;
+                  }
+                }),
+              ),
+              const SizedBox(height: 20),
+              EmailInput(
                 controller: emailController,
-                validator: validateEmail,
-                textInputAction: TextInputAction.next,
-                cursorColor: context.colors.outline,
-                textAlign: TextAlign.justify,
-                decoration: authTheme.copyWith(
-                  labelText: 'Почта',
-                  hintText: 'Введите свою почту',
-                ),
               ),
               const SizedBox(height: 20),
-              TextFormField(
-                obscureText: _obscurePassword,
+              PasswordInput(
+                needValidation: true,
                 controller: passwordController,
-                validator: validatePasswordLength,
-                textInputAction: TextInputAction.next,
-                cursorColor: const Color(0xff94A3B8),
-                textAlign: TextAlign.justify,
-                decoration: authTheme.copyWith(
-                  labelText: 'Пароль',
-                  hintText: 'Придумайте пароль',
-                  suffixIcon: InkWell(
-                    onTap: () => setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    }),
-                    child: const Icon(
-                      size: 24,
-                      Icons.visibility,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
+                isObsecurePassword: _obsecurePassword,
+                onVisibleChanged: () => setState(() {
+                  _obsecurePassword = !_obsecurePassword;
+                }),
+                hintText: 'Придумайте пароль',
               ),
               const SizedBox(height: 20),
               TextFormField(
@@ -183,6 +130,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
               const SizedBox(height: 20),
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
+                  // TODO: maybe cancel loading during change tab
                   if (state is AuthLoadingState) {
                     return const SizedBox(
                       height: 40,
@@ -195,12 +143,12 @@ class _RegistrationTabState extends State<RegistrationTab> {
                     width: 324,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (_formKey.currentState?.validate() ?? false) {
                           authCubit.register(
                             name: nameController.text,
                             surname: surnameController.text,
                             patronymic: patronymicController.text,
-                            birthDate: birthDateController.text,
+                            birthday: birthdayController.text,
                             email: emailController.text,
                             password: passwordController.text,
                             gender: genderSelected,
@@ -220,20 +168,6 @@ class _RegistrationTabState extends State<RegistrationTab> {
     );
   }
 
-  void _pickDate() async {
-    DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (date != null) {
-      setState(() {
-        birthDateController.text = DateFormat('dd.MM.yyyy').format(date);
-      });
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -241,9 +175,86 @@ class _RegistrationTabState extends State<RegistrationTab> {
     nameController.dispose();
     surnameController.dispose();
     patronymicController.dispose();
-    birthDateController.dispose();
+    birthdayController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+  }
+}
+
+class _GenderDropdownInput extends StatelessWidget {
+  final void Function(Gender? gender) onChangedCallback;
+
+  const _GenderDropdownInput({
+    required this.onChangedCallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Map<Gender, String> menuValues = {
+      Gender.female: 'Женский',
+      Gender.male: 'Мужской',
+    };
+
+    return DropdownButtonFormField(
+      decoration: authTheme.copyWith(labelText: 'Пол', hintText: 'Ваш пол'),
+      items: Gender.values.toList().map<DropdownMenuItem<Gender>>((value) {
+        return DropdownMenuItem<Gender>(
+          value: value,
+          child: Text(
+            menuValues[value] ?? '',
+            style: const TextStyle(fontSize: 16),
+          ),
+        );
+      }).toList(),
+      onChanged: onChangedCallback,
+    );
+  }
+}
+
+class _BirthdayInput extends StatelessWidget {
+  final void Function(DateTime data) onChangedCallback;
+  final TextEditingController controller;
+
+  const _BirthdayInput({
+    required this.onChangedCallback,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _pickDate(context),
+      child: TextFormField(
+        enabled: false,
+        controller: controller, // Добавьте эту строку
+        style: TextStyle(
+          color: context.colors.onSurface,
+        ),
+        cursorColor: context.colors.outline,
+        textAlign: TextAlign.justify,
+        decoration: authTheme.copyWith(
+          labelText: 'Дата рождения',
+          hintText: '27.07.2000',
+          suffixIcon: const Icon(
+            size: 24,
+            Icons.today_rounded,
+            color: Colors.grey,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _pickDate(BuildContext context) async {
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (date != null) {
+      onChangedCallback(date);
+    }
   }
 }

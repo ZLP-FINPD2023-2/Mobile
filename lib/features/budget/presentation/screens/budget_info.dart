@@ -15,9 +15,11 @@ class BudgetInfoScreen extends StatefulWidget {
   final int index;
   final BudgetCubit budgetCubit;
 
-  const BudgetInfoScreen(
-      {Key? key, required this.index, required this.budgetCubit})
-      : super(key: key);
+  const BudgetInfoScreen({
+    Key? key,
+    required this.index,
+    required this.budgetCubit,
+  }) : super(key: key);
 
   @override
   State<BudgetInfoScreen> createState() => _BudgetInfoScreenState();
@@ -133,14 +135,18 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
           Text(
             budgetInfo.name,
             style: const TextStyle(
-                fontSize: 28, color: Colors.black, fontWeight: FontWeight.w700),
+              fontSize: 28,
+              color: Colors.black,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           Text(
             budgetInfo.sum.toString(),
             style: const TextStyle(
-                fontSize: 24,
-                color: Color(0xff1b438f),
-                fontWeight: FontWeight.w700),
+              fontSize: 24,
+              color: Color(0xff1b438f),
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),
@@ -217,7 +223,10 @@ class PanelWidget extends StatelessWidget {
           const Text(
             'Подробности',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: Colors.black, fontSize: 20),
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              fontSize: 20,
+            ),
           ),
           TextFormField(
             enabled: false,

@@ -1,4 +1,3 @@
-import 'package:fin_app/core/logger/logger.dart';
 import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
@@ -20,46 +19,47 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocProvider(
-          create: (context) => AuthCubit(getIt<AuthUseCase>()),
-          child: DefaultTabController(
-            initialIndex: initialIndex,
-            length: 2,
-            child: Column(
-              children: [
-                const SizedBox(height: 14),
-                const TabBar(
-                  tabs: [
-                    Tab(child: Text('Регистрация')),
-                    Tab(child: Text('Вход')),
-                  ],
-                ),
-                const Expanded(
-                  flex: 2,
-                  child: TabBarView(
+    final tabs = {
+      'Регистрация': const RegistrationTab(),
+      'Вход': const LoginTab(),
+    };
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: Scaffold(
+          body: BlocProvider(
+            create: (context) => AuthCubit(getIt<AuthUseCase>()),
+            child: DefaultTabController(
+              initialIndex: initialIndex,
+              length: tabs.length,
+              child: Builder(
+                builder: (context) {
+                  return Column(
                     children: [
-                      RegistrationTab(),
-                      LoginTab(),
+                      const SizedBox(height: 14),
+                      TabBar(
+                        tabs: tabs.keys.map((title) => Text(title)).toList(),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: TabBarView(
+                          children: tabs.values.toList(),
+                        ),
+                      ),
+                      BlocListener<AuthCubit, AuthState>(
+                        listener: (context, state) {
+                          if (state is AuthSuccessState) {
+                            Navigator.of(context)
+                                .pushReplacementNamed(Routes.homeScreen);
+                          }
+                        },
+                        child: Container(),
+                      ),
                     ],
-                  ),
-                ),
-                BlocListener<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthSuccessState) {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Routes.homeScreen);
-                    }
-                  },
-                  child: BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      logger.debug('Current AuthState: $state');
-                      return Container();
-                    },
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ),

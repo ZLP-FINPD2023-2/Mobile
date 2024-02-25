@@ -1,7 +1,10 @@
 import 'package:fin_app/core/services/network/network_service.dart';
+import 'package:fin_app/features/auth/data/models/user_login_request_dto.dart';
+import 'package:fin_app/features/auth/data/models/user_registration_request_dto.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/app_state/app_state.dart';
+import 'auth_datasource_constants.dart';
 
 @injectable
 class ServerAuthDataSource {
@@ -11,47 +14,25 @@ class ServerAuthDataSource {
     required NetworkService networkService,
   }) : _networkService = networkService;
 
-  Future<String> signIn({required String email, required String password}) async {
-    final Map<String, dynamic> data = {
-      "email": email,
-      "password": password,
-    };
-
+  Future<String> signIn(UserLoginRequestDTO userDTO) async {
     final response = await _networkService.post(
-      '/auth/login',
-      data: data,
+      AuthDatasourceConstants.loginPath,
+      data: userDTO.toJson(),
     );
 
     final result = response.data;
 
-    if (result != null && result.containsKey('token')) {
-      return result['token'] as String;
+    if (result != null &&
+        result.containsKey(AuthDatasourceConstants.tokenKey)) {
+      return result[AuthDatasourceConstants.tokenKey] as String;
     }
     throw AppStateWarning("[Sign in] Bad response: No token field!");
   }
 
-  Future<void> signUp({
-    required String birthday,
-    required String email,
-    required String firstname,
-    required String gender,
-    required String lastname,
-    required String password,
-    required String patronymic,
-  }) async {
-    final Map<String, dynamic> data = {
-      "birthday": birthday,
-      "email": email,
-      "firstname": firstname,
-      "gender": gender,
-      "lastname": lastname,
-      "password": password,
-      "patronymic": patronymic,
-    };
-
+  Future<void> signUp(UserRegistrationRequestDTO userDTO) async {
     final response = await _networkService.post(
-      '/auth/register',
-      data: data,
+      AuthDatasourceConstants.registrationPath,
+      data: userDTO.toJson(),
     );
 
     final result = response.data;

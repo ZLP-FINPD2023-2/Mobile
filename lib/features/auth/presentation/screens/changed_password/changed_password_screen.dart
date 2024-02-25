@@ -33,15 +33,15 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 48),
-            //кнопка войти
             SizedBox(
               height: 40,
               width: 324,
               child: ElevatedButton(
-                onPressed: () => Navigator.popUntil(
-                  context,
-                  ModalRoute.withName(Routes.authScreen),
-                ),
+                onPressed: () {
+                  Navigator.of(context).popUntil(
+                    ModalRoute.withName(Routes.authScreen),
+                  );
+                },
                 child: const Text('Войти'),
               ),
             ),

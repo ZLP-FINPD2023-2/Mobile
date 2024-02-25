@@ -54,7 +54,10 @@ class DeleteBudget extends StatelessWidget {
                       Navigator.pop(context);
                       Navigator.pop(context);
                     },
-                    child: const Text('Да', style: TextStyle(fontSize: 14, color: Color(0xff1b438f))),
+                    child: const Text(
+                      'Да',
+                      style: TextStyle(fontSize: 14, color: Color(0xff1b438f)),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {

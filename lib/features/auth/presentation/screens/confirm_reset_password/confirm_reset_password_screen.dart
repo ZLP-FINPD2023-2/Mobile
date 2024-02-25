@@ -29,10 +29,7 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                 style: context.textStyles.bodyLarge,
                 textAlign: TextAlign.start,
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              //? Текстовое поле Новый пароль
+              const SizedBox(height: 24),
               TextFormField(
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
@@ -50,7 +47,6 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              //? Текстовое поле Подтвердите новый пароль
               TextFormField(
                 textInputAction: TextInputAction.next,
                 cursorColor: context.colors.outline,
@@ -66,13 +62,12 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                   const Text('Вспомнили свой пароль?'),
                   TextButton(
                     onPressed: () {
-                      Navigator.popUntil(
-                        context,
-                        ModalRoute.withName(Routes.startScreen),
+                      Navigator.of(context).popUntil(
+                        ModalRoute.withName(Routes.authScreen),
                       );
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
+                          settings: RouteSettings(name: Routes.authScreen),
                           builder: (context) =>
                               const AuthScreen(initialIndex: 1),
                         ),
@@ -83,7 +78,6 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              //кнопка сохранить
               SizedBox(
                 height: 40,
                 child: ElevatedButton(

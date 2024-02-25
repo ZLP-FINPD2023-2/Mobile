@@ -1,9 +1,10 @@
-import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
+import 'package:fin_app/features/auth/presentation/widgets/email_input.dart';
+import 'package:fin_app/features/auth/presentation/widgets/password_input.dart';
+import 'package:fin_app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fin_app/constants/theme.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
@@ -17,19 +18,13 @@ class _LoginTabState extends State<LoginTab> {
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
-  bool _obscurePassword = true;
+  bool _obsecurePassword = true;
+
   @override
   void initState() {
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null || !value.contains('@')) {
-      return 'Введите корректный адрес электронной почты';
-    }
-    return null;
   }
 
   @override
@@ -43,44 +38,23 @@ class _LoginTabState extends State<LoginTab> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
+            EmailInput(
               controller: emailController,
-              validator: validateEmail,
-              textInputAction: TextInputAction.next,
-              cursorColor: context.colors.outline,
-              textAlign: TextAlign.justify,
-              decoration: authTheme.copyWith(
-                labelText: 'Почта',
-                hintText: 'Введите свою почту',
-              ),
             ),
             const SizedBox(height: 12),
-            TextFormField(
+            PasswordInput(
               controller: passwordController,
-              textInputAction: TextInputAction.next,
-              obscureText: _obscurePassword,
-              autocorrect: false,
-              cursorColor: context.colors.outline,
-              textAlign: TextAlign.justify,
-              decoration: authTheme.copyWith(
-                labelText: 'Пароль',
-                hintText: 'Введите свой пароль',
-                suffixIcon: InkWell(
-                  onTap: () => setState(() {
-                    _obscurePassword = !_obscurePassword;
-                  }),
-                  child: const Icon(
-                    size: 24,
-                    Icons.visibility,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
+              isObsecurePassword: _obsecurePassword,
+              onVisibleChanged: () => setState(() {
+                _obsecurePassword = !_obsecurePassword;
+              }),
+              hintText: 'Введите свой пароль',
             ),
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: TextButton(
-                onPressed: () => {},
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(Routes.resetPasswordScreen),
                 child: const Text(
                   'Забыли пароль?',
                 ),
@@ -89,6 +63,7 @@ class _LoginTabState extends State<LoginTab> {
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
                 if (state is AuthLoadingState) {
+                  // TODO: maybe cancel loading during change tab
                   return const SizedBox(
                     height: 40,
                     width: 40,
@@ -100,7 +75,7 @@ class _LoginTabState extends State<LoginTab> {
                   width: 324,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState?.validate() ?? false) {
                         authCubit.login(
                           emailController.text,
                           passwordController.text,

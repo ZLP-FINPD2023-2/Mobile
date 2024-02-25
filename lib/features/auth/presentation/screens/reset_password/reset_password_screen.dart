@@ -1,11 +1,24 @@
 import 'package:fin_app/core/extensions/context.dart';
+import 'package:fin_app/features/auth/presentation/widgets/email_input.dart';
 import 'package:flutter/material.dart';
-import 'package:fin_app/constants/theme.dart';
 
 import '../../../../../routes.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
+class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({super.key});
+
+  @override
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+}
+
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  late final TextEditingController emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,31 +37,12 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Укажите адрес электронной почты,',
-                style: context.textStyles.bodyLarge,
-                textAlign: TextAlign.start,
-              ),
-              Text(
-                'связанный с вашей учетной записью,',
-                style: context.textStyles.bodyLarge,
-                textAlign: TextAlign.start,
-              ),
-              Text(
-                'для восстановления пароля.',
+                'Укажите адрес электронной почты, связанный с вашей учетной записью, для восстановления пароля.',
                 style: context.textStyles.bodyLarge,
                 textAlign: TextAlign.start,
               ),
               const SizedBox(height: 32),
-              //? Текстовое поле Почта
-              TextFormField(
-                textInputAction: TextInputAction.next,
-                cursorColor: context.colors.outline,
-                textAlign: TextAlign.justify,
-                decoration: authTheme.copyWith(
-                  labelText: 'Почта',
-                  hintText: 'Введите свою почту',
-                ),
-              ),
+              EmailInput(controller: emailController),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -60,7 +54,6 @@ class ResetPasswordScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              //кнопка прислать код
               SizedBox(
                 height: 40,
                 child: ElevatedButton(
@@ -74,5 +67,11 @@ class ResetPasswordScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
   }
 }
