@@ -23,7 +23,6 @@ Future<String> getInitialRoute() async {
 }
 
 class MainApp extends StatelessWidget {
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final String initialRoute;
 
   const MainApp({required this.initialRoute, super.key});
