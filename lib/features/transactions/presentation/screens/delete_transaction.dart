@@ -8,10 +8,10 @@ class DeleteTransaction extends StatelessWidget {
   final List<TransactionModel> listOfTransaction;
 
   const DeleteTransaction({
-    Key? key,
+    super.key,
     required this.index,
     required this.listOfTransaction,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -15,16 +15,15 @@ class GoalInfoScreen extends StatefulWidget {
   final String id;
 
   const GoalInfoScreen({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   State<GoalInfoScreen> createState() => _GoalInfoScreenState();
 }
 
-class _GoalInfoScreenState extends State<GoalInfoScreen>
-    with TickerProviderStateMixin {
+class _GoalInfoScreenState extends State<GoalInfoScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
   @override
   void initState() {
@@ -99,8 +98,7 @@ class _GoalInfoScreenState extends State<GoalInfoScreen>
               return SlidingUpPanel(
                 maxHeight: MediaQuery.of(context).size.height * 0.55,
                 minHeight: MediaQuery.of(context).size.height * 0.1,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(10)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                 body: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -207,10 +205,10 @@ class _PanelWidget extends StatelessWidget {
   final String id;
 
   const _PanelWidget({
-    Key? key,
+    super.key,
     required this.id,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -300,10 +298,7 @@ class _PanelWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 enabled: false,
-                initialValue:
-                    goal?.budgets != null && goal?.budgets.isEmpty != null
-                        ? ''
-                        : 'Бюджет ',
+                initialValue: goal?.budgets != null && goal?.budgets.isEmpty != null ? '' : 'Бюджет ',
                 decoration: homeTheme.copyWith(
                   labelText: 'Бюджеты',
                 ),

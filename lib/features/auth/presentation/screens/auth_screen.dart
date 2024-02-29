@@ -13,9 +13,9 @@ class AuthScreen extends StatelessWidget {
   final int initialIndex;
 
   const AuthScreen({
-    Key? key,
+    super.key,
     required this.initialIndex,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,7 @@ class AuthScreen extends StatelessWidget {
                       BlocListener<AuthCubit, AuthState>(
                         listener: (context, state) {
                           if (state is AuthSuccessState) {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Routes.homeScreen);
+                            Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
                           }
                         },
                         child: Container(),

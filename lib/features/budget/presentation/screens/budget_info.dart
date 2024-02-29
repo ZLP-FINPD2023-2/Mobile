@@ -16,17 +16,16 @@ class BudgetInfoScreen extends StatefulWidget {
   final BudgetCubit budgetCubit;
 
   const BudgetInfoScreen({
-    Key? key,
+    super.key,
     required this.index,
     required this.budgetCubit,
-  }) : super(key: key);
+  });
 
   @override
   State<BudgetInfoScreen> createState() => _BudgetInfoScreenState();
 }
 
-class _BudgetInfoScreenState extends State<BudgetInfoScreen>
-    with TickerProviderStateMixin {
+class _BudgetInfoScreenState extends State<BudgetInfoScreen> with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -105,8 +104,7 @@ class _BudgetInfoScreenState extends State<BudgetInfoScreen>
         ],
       ),
       body: AnimatedBuilder(
-        animation:
-            CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
+        animation: CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
         builder: (context, child) {
           return SlidingUpPanel(
             maxHeight: MediaQuery.of(context).size.height * 0.55,
@@ -195,12 +193,12 @@ class PanelWidget extends StatelessWidget {
   final int sum;
 
   const PanelWidget({
-    Key? key,
+    super.key,
     required this.name,
     required this.description,
     required this.sum,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

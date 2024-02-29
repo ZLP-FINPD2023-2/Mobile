@@ -53,8 +53,7 @@ class _LoginTabState extends State<LoginTab> {
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(Routes.resetPasswordScreen),
+                onPressed: () => Navigator.of(context).pushNamed(Routes.resetPasswordScreen),
                 child: const Text(
                   'Забыли пароль?',
                 ),

@@ -11,10 +11,10 @@ class EditBudget extends StatefulWidget {
   final BudgetCubit budgetCubit;
 
   const EditBudget({
-    Key? key,
+    super.key,
     required this.index,
     required this.budgetCubit,
-  }) : super(key: key);
+  });
 
   @override
   State<EditBudget> createState() => _EditBudgetState();
@@ -84,9 +84,7 @@ class _EditBudgetState extends State<EditBudget> {
                     description: descriptionController.text,
                     sum: int.tryParse(sumController.text) ?? 0,
                   );
-                  context
-                      .read<BudgetCubit>()
-                      .updateBudget(widget.index, updatedBudget);
+                  context.read<BudgetCubit>().updateBudget(widget.index, updatedBudget);
                   Navigator.pop(context);
                 },
                 child: const Text('Сохранить'),

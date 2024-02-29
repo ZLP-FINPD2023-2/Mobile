@@ -44,9 +44,7 @@ class _AddTransactionState extends State<AddTransaction> {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: isIncomeSelected
-            ? const Color(0xff22c55e)
-            : const Color(0xffEF4444),
+        backgroundColor: isIncomeSelected ? const Color(0xff22c55e) : const Color(0xffEF4444),
         title: Text(
           'Новая транзакция',
           style: context.textStyles.headlineSmall,
@@ -60,10 +58,7 @@ class _AddTransactionState extends State<AddTransaction> {
               DropdownButtonFormField(
                 value: typeSelected,
                 decoration: homeTheme,
-                items: TransactionType.values
-                    .toList()
-                    .map<DropdownMenuItem<TransactionType>>(
-                        (TransactionType value) {
+                items: TransactionType.values.toList().map<DropdownMenuItem<TransactionType>>((TransactionType value) {
                   return DropdownMenuItem<TransactionType>(
                     value: value,
                     child: Text(
@@ -157,11 +152,11 @@ class _AddTransactionState extends State<AddTransaction> {
 
   @override
   void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    dateController.dispose();
+    sumController.dispose();
     super.dispose();
-    nameController = TextEditingController();
-    descriptionController = TextEditingController();
-    dateController = TextEditingController();
-    sumController = TextEditingController();
   }
 }
 
@@ -192,8 +187,7 @@ Map<String, List<TransactionModel>> sortedKeys(
   }
   List<DateTime> dates = sortedKeys.map((key) => DateTime.parse(key)).toList();
   dates.sort();
-  List<String> sortedDateStrings =
-      dates.map((date) => date.toLocal().toString().split(' ')[0]).toList();
+  List<String> sortedDateStrings = dates.map((date) => date.toLocal().toString().split(' ')[0]).toList();
   sortedDateStrings.reversed;
   for (int i = 0; i < sortedKeys.length; i++) {
     String year = sortedKeys[i].substring(0, 4);

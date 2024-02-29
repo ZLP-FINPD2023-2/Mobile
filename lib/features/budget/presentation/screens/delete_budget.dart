@@ -7,10 +7,10 @@ class DeleteBudget extends StatelessWidget {
   final BudgetCubit budgetCubit;
 
   const DeleteBudget({
-    Key? key,
+    super.key,
     required this.index,
     required this.budgetCubit,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

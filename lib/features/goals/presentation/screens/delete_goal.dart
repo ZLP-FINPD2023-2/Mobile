@@ -9,9 +9,9 @@ class DeleteGoal extends StatelessWidget {
   final String id;
 
   const DeleteGoal({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

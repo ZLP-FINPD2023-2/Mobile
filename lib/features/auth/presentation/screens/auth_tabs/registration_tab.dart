@@ -25,8 +25,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthdayController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   Gender genderSelected = Gender.male;
   bool _obsecurePassword = true;
@@ -87,8 +86,7 @@ class _RegistrationTabState extends State<RegistrationTab> {
               const SizedBox(height: 20),
               _BirthdayInput(
                 onChangedCallback: (date) => setState(() {
-                  birthdayController.text =
-                      DateFormat('dd.MM.yyyy').format(date);
+                  birthdayController.text = DateFormat('dd.MM.yyyy').format(date);
                 }),
                 controller: birthdayController,
               ),

@@ -19,14 +19,11 @@ Future<String> getInitialRoute() async {
   final storage = getIt<FlutterSecureStorage>();
   String? token = await storage.read(key: 'token');
   logger.debug("Token $token");
-  return token != null && token.isNotEmpty
-      ? Routes.homeScreen
-      : Routes.startScreen;
+  return token != null && token.isNotEmpty ? Routes.homeScreen : Routes.startScreen;
 }
 
 class MainApp extends StatelessWidget {
-  static final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final String initialRoute;
 
   const MainApp({required this.initialRoute, super.key});
@@ -35,7 +32,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: initialRoute,
+      initialRoute: '/home',
       routes: routes,
       theme: appTheme,
     );

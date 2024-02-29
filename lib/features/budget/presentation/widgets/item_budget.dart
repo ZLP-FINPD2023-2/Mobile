@@ -9,15 +9,13 @@ class ItemBudget extends StatelessWidget {
   final BudgetModel budget;
   final int index;
 
-  const ItemBudget({Key? key, required this.budget, required this.index})
-      : super(key: key);
+  const ItemBudget({super.key, required this.budget, required this.index});
 
   void onBudgetTap(BuildContext context, int index, BudgetCubit budgetCubit) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            BudgetInfoScreen(index: index, budgetCubit: budgetCubit),
+        builder: (context) => BudgetInfoScreen(index: index, budgetCubit: budgetCubit),
       ),
     );
   }

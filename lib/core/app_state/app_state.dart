@@ -11,12 +11,7 @@ class AppState {
       return error;
     } else if (error is DioException) {
       return AppStateError(
-        (error.response?.data as Map<String, dynamic>)
-                .entries
-                .firstOrNull
-                ?.value ??
-            error.message ??
-            '',
+        (error.response?.data as Map<String, dynamic>).entries.firstOrNull?.value ?? error.message ?? '',
         details: details,
       );
     } else if (error is TypeError) {
@@ -58,13 +53,11 @@ class AppStateWrong extends AppState {
 }
 
 class AppStateError extends AppStateWrong {
-  AppStateError(String message, {String? key, String? details})
-      : super(message, key: key, details: details);
+  AppStateError(super.message, {super.key, super.details});
 }
 
 class AppStateWarning extends AppStateWrong {
-  AppStateWarning(String message, {String? key, String? details})
-      : super(message, key: key, details: details);
+  AppStateWarning(super.message, {super.key, super.details});
 }
 
 class AppStateDefault extends AppState {}

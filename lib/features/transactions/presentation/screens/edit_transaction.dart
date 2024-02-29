@@ -10,10 +10,10 @@ class EditTransaction extends StatelessWidget {
   final List<TransactionModel> listOfTransaction;
 
   EditTransaction({
-    Key? key,
+    super.key,
     required this.index,
     required this.listOfTransaction,
-  }) : super(key: key);
+  });
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -22,13 +22,10 @@ class EditTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isIncomeSelected =
-        (listOfTransaction[index].type == TransactionType.income);
+    bool isIncomeSelected = (listOfTransaction[index].type == TransactionType.income);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: isIncomeSelected
-            ? const Color(0xff22c55e)
-            : const Color(0xffef4444),
+        backgroundColor: isIncomeSelected ? const Color(0xff22c55e) : const Color(0xffef4444),
         leading: IconButton(
           icon: const Icon(Icons.close, color: textWhite),
           onPressed: () {
@@ -86,9 +83,7 @@ class EditTransaction extends StatelessWidget {
               width: 336,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: isIncomeSelected
-                      ? transactionColor
-                      : const Color(0xffdc2626),
+                  primary: isIncomeSelected ? transactionColor : const Color(0xffdc2626),
                 ),
                 onPressed: () {
                   dateMap.remove(key);

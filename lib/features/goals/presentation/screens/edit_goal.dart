@@ -12,9 +12,9 @@ class EditGoal extends StatefulWidget {
   final String id;
 
   const EditGoal({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   State<EditGoal> createState() => _EditGoalState();
@@ -22,11 +22,9 @@ class EditGoal extends StatefulWidget {
 
 class _EditGoalState extends State<EditGoal> {
   late final TextEditingController nameController = TextEditingController();
-  late final TextEditingController descriptionController =
-      TextEditingController();
+  late final TextEditingController descriptionController = TextEditingController();
   late final TextEditingController goalSumController = TextEditingController();
-  late final TextEditingController currentSumController =
-      TextEditingController();
+  late final TextEditingController currentSumController = TextEditingController();
   List<BudgetModel> budgets = [];
 
   @override
@@ -55,12 +53,9 @@ class _EditGoalState extends State<EditGoal> {
               builder: (context, state) {
                 final currentState = state as GoalsSuccessState;
                 nameController.text = currentState.goals[widget.id]?.name ?? '';
-                descriptionController.text =
-                    currentState.goals[widget.id]?.description ?? '';
-                goalSumController.text =
-                    currentState.goals[widget.id]?.goalSum.toString() ?? '';
-                currentSumController.text =
-                    currentState.goals[widget.id]?.currentSum.toString() ?? '';
+                descriptionController.text = currentState.goals[widget.id]?.description ?? '';
+                goalSumController.text = currentState.goals[widget.id]?.goalSum.toString() ?? '';
+                currentSumController.text = currentState.goals[widget.id]?.currentSum.toString() ?? '';
                 budgets = currentState.goals[widget.id]?.budgets ?? [];
                 return Column(
                   children: [

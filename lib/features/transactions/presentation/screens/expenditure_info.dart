@@ -21,8 +21,7 @@ class ExpenditureInfo extends StatefulWidget {
   State<ExpenditureInfo> createState() => _ExpenditureInfoState();
 }
 
-class _ExpenditureInfoState extends State<ExpenditureInfo>
-    with TickerProviderStateMixin {
+class _ExpenditureInfoState extends State<ExpenditureInfo> with TickerProviderStateMixin {
   late AnimationController _controller;
   late String name = widget.listOfTransactions[widget.index].name;
   late String description = widget.listOfTransactions[widget.index].description;
@@ -88,8 +87,7 @@ class _ExpenditureInfoState extends State<ExpenditureInfo>
         ],
       ),
       body: AnimatedBuilder(
-        animation:
-            CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
+        animation: CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
         builder: (context, child) {
           return SlidingUpPanel(
             maxHeight: MediaQuery.of(context).size.height * 0.55,
@@ -182,10 +180,10 @@ class PanelWidget extends StatelessWidget {
   final String date;
 
   const PanelWidget({
-    Key? key,
+    super.key,
     required this.date,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
