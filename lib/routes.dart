@@ -12,24 +12,23 @@ final Map<String, WidgetBuilder> routes = {
   Routes.authScreen: (context) => const AuthScreen(initialIndex: 1),
   Routes.confirmEmailScreen: (context) => const ConfirmEmailScreen(),
   Routes.resetPasswordScreen: (context) => const ResetPasswordScreen(),
-  Routes.confirmResetPasswordScreen: (context) =>
-      const ConfirmResetPasswordScreen(),
+  Routes.confirmResetPasswordScreen: (context) => const ConfirmResetPasswordScreen(),
   Routes.changePasswordScreen: (context) => const ChangePasswordScreen(),
   Routes.homeScreen: (context) => const HomeScreen(),
 };
 
-class Routes {
-  static String startScreen = '/start';
+sealed class Routes {
+  static const String startScreen = '/start';
 
-  static String authScreen = '/start/auth';
+  static const String authScreen = '/start/auth';
 
-  static String confirmEmailScreen = '/start/auth/confirm_email';
+  static const String confirmEmailScreen = '/start/auth/confirm_email';
 
-  static String resetPasswordScreen = '/start/auth/reset';
+  static const String resetPasswordScreen = '/start/auth/reset';
 
-  static String confirmResetPasswordScreen = '/start/auth/reset/confirm';
+  static const String confirmResetPasswordScreen = '/start/auth/reset/confirm';
 
-  static String changePasswordScreen = '/start/auth/reset/confirm/changed';
+  static const String changePasswordScreen = '/start/auth/reset/confirm/changed';
 
-  static String homeScreen = '/home';
+  static const String homeScreen = '/home';
 }
