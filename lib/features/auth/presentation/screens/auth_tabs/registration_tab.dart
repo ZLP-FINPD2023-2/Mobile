@@ -1,7 +1,7 @@
 import 'package:fin_app/core/extensions/context.dart';
 import 'package:fin_app/features/auth/domain/models/user.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:fin_app/features/auth/presentation/widgets/email_input.dart';
 import 'package:fin_app/features/auth/presentation/widgets/password_input.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
   final TextEditingController birthdayController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   Gender genderSelected = Gender.male;
   bool _obsecurePassword = true;
@@ -86,7 +87,8 @@ class _RegistrationTabState extends State<RegistrationTab> {
               const SizedBox(height: 20),
               _BirthdayInput(
                 onChangedCallback: (date) => setState(() {
-                  birthdayController.text = DateFormat('dd.MM.yyyy').format(date);
+                  birthdayController.text =
+                      DateFormat('dd.MM.yyyy').format(date);
                 }),
                 controller: birthdayController,
               ),
@@ -129,7 +131,9 @@ class _RegistrationTabState extends State<RegistrationTab> {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   // TODO: maybe cancel loading during change tab
-                  if (state is AuthLoadingState) {
+                  final isLoading =
+                      state.whenOrNull(loading: () => true) ?? false;
+                  if (isLoading) {
                     return const SizedBox(
                       height: 40,
                       width: 40,

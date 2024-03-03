@@ -66,6 +66,7 @@ class AddBudget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   final newBudget = BudgetModel(
+                    id: '',
                     name: nameController.text,
                     description: descriptionController.text,
                     sum: int.tryParse(sumController.text) ?? 0,

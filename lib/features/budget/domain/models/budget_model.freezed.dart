@@ -20,6 +20,7 @@ BudgetModel _$BudgetModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BudgetModel {
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get sum => throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ abstract class $BudgetModelCopyWith<$Res> {
           BudgetModel value, $Res Function(BudgetModel) then) =
       _$BudgetModelCopyWithImpl<$Res, BudgetModel>;
   @useResult
-  $Res call({String name, String description, int sum});
+  $Res call({String id, String name, String description, int sum});
 }
 
 /// @nodoc
@@ -52,11 +53,16 @@ class _$BudgetModelCopyWithImpl<$Res, $Val extends BudgetModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? description = null,
     Object? sum = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -81,7 +87,7 @@ abstract class _$$BudgetModelImplCopyWith<$Res>
       __$$BudgetModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String description, int sum});
+  $Res call({String id, String name, String description, int sum});
 }
 
 /// @nodoc
@@ -95,11 +101,16 @@ class __$$BudgetModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? description = null,
     Object? sum = null,
   }) {
     return _then(_$BudgetModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -120,11 +131,16 @@ class __$$BudgetModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BudgetModelImpl implements _BudgetModel {
   const _$BudgetModelImpl(
-      {required this.name, required this.description, required this.sum});
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.sum});
 
   factory _$BudgetModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$BudgetModelImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final String name;
   @override
@@ -134,7 +150,7 @@ class _$BudgetModelImpl implements _BudgetModel {
 
   @override
   String toString() {
-    return 'BudgetModel(name: $name, description: $description, sum: $sum)';
+    return 'BudgetModel(id: $id, name: $name, description: $description, sum: $sum)';
   }
 
   @override
@@ -142,6 +158,7 @@ class _$BudgetModelImpl implements _BudgetModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BudgetModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -150,7 +167,7 @@ class _$BudgetModelImpl implements _BudgetModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, sum);
+  int get hashCode => Object.hash(runtimeType, id, name, description, sum);
 
   @JsonKey(ignore: true)
   @override
@@ -168,13 +185,16 @@ class _$BudgetModelImpl implements _BudgetModel {
 
 abstract class _BudgetModel implements BudgetModel {
   const factory _BudgetModel(
-      {required final String name,
+      {required final String id,
+      required final String name,
       required final String description,
       required final int sum}) = _$BudgetModelImpl;
 
   factory _BudgetModel.fromJson(Map<String, dynamic> json) =
       _$BudgetModelImpl.fromJson;
 
+  @override
+  String get id;
   @override
   String get name;
   @override

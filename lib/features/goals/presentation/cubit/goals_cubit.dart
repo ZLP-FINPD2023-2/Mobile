@@ -1,17 +1,21 @@
 import 'package:fin_app/features/budget/domain/models/budget_model.dart';
+import 'package:fin_app/features/goals/data/models/goal_request_dto.dart';
 import 'package:fin_app/features/goals/domain/models/goal_model.dart';
+import 'package:fin_app/features/goals/domain/usecases/goals_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uuid/uuid.dart';
-import 'goals_cubit_state.dart';
+import 'goals_state.dart';
 
 @singleton
 class GoalsCubit extends Cubit<GoalsState> {
-  GoalsCubit() : super(const GoalsState.initial());
+  final GoalsUseCase _useCase;
+
+  GoalsCubit(this._useCase) : super(const GoalsState.initial());
 
   Future<void> getGoals() async {
     emit(const GoalsState.loading());
-    emit(const GoalsState.success(goals: {}));
+    final goals = await _useCase.getGoals();
+    emit(GoalsState.success(goals: goals));
   }
 
   Future<void> addGoal({
@@ -21,42 +25,26 @@ class GoalsCubit extends Cubit<GoalsState> {
     required int currentSum,
     required List<BudgetModel> budgets,
   }) async {
-    final goal = GoalModel(
-      id: const Uuid().v4(),
+    final goalRequestDTO = GoalRequestDTO(
       name: name,
       description: description,
       goalSum: goalSum,
       currentSum: currentSum,
       budgets: budgets,
     );
-    if (state is GoalsSuccessState) {
-      final state = this.state as GoalsSuccessState;
-      final goals = {goal.id: goal}..addEntries(state.goals.entries);
-      emit(state.copyWith(goals: goals));
-    } else {
-      emit(GoalsState.success(goals: {goal.id: goal}));
-    }
+    final goals = await _useCase.addGoal(goalRequestDTO);
+    emit(GoalsState.success(goals: goals));
   }
 
-  Future<void> deleteGoal({required String id}) async {
-    final state = this.state as GoalsSuccessState;
-    final goals = Map.fromEntries(state.goals.entries)..remove(id);
-    emit(
-      state.copyWith(goals: goals),
-    );
+  Future<void> deleteGoal({required String goalId}) async {
+    emit(const GoalsState.loading());
+    final goals = await _useCase.deleteGoal(goalId);
+    emit(GoalsState.success(goals: goals));
   }
 
-  Future<void> editGoal({
-    required GoalModel goal,
-  }) async {
-    final state = this.state as GoalsSuccessState;
-    emit(const GoalsLoadingState());
-    final goals = Map.fromEntries(
-      state.goals.entries.map(
-        (e) =>
-            e.key == goal.id ? MapEntry<String, GoalModel>(goal.id, goal) : e,
-      ),
-    );
-    emit(state.copyWith(goals: goals));
+  Future<void> editGoal({required GoalModel editedGoal}) async {
+    emit(const GoalsState.loading());
+    final goals = await _useCase.editGoal(editedGoal);
+    emit(GoalsState.success(goals: goals));
   }
 }

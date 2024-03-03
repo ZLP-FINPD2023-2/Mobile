@@ -1,7 +1,7 @@
 import 'package:fin_app/features/budget/domain/models/budget_model.dart';
 import 'package:fin_app/features/goals/domain/models/goal_model.dart';
 import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
-import 'package:fin_app/features/goals/presentation/cubit/goals_cubit_state.dart';
+import 'package:fin_app/features/goals/presentation/cubit/goals_state.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/theme.dart';
 import 'package:fin_app/core/extensions/context.dart';
@@ -9,11 +9,11 @@ import 'package:fin_app/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditGoal extends StatefulWidget {
-  final String id;
+  final GoalModel goal;
 
   const EditGoal({
     super.key,
-    required this.id,
+    required this.goal,
   });
 
   @override
@@ -21,11 +21,20 @@ class EditGoal extends StatefulWidget {
 }
 
 class _EditGoalState extends State<EditGoal> {
-  late final TextEditingController nameController = TextEditingController();
-  late final TextEditingController descriptionController = TextEditingController();
-  late final TextEditingController goalSumController = TextEditingController();
-  late final TextEditingController currentSumController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController descriptionController;
+  late TextEditingController goalSumController;
+  late TextEditingController currentSumController;
   List<BudgetModel> budgets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.goal.name);
+    descriptionController = TextEditingController(text: widget.goal.description);
+    goalSumController = TextEditingController(text: widget.goal.goalSum.toString());
+    currentSumController = TextEditingController(text: widget.goal.currentSum.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +60,15 @@ class _EditGoalState extends State<EditGoal> {
             BlocBuilder<GoalsCubit, GoalsState>(
               bloc: context.read<GoalsCubit>(),
               builder: (context, state) {
-                final currentState = state as GoalsSuccessState;
-                nameController.text = currentState.goals[widget.id]?.name ?? '';
-                descriptionController.text = currentState.goals[widget.id]?.description ?? '';
-                goalSumController.text = currentState.goals[widget.id]?.goalSum.toString() ?? '';
-                currentSumController.text = currentState.goals[widget.id]?.currentSum.toString() ?? '';
-                budgets = currentState.goals[widget.id]?.budgets ?? [];
+                // final currentState = state as GoalsSuccessState;
+                // nameController.text = currentState.goals[widget.id]?.name ?? '';
+                // descriptionController.text =
+                //     currentState.goals[widget.id]?.description ?? '';
+                // goalSumController.text =
+                //     currentState.goals[widget.id]?.goalSum.toString() ?? '';
+                // currentSumController.text =
+                //     currentState.goals[widget.id]?.currentSum.toString() ?? '';
+                // budgets = currentState.goals[widget.id]?.budgets ?? [];
                 return Column(
                   children: [
                     TextFormField(
@@ -113,7 +125,7 @@ class _EditGoalState extends State<EditGoal> {
                 ),
                 onPressed: () {
                   final editedGoal = GoalModel(
-                    id: widget.id,
+                    id: widget.goal.id,
                     name: nameController.text,
                     description: descriptionController.text,
                     currentSum: int.tryParse(currentSumController.text) ?? 0,
@@ -121,7 +133,7 @@ class _EditGoalState extends State<EditGoal> {
                     budgets: budgets,
                   );
 
-                  context.read<GoalsCubit>().editGoal(goal: editedGoal);
+                  context.read<GoalsCubit>().editGoal(editedGoal: editedGoal);
 
                   Navigator.pop(context);
                 },
@@ -132,5 +144,14 @@ class _EditGoalState extends State<EditGoal> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    goalSumController.dispose();
+    currentSumController.dispose();
+    super.dispose();
   }
 }

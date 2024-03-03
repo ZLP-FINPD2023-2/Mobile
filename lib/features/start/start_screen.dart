@@ -40,7 +40,7 @@ class StartScreen extends StatelessWidget {
                   onPressed: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      settings: RouteSettings(name: Routes.authScreen),
+                      settings: const RouteSettings(name: Routes.authScreen),
                       builder: (context) => const AuthScreen(
                         initialIndex: 1,
                       ),
@@ -58,7 +58,7 @@ class StartScreen extends StatelessWidget {
                   onPressed: () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      settings: RouteSettings(name: Routes.authScreen),
+                      settings: const RouteSettings(name: Routes.authScreen),
                       builder: (context) => const AuthScreen(
                         initialIndex: 0,
                       ),
