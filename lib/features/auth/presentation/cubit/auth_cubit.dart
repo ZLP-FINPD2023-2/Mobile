@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/app_state/app_state.dart';
-import 'auth_cubit_state.dart';
+import 'auth_state.dart';
 
 @singleton
 class AuthCubit extends Cubit<AuthState> {
@@ -15,22 +15,22 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(
     this._authUseCase,
-  ) : super(AuthInitialState());
+  ) : super(const AuthState.success());
 
   Future<void> login(String email, String password) async {
     try {
-      emit(AuthLoadingState());
+      emit(const AuthState.loading());
 
       logger.info('Sending login request...');
 
       await _authUseCase.signIn(email: email, password: password);
 
-      emit(AuthSuccessState());
+      emit(const AuthState.success());
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
 
       logger.warning('Error during login: ${error.message}');
-      emit(AuthErrorState(e.toString()));
+      emit(AuthState.error(error: e.toString()));
       _showToast(error.message.toString());
     }
   }
@@ -45,7 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
     required Gender gender,
   }) async {
     try {
-      emit(AuthLoadingState());
+      emit(const AuthState.loading());
 
       await _authUseCase.signUp(
         birthday: birthday,
@@ -62,21 +62,21 @@ class AuthCubit extends Cubit<AuthState> {
       final error = AppState.catchErrorHandler(e);
 
       logger.warning('Error during register: ${error.message}');
-      emit(AuthErrorState(error.toString()));
+      emit(AuthState.error(error: error.toString()));
       _showToast(error.message.toString());
     }
   }
 
   Future<void> logout() async {
     try {
-      emit(AuthLoadingState());
+      emit(const AuthState.loading());
       await _authUseCase.logout();
-      emit(AuthInitialState());
+      emit(const AuthState.initial());
     } catch (e) {
       final error = AppState.catchErrorHandler(e);
 
       logger.warning('Error during register: ${error.message}');
-      emit(AuthErrorState(e.toString()));
+      emit(AuthState.error(error: e.toString()));
       _showToast(e.toString());
     }
   }

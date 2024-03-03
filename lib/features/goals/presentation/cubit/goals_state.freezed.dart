@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'goals_cubit_state.dart';
+part of 'goals_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -20,49 +20,49 @@ mixin _$GoalsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) eror,
-    required TResult Function(Map<String, GoalModel> goals) success,
+    required TResult Function(String error) error,
+    required TResult Function(List<GoalModel> goals) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String error)? eror,
-    TResult? Function(Map<String, GoalModel> goals)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(List<GoalModel> goals)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? eror,
-    TResult Function(Map<String, GoalModel> goals)? success,
+    TResult Function(String error)? error,
+    TResult Function(List<GoalModel> goals)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GoalsInitialState value) initial,
-    required TResult Function(GoalsLoadingState value) loading,
-    required TResult Function(GoalsErrorState value) eror,
-    required TResult Function(GoalsSuccessState value) success,
+    required TResult Function(_GoalsInitialState value) initial,
+    required TResult Function(_GoalsLoadingState value) loading,
+    required TResult Function(_GoalsErrorState value) error,
+    required TResult Function(_GoalsSuccessState value) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GoalsInitialState value)? initial,
-    TResult? Function(GoalsLoadingState value)? loading,
-    TResult? Function(GoalsErrorState value)? eror,
-    TResult? Function(GoalsSuccessState value)? success,
+    TResult? Function(_GoalsInitialState value)? initial,
+    TResult? Function(_GoalsLoadingState value)? loading,
+    TResult? Function(_GoalsErrorState value)? error,
+    TResult? Function(_GoalsSuccessState value)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GoalsInitialState value)? initial,
-    TResult Function(GoalsLoadingState value)? loading,
-    TResult Function(GoalsErrorState value)? eror,
-    TResult Function(GoalsSuccessState value)? success,
+    TResult Function(_GoalsInitialState value)? initial,
+    TResult Function(_GoalsLoadingState value)? loading,
+    TResult Function(_GoalsErrorState value)? error,
+    TResult Function(_GoalsSuccessState value)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -104,7 +104,7 @@ class __$$GoalsInitialStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GoalsInitialStateImpl implements GoalsInitialState {
+class _$GoalsInitialStateImpl implements _GoalsInitialState {
   const _$GoalsInitialStateImpl();
 
   @override
@@ -126,8 +126,8 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) eror,
-    required TResult Function(Map<String, GoalModel> goals) success,
+    required TResult Function(String error) error,
+    required TResult Function(List<GoalModel> goals) success,
   }) {
     return initial();
   }
@@ -137,8 +137,8 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String error)? eror,
-    TResult? Function(Map<String, GoalModel> goals)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(List<GoalModel> goals)? success,
   }) {
     return initial?.call();
   }
@@ -148,8 +148,8 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? eror,
-    TResult Function(Map<String, GoalModel> goals)? success,
+    TResult Function(String error)? error,
+    TResult Function(List<GoalModel> goals)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -161,10 +161,10 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GoalsInitialState value) initial,
-    required TResult Function(GoalsLoadingState value) loading,
-    required TResult Function(GoalsErrorState value) eror,
-    required TResult Function(GoalsSuccessState value) success,
+    required TResult Function(_GoalsInitialState value) initial,
+    required TResult Function(_GoalsLoadingState value) loading,
+    required TResult Function(_GoalsErrorState value) error,
+    required TResult Function(_GoalsSuccessState value) success,
   }) {
     return initial(this);
   }
@@ -172,10 +172,10 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GoalsInitialState value)? initial,
-    TResult? Function(GoalsLoadingState value)? loading,
-    TResult? Function(GoalsErrorState value)? eror,
-    TResult? Function(GoalsSuccessState value)? success,
+    TResult? Function(_GoalsInitialState value)? initial,
+    TResult? Function(_GoalsLoadingState value)? loading,
+    TResult? Function(_GoalsErrorState value)? error,
+    TResult? Function(_GoalsSuccessState value)? success,
   }) {
     return initial?.call(this);
   }
@@ -183,10 +183,10 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GoalsInitialState value)? initial,
-    TResult Function(GoalsLoadingState value)? loading,
-    TResult Function(GoalsErrorState value)? eror,
-    TResult Function(GoalsSuccessState value)? success,
+    TResult Function(_GoalsInitialState value)? initial,
+    TResult Function(_GoalsLoadingState value)? loading,
+    TResult Function(_GoalsErrorState value)? error,
+    TResult Function(_GoalsSuccessState value)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -196,8 +196,8 @@ class _$GoalsInitialStateImpl implements GoalsInitialState {
   }
 }
 
-abstract class GoalsInitialState implements GoalsState {
-  const factory GoalsInitialState() = _$GoalsInitialStateImpl;
+abstract class _GoalsInitialState implements GoalsState {
+  const factory _GoalsInitialState() = _$GoalsInitialStateImpl;
 }
 
 /// @nodoc
@@ -218,7 +218,7 @@ class __$$GoalsLoadingStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GoalsLoadingStateImpl implements GoalsLoadingState {
+class _$GoalsLoadingStateImpl implements _GoalsLoadingState {
   const _$GoalsLoadingStateImpl();
 
   @override
@@ -240,8 +240,8 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) eror,
-    required TResult Function(Map<String, GoalModel> goals) success,
+    required TResult Function(String error) error,
+    required TResult Function(List<GoalModel> goals) success,
   }) {
     return loading();
   }
@@ -251,8 +251,8 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String error)? eror,
-    TResult? Function(Map<String, GoalModel> goals)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(List<GoalModel> goals)? success,
   }) {
     return loading?.call();
   }
@@ -262,8 +262,8 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? eror,
-    TResult Function(Map<String, GoalModel> goals)? success,
+    TResult Function(String error)? error,
+    TResult Function(List<GoalModel> goals)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -275,10 +275,10 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GoalsInitialState value) initial,
-    required TResult Function(GoalsLoadingState value) loading,
-    required TResult Function(GoalsErrorState value) eror,
-    required TResult Function(GoalsSuccessState value) success,
+    required TResult Function(_GoalsInitialState value) initial,
+    required TResult Function(_GoalsLoadingState value) loading,
+    required TResult Function(_GoalsErrorState value) error,
+    required TResult Function(_GoalsSuccessState value) success,
   }) {
     return loading(this);
   }
@@ -286,10 +286,10 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GoalsInitialState value)? initial,
-    TResult? Function(GoalsLoadingState value)? loading,
-    TResult? Function(GoalsErrorState value)? eror,
-    TResult? Function(GoalsSuccessState value)? success,
+    TResult? Function(_GoalsInitialState value)? initial,
+    TResult? Function(_GoalsLoadingState value)? loading,
+    TResult? Function(_GoalsErrorState value)? error,
+    TResult? Function(_GoalsSuccessState value)? success,
   }) {
     return loading?.call(this);
   }
@@ -297,10 +297,10 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GoalsInitialState value)? initial,
-    TResult Function(GoalsLoadingState value)? loading,
-    TResult Function(GoalsErrorState value)? eror,
-    TResult Function(GoalsSuccessState value)? success,
+    TResult Function(_GoalsInitialState value)? initial,
+    TResult Function(_GoalsLoadingState value)? loading,
+    TResult Function(_GoalsErrorState value)? error,
+    TResult Function(_GoalsSuccessState value)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -310,8 +310,8 @@ class _$GoalsLoadingStateImpl implements GoalsLoadingState {
   }
 }
 
-abstract class GoalsLoadingState implements GoalsState {
-  const factory GoalsLoadingState() = _$GoalsLoadingStateImpl;
+abstract class _GoalsLoadingState implements GoalsState {
+  const factory _GoalsLoadingState() = _$GoalsLoadingStateImpl;
 }
 
 /// @nodoc
@@ -347,7 +347,7 @@ class __$$GoalsErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GoalsErrorStateImpl implements GoalsErrorState {
+class _$GoalsErrorStateImpl implements _GoalsErrorState {
   const _$GoalsErrorStateImpl({required this.error});
 
   @override
@@ -355,7 +355,7 @@ class _$GoalsErrorStateImpl implements GoalsErrorState {
 
   @override
   String toString() {
-    return 'GoalsState.eror(error: $error)';
+    return 'GoalsState.error(error: $error)';
   }
 
   @override
@@ -381,10 +381,10 @@ class _$GoalsErrorStateImpl implements GoalsErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) eror,
-    required TResult Function(Map<String, GoalModel> goals) success,
+    required TResult Function(String error) error,
+    required TResult Function(List<GoalModel> goals) success,
   }) {
-    return eror(error);
+    return error(this.error);
   }
 
   @override
@@ -392,10 +392,10 @@ class _$GoalsErrorStateImpl implements GoalsErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String error)? eror,
-    TResult? Function(Map<String, GoalModel> goals)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(List<GoalModel> goals)? success,
   }) {
-    return eror?.call(error);
+    return error?.call(this.error);
   }
 
   @override
@@ -403,12 +403,12 @@ class _$GoalsErrorStateImpl implements GoalsErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? eror,
-    TResult Function(Map<String, GoalModel> goals)? success,
+    TResult Function(String error)? error,
+    TResult Function(List<GoalModel> goals)? success,
     required TResult orElse(),
   }) {
-    if (eror != null) {
-      return eror(error);
+    if (error != null) {
+      return error(this.error);
     }
     return orElse();
   }
@@ -416,43 +416,43 @@ class _$GoalsErrorStateImpl implements GoalsErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GoalsInitialState value) initial,
-    required TResult Function(GoalsLoadingState value) loading,
-    required TResult Function(GoalsErrorState value) eror,
-    required TResult Function(GoalsSuccessState value) success,
+    required TResult Function(_GoalsInitialState value) initial,
+    required TResult Function(_GoalsLoadingState value) loading,
+    required TResult Function(_GoalsErrorState value) error,
+    required TResult Function(_GoalsSuccessState value) success,
   }) {
-    return eror(this);
+    return error(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GoalsInitialState value)? initial,
-    TResult? Function(GoalsLoadingState value)? loading,
-    TResult? Function(GoalsErrorState value)? eror,
-    TResult? Function(GoalsSuccessState value)? success,
+    TResult? Function(_GoalsInitialState value)? initial,
+    TResult? Function(_GoalsLoadingState value)? loading,
+    TResult? Function(_GoalsErrorState value)? error,
+    TResult? Function(_GoalsSuccessState value)? success,
   }) {
-    return eror?.call(this);
+    return error?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GoalsInitialState value)? initial,
-    TResult Function(GoalsLoadingState value)? loading,
-    TResult Function(GoalsErrorState value)? eror,
-    TResult Function(GoalsSuccessState value)? success,
+    TResult Function(_GoalsInitialState value)? initial,
+    TResult Function(_GoalsLoadingState value)? loading,
+    TResult Function(_GoalsErrorState value)? error,
+    TResult Function(_GoalsSuccessState value)? success,
     required TResult orElse(),
   }) {
-    if (eror != null) {
-      return eror(this);
+    if (error != null) {
+      return error(this);
     }
     return orElse();
   }
 }
 
-abstract class GoalsErrorState implements GoalsState {
-  const factory GoalsErrorState({required final String error}) =
+abstract class _GoalsErrorState implements GoalsState {
+  const factory _GoalsErrorState({required final String error}) =
       _$GoalsErrorStateImpl;
 
   String get error;
@@ -467,7 +467,7 @@ abstract class _$$GoalsSuccessStateImplCopyWith<$Res> {
           $Res Function(_$GoalsSuccessStateImpl) then) =
       __$$GoalsSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Map<String, GoalModel> goals});
+  $Res call({List<GoalModel> goals});
 }
 
 /// @nodoc
@@ -487,23 +487,23 @@ class __$$GoalsSuccessStateImplCopyWithImpl<$Res>
       goals: null == goals
           ? _value._goals
           : goals // ignore: cast_nullable_to_non_nullable
-              as Map<String, GoalModel>,
+              as List<GoalModel>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$GoalsSuccessStateImpl implements GoalsSuccessState {
-  const _$GoalsSuccessStateImpl({required final Map<String, GoalModel> goals})
+class _$GoalsSuccessStateImpl implements _GoalsSuccessState {
+  const _$GoalsSuccessStateImpl({required final List<GoalModel> goals})
       : _goals = goals;
 
-  final Map<String, GoalModel> _goals;
+  final List<GoalModel> _goals;
   @override
-  Map<String, GoalModel> get goals {
-    if (_goals is EqualUnmodifiableMapView) return _goals;
+  List<GoalModel> get goals {
+    if (_goals is EqualUnmodifiableListView) return _goals;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_goals);
+    return EqualUnmodifiableListView(_goals);
   }
 
   @override
@@ -535,8 +535,8 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String error) eror,
-    required TResult Function(Map<String, GoalModel> goals) success,
+    required TResult Function(String error) error,
+    required TResult Function(List<GoalModel> goals) success,
   }) {
     return success(goals);
   }
@@ -546,8 +546,8 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String error)? eror,
-    TResult? Function(Map<String, GoalModel> goals)? success,
+    TResult? Function(String error)? error,
+    TResult? Function(List<GoalModel> goals)? success,
   }) {
     return success?.call(goals);
   }
@@ -557,8 +557,8 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String error)? eror,
-    TResult Function(Map<String, GoalModel> goals)? success,
+    TResult Function(String error)? error,
+    TResult Function(List<GoalModel> goals)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -570,10 +570,10 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(GoalsInitialState value) initial,
-    required TResult Function(GoalsLoadingState value) loading,
-    required TResult Function(GoalsErrorState value) eror,
-    required TResult Function(GoalsSuccessState value) success,
+    required TResult Function(_GoalsInitialState value) initial,
+    required TResult Function(_GoalsLoadingState value) loading,
+    required TResult Function(_GoalsErrorState value) error,
+    required TResult Function(_GoalsSuccessState value) success,
   }) {
     return success(this);
   }
@@ -581,10 +581,10 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(GoalsInitialState value)? initial,
-    TResult? Function(GoalsLoadingState value)? loading,
-    TResult? Function(GoalsErrorState value)? eror,
-    TResult? Function(GoalsSuccessState value)? success,
+    TResult? Function(_GoalsInitialState value)? initial,
+    TResult? Function(_GoalsLoadingState value)? loading,
+    TResult? Function(_GoalsErrorState value)? error,
+    TResult? Function(_GoalsSuccessState value)? success,
   }) {
     return success?.call(this);
   }
@@ -592,10 +592,10 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(GoalsInitialState value)? initial,
-    TResult Function(GoalsLoadingState value)? loading,
-    TResult Function(GoalsErrorState value)? eror,
-    TResult Function(GoalsSuccessState value)? success,
+    TResult Function(_GoalsInitialState value)? initial,
+    TResult Function(_GoalsLoadingState value)? loading,
+    TResult Function(_GoalsErrorState value)? error,
+    TResult Function(_GoalsSuccessState value)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -605,11 +605,11 @@ class _$GoalsSuccessStateImpl implements GoalsSuccessState {
   }
 }
 
-abstract class GoalsSuccessState implements GoalsState {
-  const factory GoalsSuccessState(
-      {required final Map<String, GoalModel> goals}) = _$GoalsSuccessStateImpl;
+abstract class _GoalsSuccessState implements GoalsState {
+  const factory _GoalsSuccessState({required final List<GoalModel> goals}) =
+      _$GoalsSuccessStateImpl;
 
-  Map<String, GoalModel> get goals;
+  List<GoalModel> get goals;
   @JsonKey(ignore: true)
   _$$GoalsSuccessStateImplCopyWith<_$GoalsSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

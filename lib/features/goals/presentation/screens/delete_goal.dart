@@ -51,9 +51,8 @@ class DeleteGoal extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      context.read<GoalsCubit>().deleteGoal(id: id);
-                      Navigator.popUntil(
-                        context,
+                      context.read<GoalsCubit>().deleteGoal(goalId: id);
+                      Navigator.of(context).popUntil(
                         ModalRoute.withName(Routes.homeScreen),
                       );
                     },
@@ -66,9 +65,7 @@ class DeleteGoal extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                    onPressed: () => Navigator.pop(context),
                     child: const Text(
                       'Нет',
                       style: TextStyle(fontSize: 14, color: errorColor),

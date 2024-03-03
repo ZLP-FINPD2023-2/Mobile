@@ -67,7 +67,8 @@ class ConfirmResetPasswordScreen extends StatelessWidget {
                       );
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          settings: RouteSettings(name: Routes.authScreen),
+                          settings:
+                              const RouteSettings(name: Routes.authScreen),
                           builder: (context) =>
                               const AuthScreen(initialIndex: 1),
                         ),

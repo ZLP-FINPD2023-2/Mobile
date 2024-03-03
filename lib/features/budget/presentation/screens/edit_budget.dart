@@ -80,6 +80,7 @@ class _EditBudgetState extends State<EditBudget> {
               child: ElevatedButton(
                 onPressed: () {
                   final updatedBudget = BudgetModel(
+                    id: '',
                     name: nameController.text,
                     description: descriptionController.text,
                     sum: int.tryParse(sumController.text) ?? 0,

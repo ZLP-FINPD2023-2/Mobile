@@ -100,7 +100,7 @@ class _AddGoalState extends State<AddGoal> {
                   primary: targetColor, // Задайте желаемый цвет фона кнопки
                 ),
                 onPressed: () {
-                  context.read<GoalsCubit>().addGoal(
+                  context.read()<GoalsCubit>().addGoal(
                         name: nameController.text,
                         description: descriptionController.text,
                         goalSum: int.tryParse(goalSumController.text) ?? 0,

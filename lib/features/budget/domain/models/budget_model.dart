@@ -6,6 +6,7 @@ part 'budget_model.g.dart';
 @freezed
 class BudgetModel with _$BudgetModel {
   const factory BudgetModel({
+    required String id,
     required String name,
     required String description,
     required int sum,

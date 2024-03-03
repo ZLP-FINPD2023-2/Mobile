@@ -1,5 +1,5 @@
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:fin_app/features/auth/presentation/cubit/auth_cubit_state.dart';
+import 'package:fin_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:fin_app/features/auth/presentation/widgets/email_input.dart';
 import 'package:fin_app/features/auth/presentation/widgets/password_input.dart';
 import 'package:fin_app/routes.dart';
@@ -53,7 +53,8 @@ class _LoginTabState extends State<LoginTab> {
             Align(
               alignment: AlignmentDirectional.centerEnd,
               child: TextButton(
-                onPressed: () => Navigator.of(context).pushNamed(Routes.resetPasswordScreen),
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(Routes.resetPasswordScreen),
                 child: const Text(
                   'Забыли пароль?',
                 ),
@@ -61,7 +62,9 @@ class _LoginTabState extends State<LoginTab> {
             ),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
-                if (state is AuthLoadingState) {
+                final isLoading =
+                    state.whenOrNull(loading: () => true) ?? false;
+                if (isLoading) {
                   // TODO: maybe cancel loading during change tab
                   return const SizedBox(
                     height: 40,
