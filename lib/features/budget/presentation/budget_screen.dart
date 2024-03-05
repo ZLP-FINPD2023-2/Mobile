@@ -49,10 +49,9 @@ class _BudgetScreenContentState extends State<BudgetScreenContent> {
           IconButton(
             icon: Icon(Icons.add, color: lightColorScheme.shadow),
             onPressed: () {
-              final budgetCubit = context.read<BudgetCubit>();
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) {
-                  return AddBudget(budgetCubit: budgetCubit);
+                  return const AddBudget();
                 }),
               );
             },
