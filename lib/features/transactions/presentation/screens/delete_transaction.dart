@@ -1,5 +1,5 @@
 import 'package:fin_app/features/transactions/domain/models/transaction_model.dart';
-import 'package:fin_app/features/transactions/presentation/transaction_screen.dart';
+import 'package:fin_app/features/transactions/presentation/transactions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fin_app/constants/colors.dart';
 

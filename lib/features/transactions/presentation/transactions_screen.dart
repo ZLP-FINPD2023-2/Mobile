@@ -5,8 +5,6 @@ import 'package:fin_app/features/transactions/presentation/screens/add_transacti
 import 'package:fin_app/features/transactions/presentation/widgets/item_transaction.dart';
 import 'package:flutter/material.dart';
 
-var dateMap = <String, List<TransactionModel>>{};
-
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
 
@@ -22,7 +20,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text('Транзакции', style: context.textStyles.headlineMedium),
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(
               Icons.add,

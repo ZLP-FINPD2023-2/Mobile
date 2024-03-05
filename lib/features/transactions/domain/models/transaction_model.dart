@@ -7,6 +7,7 @@ part 'transaction_model.freezed.dart';
 @freezed
 class TransactionModel with _$TransactionModel {
   const factory TransactionModel({
+    required int id,
     required TransactionType type,
     required String name,
     required String description,
@@ -15,8 +16,7 @@ class TransactionModel with _$TransactionModel {
     @Default([]) List<BudgetModel> budgets,
   }) = _TransactionModel;
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      _$TransactionModelFromJson(json);
+  factory TransactionModel.fromJson(Map<String, dynamic> json) => _$TransactionModelFromJson(json);
 }
 
 enum TransactionType { income, expenditure }

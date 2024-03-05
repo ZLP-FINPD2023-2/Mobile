@@ -20,6 +20,7 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionModel {
+  int get id => throw _privateConstructorUsedError;
   TransactionType get type => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $TransactionModelCopyWith<$Res> {
       _$TransactionModelCopyWithImpl<$Res, TransactionModel>;
   @useResult
   $Res call(
-      {TransactionType type,
+      {int id,
+      TransactionType type,
       String name,
       String description,
       int sum,
@@ -61,6 +63,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? type = null,
     Object? name = null,
     Object? description = null,
@@ -69,6 +72,10 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
     Object? budgets = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -106,7 +113,8 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TransactionType type,
+      {int id,
+      TransactionType type,
       String name,
       String description,
       int sum,
@@ -125,6 +133,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? type = null,
     Object? name = null,
     Object? description = null,
@@ -133,6 +142,10 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
     Object? budgets = null,
   }) {
     return _then(_$TransactionModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -165,7 +178,8 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TransactionModelImpl implements _TransactionModel {
   const _$TransactionModelImpl(
-      {required this.type,
+      {required this.id,
+      required this.type,
       required this.name,
       required this.description,
       required this.sum,
@@ -176,6 +190,8 @@ class _$TransactionModelImpl implements _TransactionModel {
   factory _$TransactionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionModelImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final TransactionType type;
   @override
@@ -197,7 +213,7 @@ class _$TransactionModelImpl implements _TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(type: $type, name: $name, description: $description, sum: $sum, date: $date, budgets: $budgets)';
+    return 'TransactionModel(id: $id, type: $type, name: $name, description: $description, sum: $sum, date: $date, budgets: $budgets)';
   }
 
   @override
@@ -205,6 +221,7 @@ class _$TransactionModelImpl implements _TransactionModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TransactionModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -216,7 +233,7 @@ class _$TransactionModelImpl implements _TransactionModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, type, name, description, sum,
+  int get hashCode => Object.hash(runtimeType, id, type, name, description, sum,
       date, const DeepCollectionEquality().hash(_budgets));
 
   @JsonKey(ignore: true)
@@ -236,7 +253,8 @@ class _$TransactionModelImpl implements _TransactionModel {
 
 abstract class _TransactionModel implements TransactionModel {
   const factory _TransactionModel(
-      {required final TransactionType type,
+      {required final int id,
+      required final TransactionType type,
       required final String name,
       required final String description,
       required final int sum,
@@ -246,6 +264,8 @@ abstract class _TransactionModel implements TransactionModel {
   factory _TransactionModel.fromJson(Map<String, dynamic> json) =
       _$TransactionModelImpl.fromJson;
 
+  @override
+  int get id;
   @override
   TransactionType get type;
   @override

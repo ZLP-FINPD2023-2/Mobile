@@ -5,6 +5,8 @@ import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:fin_app/features/goals/domain/usecases/goals_usecase.dart';
 import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
+import 'package:fin_app/features/transactions/domain/models/usecases/transactions_usecase.dart';
+import 'package:fin_app/features/transactions/presentation/cubit/transactions_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,9 +27,7 @@ Future<String> getInitialRoute() async {
   final storage = getIt<FlutterSecureStorage>();
   String? token = await storage.read(key: 'token');
   logger.debug("Token $token");
-  return token != null && token.isNotEmpty
-      ? Routes.homeScreen
-      : Routes.startScreen;
+  return token != null && token.isNotEmpty ? Routes.homeScreen : Routes.startScreen;
 }
 
 class MainApp extends StatelessWidget {
@@ -53,6 +53,9 @@ class MainApp extends StatelessWidget {
               providers: [
                 BlocProvider<GoalsCubit>(
                   create: (_) => GoalsCubit(getIt<GoalsUseCase>()),
+                ),
+                BlocProvider<TransactionsCubit>(
+                  create: (_) => TransactionsCubit(getIt<TransactionsUseCase>()),
                 ),
               ],
               child: child,

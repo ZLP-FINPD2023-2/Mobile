@@ -1,6 +1,6 @@
 import 'package:fin_app/features/goals/presentation/goals_screen.dart';
 import 'package:fin_app/features/home/presentation/settings/settings_tab.dart';
-import 'package:fin_app/features/transactions/presentation/transaction_screen.dart';
+import 'package:fin_app/features/transactions/presentation/transactions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fin_app/constants/colors.dart';

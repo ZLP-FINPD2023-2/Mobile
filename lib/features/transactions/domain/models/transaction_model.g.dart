@@ -9,6 +9,7 @@ part of 'transaction_model.dart';
 _$TransactionModelImpl _$$TransactionModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionModelImpl(
+      id: json['id'] as int,
       type: $enumDecode(_$TransactionTypeEnumMap, json['type']),
       name: json['name'] as String,
       description: json['description'] as String,
@@ -23,6 +24,7 @@ _$TransactionModelImpl _$$TransactionModelImplFromJson(
 Map<String, dynamic> _$$TransactionModelImplToJson(
         _$TransactionModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'type': _$TransactionTypeEnumMap[instance.type]!,
       'name': instance.name,
       'description': instance.description,
