@@ -1,8 +1,8 @@
 import 'package:fin_app/constants/colors.dart';
 import 'package:fin_app/core/di/di.dart';
 import 'package:fin_app/core/extensions/context.dart';
-import 'package:fin_app/features/budget/data/repositories/budget_repository.dart';
 import 'package:fin_app/features/budget/domain/models/budget_model.dart';
+import 'package:fin_app/features/budget/domain/usecases/budget_usecase.dart';
 import 'package:fin_app/features/budget/presentation/screens/add_budget.dart';
 import 'package:fin_app/features/budget/presentation/widgets/item_budget.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class BudgetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BudgetCubit>(
-      create: (context) => BudgetCubit(getIt<BudgetRepository>()),
+      create: (context) => BudgetCubit(getIt<BudgetUseCase>()),
       child: const BudgetScreenContent(),
     );
   }

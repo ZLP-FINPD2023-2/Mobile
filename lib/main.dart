@@ -3,7 +3,7 @@ import 'package:fin_app/core/logger/logger.dart';
 import 'package:fin_app/features/auth/domain/usecases/auth_usecase.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:fin_app/features/auth/presentation/cubit/auth_state.dart';
-import 'package:fin_app/features/budget/data/repositories/budget_repository.dart';
+import 'package:fin_app/features/budget/domain/usecases/budget_usecase.dart';
 import 'package:fin_app/features/budget/presentation/cubit/budget_cubit.dart';
 import 'package:fin_app/features/goals/domain/usecases/goals_usecase.dart';
 import 'package:fin_app/features/goals/presentation/cubit/goals_cubit.dart';
@@ -57,7 +57,7 @@ class MainApp extends StatelessWidget {
                   create: (_) => GoalsCubit(getIt<GoalsUseCase>()),
                 ),
                 BlocProvider<BudgetCubit>(
-                  create: (_) => BudgetCubit(getIt<BudgetRepository>()),
+                  create: (_) => BudgetCubit(getIt<BudgetUseCase>()),
                 ),
               ],
               child: child,
