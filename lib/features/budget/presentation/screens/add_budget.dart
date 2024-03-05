@@ -7,7 +7,9 @@ import 'package:fin_app/constants/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddBudget extends StatelessWidget {
-  const AddBudget({super.key});
+  final BudgetCubit budgetCubit;
+
+  const AddBudget({super.key, required this.budgetCubit});
 
   @override
   Widget build(BuildContext context) {
