@@ -1,5 +1,5 @@
-import 'package:fin_app/features/budget/data/repositories/budget_repository.dart';
 import 'package:fin_app/features/budget/domain/models/budget_model.dart';
+import 'package:fin_app/features/budget/domain/usecases/budget_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,16 +7,14 @@ import 'budget_cubit_states.dart';
 
 @singleton
 class BudgetCubit extends Cubit<BudgetState> {
-  final BudgetRepository _budgetRepository;
+  final BudgetUseCase _budgetUseCase;
 
-  BudgetCubit(
-    this._budgetRepository,
-  ) : super(BudgetInitialState());
+  BudgetCubit(this._budgetUseCase) : super(BudgetInitialState());
 
   Future<void> loadBudgets() async {
     try {
       emit(BudgetLoadingState());
-      final budgets = await _budgetRepository.loadBudgets();
+      final budgets = await _budgetUseCase.getBudgets();
       emit(BudgetLoadedState(budgets));
     } catch (e) {
       emit(BudgetErrorState(e.toString()));
@@ -26,11 +24,8 @@ class BudgetCubit extends Cubit<BudgetState> {
   Future<void> addBudget(BudgetModel budget) async {
     try {
       emit(BudgetLoadingState());
-      final budgets = await _budgetRepository.loadBudgets();
-      budgets.add(budget);
-      await _budgetRepository.saveBudgets(budgets);
+      final budgets = await _budgetUseCase.addBudget(budget);
       emit(BudgetLoadedState(budgets));
-      // Отправка данных на сервер (если необходимо)
     } catch (e) {
       emit(BudgetErrorState(e.toString()));
     }
@@ -39,11 +34,8 @@ class BudgetCubit extends Cubit<BudgetState> {
   Future<void> updateBudget(int index, BudgetModel updatedBudget) async {
     try {
       emit(BudgetLoadingState());
-      final budgets = await _budgetRepository.loadBudgets();
-      budgets[index] = updatedBudget;
-      await _budgetRepository.saveBudgets(budgets);
+      final budgets = await _budgetUseCase.updateBudget(index, updatedBudget);
       emit(BudgetLoadedState(budgets));
-      // Обновление данных на сервере (если необходимо)
     } catch (e) {
       emit(BudgetErrorState(e.toString()));
     }
@@ -52,11 +44,8 @@ class BudgetCubit extends Cubit<BudgetState> {
   Future<void> deleteBudget(int index) async {
     try {
       emit(BudgetLoadingState());
-      final budgets = await _budgetRepository.loadBudgets();
-      budgets.removeAt(index);
-      await _budgetRepository.saveBudgets(budgets);
+      final budgets = await _budgetUseCase.deleteBudget(index);
       emit(BudgetLoadedState(budgets));
-      // Удаление данных с сервера (если необходимо)
     } catch (e) {
       emit(BudgetErrorState(e.toString()));
     }
